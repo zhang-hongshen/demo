@@ -164,7 +164,9 @@ export async function generateTeachingPackage({ input, config, fetchImpl = fetch
   }
 
   if (!response.ok) {
-    throw new Error(`DeepSeek request failed with status ${response.status || 'unknown'}`);
+    const detail = await response.text();
+    const suffix = detail ? `: ${detail.slice(0, 500)}` : '';
+    throw new Error(`DeepSeek request failed with status ${response.status || 'unknown'}${suffix}`);
   }
 
   return parseDeepSeekPayload(await response.json());

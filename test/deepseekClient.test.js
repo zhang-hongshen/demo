@@ -99,6 +99,22 @@ test('generateTeachingPackage uses injected fetch implementation', async () => {
   assert.equal(result.pitchScript, '演示话术');
 });
 
+test('generateTeachingPackage includes upstream status and body in internal errors', async () => {
+  await assert.rejects(
+    () =>
+      generateTeachingPackage({
+        input: { course: '数据结构' },
+        config: { baseUrl: 'https://api.deepseek.com', apiKey: 'secret-key', model: 'deepseek-v4-flash' },
+        fetchImpl: async () =>
+          new Response(JSON.stringify({ error: { message: 'Insufficient Balance' } }), {
+            status: 402,
+            headers: { 'Content-Type': 'application/json' }
+          })
+      }),
+    /status 402: \{"error":\{"message":"Insufficient Balance"\}\}/
+  );
+});
+
 test('generateTeachingPackage times out slow DeepSeek requests', async () => {
   await assert.rejects(
     () => generateTeachingPackage({

@@ -48,6 +48,7 @@ test('Cloudflare generate function hides provider, model, and secret in errors',
   const response = await handleGenerateRequest({
     request,
     env: { api_key: 'secret-key' },
+    logger: { error: () => {} },
     generate: async () => {
       throw new Error('DeepSeek request failed for deepseek-v4-flash at https://api.deepseek.com with secret-key');
     }
@@ -59,4 +60,26 @@ test('Cloudflare generate function hides provider, model, and secret in errors',
   assert.equal(json.error, '智能生成服务暂时不可用，请稍后重试或载入样例。');
   assert.doesNotMatch(JSON.stringify(json), /secret-key/);
   assert.doesNotMatch(JSON.stringify(json), providerPattern);
+});
+
+test('Cloudflare generate function logs sanitized diagnostics for operators', async () => {
+  const request = new Request('https://example.test/api/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ course: '数据结构' })
+  });
+  const logs = [];
+  await handleGenerateRequest({
+    request,
+    env: { api_key: 'secret-key' },
+    logger: { error: (...args) => logs.push(args.join(' ')) },
+    generate: async () => {
+      throw new Error('DeepSeek request failed with status 402: secret-key');
+    }
+  });
+
+  assert.equal(logs.length, 1);
+  assert.match(logs[0], /generate_failed/);
+  assert.match(logs[0], /status 402/);
+  assert.doesNotMatch(logs[0], /secret-key/);
 });
