@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>智教方案生成台</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="智教方案生成台">
+        <aside class="input-panel">
+          <div class="brand-row">
+            <div class="brand-mark" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div>
+              <p class="eyebrow">高校智能教学工作台</p>
+              <h1>智教方案生成台</h1>
+              <p class="panel-subtitle">围绕备课、授课、评测、补救生成可演示的课堂方案。</p>
+            </div>
+          </div>
+
+          <div class="input-meta" aria-label="演示能力">
+            <span>需求输入</span>
+            <span>智能生成</span>
+            <span>成果交付</span>
+          </div>
+
+          <form id="request-form" class="request-form">
+            <label>
+              <span>课程名称</span>
+              <input name="course" value="数据结构" autocomplete="off">
+            </label>
+
+            <label>
+              <span>本节主题</span>
+              <input name="topic" value="二叉树遍历" autocomplete="off">
+            </label>
+
+            <label>
+              <span>班级画像</span>
+              <textarea name="classProfile" rows="3">软件工程大二，48人；约三分之一学生递归基础薄弱，课堂练习提交速度差异明显。</textarea>
+            </label>
+
+            <label>
+              <span>学生痛点</span>
+              <textarea name="painPoints" rows="3">容易混淆前序、中序、后序；只会背顺序，不理解递归调用过程。</textarea>
+            </label>
+
+            <label>
+              <span>教学目标</span>
+              <textarea name="objectives" rows="3">掌握三种遍历规则，能根据样例树写出遍历序列，并解释递归边界。</textarea>
+            </label>
+
+            <div class="form-grid">
+              <label>
+                <span>课堂时长</span>
+                <input name="duration" value="45分钟" autocomplete="off">
+              </label>
+              <label>
+                <span>输出风格</span>
+                <select name="outputStyle">
+                  <option>竞标答辩演示</option>
+                  <option>校方领导汇报</option>
+                  <option>教师备课助手</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="button-row">
+              <button id="generate-button" class="primary-button" type="submit">
+                <span class="button-icon" aria-hidden="true">AI</span>
+                生成智教方案
+              </button>
+              <button id="sample-button" class="secondary-button" type="button">载入样例</button>
+            </div>
+          </form>
+        </aside>
+
+        <section class="output-panel" aria-live="polite">
+          <div class="output-header">
+            <div>
+              <p class="eyebrow">需求输入 → AI 智能处理 → 成果输出</p>
+              <h2>课堂方案工作台</h2>
+            </div>
+            <div id="status" class="status">准备生成</div>
+          </div>
+
+          <div class="summary-strip" aria-label="演示流程摘要">
+            <div>
+              <span>演示链路</span>
+              <strong>一键生成</strong>
+            </div>
+            <div>
+              <span>交付内容</span>
+              <strong>五类成果</strong>
+            </div>
+            <div>
+              <span>适配场景</span>
+              <strong>高校课堂</strong>
+            </div>
+          </div>
+
+          <nav class="tabs" aria-label="结果分类">
+            <button class="tab active" type="button" data-tab="teachingPlan">教案</button>
+            <button class="tab" type="button" data-tab="slideOutline">课件大纲</button>
+            <button class="tab" type="button" data-tab="quiz">随堂测验</button>
+            <button class="tab" type="button" data-tab="learningAnalysis">学情分析</button>
+            <button class="tab" type="button" data-tab="pitchScript">演示话术</button>
+          </nav>
+
+          <div id="result" class="result-surface">
+            <div class="empty-state">
+              <div class="empty-visual" aria-hidden="true"></div>
+              <h3>等待生成教学方案</h3>
+              <p>点击左侧按钮后，系统将生成教案、课件大纲、测验和学情分析。</p>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { buildTeachingMessages } from '../src/promptBuilder.js';
+
+test('buildTeachingMessages includes campus teaching context and all teacher inputs', () => {
+  const messages = buildTeachingMessages({
+    course: '数据结构',
+    topic: '二叉树遍历',
+    classProfile: '软件工程大二，48人',
+    painPoints: '递归理解弱，课堂互动少',
+    objectives: '掌握前序、中序、后序遍历',
+    duration: '45分钟',
+    outputStyle: '竞标答辩演示'
+  });
+
+  const text = messages.map((message) => message.content).join('\n');
+
+  assert.equal(messages[0].role, 'system');
+  assert.match(text, /高校/);
+  assert.match(text, /数据结构/);
+  assert.match(text, /二叉树遍历/);
+  assert.match(text, /软件工程大二，48人/);
+  assert.match(text, /递归理解弱，课堂互动少/);
+  assert.match(text, /掌握前序、中序、后序遍历/);
+  assert.match(text, /45分钟/);
+  assert.match(text, /teachingPlan/);
+  assert.match(text, /slideOutline/);
+  assert.match(text, /quiz/);
+  assert.match(text, /learningAnalysis/);
+  assert.match(text, /pitchScript/);
+});
