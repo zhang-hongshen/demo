@@ -14,7 +14,7 @@ test('GET /api/sample returns demo result', async () => {
     const json = await response.json();
     assert.equal(response.status, 200);
     assert.equal(json.ok, true);
-    assert.ok(json.result.pitchScript.includes('智能生成'));
+    assert.ok(json.result.pitchScript.includes('完整闭环'));
     assert.doesNotMatch(JSON.stringify(json), providerPattern);
   } finally {
     server.close();
@@ -42,7 +42,7 @@ test('POST /api/generate returns safe error without API key', async () => {
     assert.equal(json.ok, false);
     assert.doesNotMatch(JSON.stringify(json), /secret-key/);
     assert.doesNotMatch(JSON.stringify(json), providerPattern);
-    assert.equal(json.error, '智能生成服务暂时不可用，请稍后重试或载入样例。');
+    assert.equal(json.error, '方案服务暂时不可用，请稍后重试或查看样例。');
   } finally {
     server.close();
   }

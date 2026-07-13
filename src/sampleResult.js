@@ -10,7 +10,7 @@ export const sampleResult = {
       { stage: '导入', minutes: 5, activity: '用校园组织架构图引出树结构' },
       { stage: '讲解', minutes: 15, activity: '对比三种遍历顺序并动态演示' },
       { stage: '练习', minutes: 15, activity: '学生分组完成遍历序列推导' },
-      { stage: '反馈', minutes: 10, activity: 'AI汇总高频错误并给出补救练习' }
+      { stage: '反馈', minutes: 10, activity: '汇总高频错误并给出补救练习' }
     ],
     teacherActions: ['展示样例树', '追问递归出口', '点评小组答案'],
     studentActions: ['标注访问顺序', '提交随堂答案', '互评推导过程'],
@@ -21,7 +21,7 @@ export const sampleResult = {
     { title: '二叉树遍历规则', speakerNotes: '突出根节点访问时机差异。' },
     { title: '递归执行过程', speakerNotes: '用颜色标记调用栈变化。' },
     { title: '课堂练习任务', speakerNotes: '分组完成一棵树的三类遍历。' },
-    { title: 'AI学情分析', speakerNotes: '展示错误分布和补救建议。' },
+    { title: '学情分析看板', speakerNotes: '展示错误分布和补救建议。' },
     { title: '课后巩固路径', speakerNotes: '输出分层练习和答疑安排。' }
   ],
   quiz: [
@@ -37,5 +37,5 @@ export const sampleResult = {
     interventions: ['推送递归动画微课', '安排助教小组答疑', '为风险学生生成3道补救题'],
     dataIndicators: ['随堂测验正确率', '练习提交耗时', '错误类型分布', '课后复习完成率']
   },
-  pitchScript: '老师输入课程主题和班级画像后，平台通过智能生成能力产出教案、课件大纲、测验和学情分析，帮助高校把AI能力落到备课、授课、评测、补救的完整闭环。'
+  pitchScript: '老师输入课程主题和班级画像后，平台即可产出教案、课件大纲、测验和学情分析，帮助高校把备课、授课、评测、补救串成完整闭环。'
 };

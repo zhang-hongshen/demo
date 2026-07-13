@@ -2,7 +2,7 @@ import { configFromEnv } from '../../src/runtimeConfig.js';
 import { generateTeachingPackage } from '../../src/deepseekClient.js';
 
 const JSON_HEADERS = { 'Content-Type': 'application/json; charset=utf-8' };
-const GENERATE_ERROR = '智能生成服务暂时不可用，请稍后重试或载入样例。';
+const GENERATE_ERROR = '方案服务暂时不可用，请稍后重试或查看样例。';
 
 function json(status, payload) {
   return new Response(JSON.stringify(payload), { status, headers: JSON_HEADERS });

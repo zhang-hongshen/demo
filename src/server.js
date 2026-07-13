@@ -43,7 +43,7 @@ function safeError(message, secrets = []) {
 
 function safeGenerateError(message, secrets = []) {
   safeError(message, secrets);
-  return '智能生成服务暂时不可用，请稍后重试或载入样例。';
+  return '方案服务暂时不可用，请稍后重试或查看样例。';
 }
 
 async function serveStatic(request, response) {

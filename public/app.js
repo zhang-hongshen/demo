@@ -174,15 +174,15 @@ function renderResult() {
 async function requestJson(url, options) {
   const response = await fetch(url, options);
   const payload = await response.json();
-  if (!payload.ok) throw new Error(payload.error || '请求失败');
+  if (!payload.ok) throw new Error(payload.error || '方案生成未完成，请稍后重试。');
   return payload.result;
 }
 
 async function generate() {
   generateButton.disabled = true;
   currentResult = null;
-  setStatus('智能生成中...', '');
-  setResultMessage('正在生成教学方案', '完整教学方案通常需要30到60秒，请稍候。');
+  setStatus('方案生成中...', '');
+  setResultMessage('正在整理课堂方案', '完整方案通常需要30到60秒，请稍候。');
 
   try {
     currentResult = await requestJson('/api/generate', {
@@ -190,12 +190,12 @@ async function generate() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formPayload())
     });
-    setStatus('已生成教学方案', 'success');
+    setStatus('课堂方案已生成', 'success');
     renderResult();
   } catch (error) {
     currentResult = null;
     setStatus(error.message, 'error');
-    setResultMessage('生成失败', error.message, 'error-state');
+    setResultMessage('暂时无法生成', error.message, 'error-state');
   } finally {
     generateButton.disabled = false;
   }
@@ -205,7 +205,7 @@ async function loadSample() {
   setStatus('正在载入样例...', '');
   try {
     currentResult = await requestJson('/api/sample');
-    setStatus('已载入本地演示样例', 'success');
+    setStatus('样例已载入', 'success');
     renderResult();
   } catch (error) {
     setStatus(error.message, 'error');

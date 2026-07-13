@@ -11,7 +11,7 @@ test('Cloudflare sample function returns public demo data without provider detai
 
   assert.equal(response.status, 200);
   assert.equal(json.ok, true);
-  assert.ok(json.result.pitchScript.includes('智能生成'));
+  assert.ok(json.result.pitchScript.includes('完整闭环'));
   assert.doesNotMatch(JSON.stringify(json), providerPattern);
 });
 
@@ -29,14 +29,14 @@ test('Cloudflare generate function reads api key from context env', async () => 
       assert.equal(config.baseUrl, 'https://api.deepseek.com');
       assert.equal(config.apiKey, 'secret-key');
       assert.equal(config.model, 'deepseek-v4-flash');
-      return { pitchScript: '智能生成完成' };
+      return { pitchScript: '课堂方案已生成' };
     }
   });
   const json = await response.json();
 
   assert.equal(response.status, 200);
   assert.equal(json.ok, true);
-  assert.equal(json.result.pitchScript, '智能生成完成');
+  assert.equal(json.result.pitchScript, '课堂方案已生成');
 });
 
 test('Cloudflare generate function hides provider, model, and secret in errors', async () => {
@@ -57,7 +57,7 @@ test('Cloudflare generate function hides provider, model, and secret in errors',
 
   assert.equal(response.status, 502);
   assert.equal(json.ok, false);
-  assert.equal(json.error, '智能生成服务暂时不可用，请稍后重试或载入样例。');
+  assert.equal(json.error, '方案服务暂时不可用，请稍后重试或查看样例。');
   assert.doesNotMatch(JSON.stringify(json), /secret-key/);
   assert.doesNotMatch(JSON.stringify(json), providerPattern);
 });
