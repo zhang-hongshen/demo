@@ -195,8 +195,14 @@ test('page provides disabled export actions before content is generated', () => 
 
   assert.match(html, /id="export-word"/);
   assert.match(html, /id="export-pdf"/);
+  assert.match(html, /id="export-ppt"/);
+  assert.match(html, /id="ppt-theme"/);
   assert.match(html, /导出 Word/);
   assert.match(html, /导出 PDF/);
+  assert.match(html, /导出 PPT/);
+  assert.match(html, /正式蓝/);
+  assert.match(html, /移动蓝/);
   assert.match(html, /id="export-word"[^>]*disabled/);
   assert.match(html, /id="export-pdf"[^>]*disabled/);
+  assert.match(html, /id="export-ppt"[^>]*disabled/);
 });

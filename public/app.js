@@ -1,10 +1,13 @@
 import { buildExportHtml, exportFileName } from './exportDocument.js';
+import { buildPptx, pptFileName } from './pptxExport.js';
 
 const form = document.querySelector('#request-form');
 const generateButton = document.querySelector('#generate-button');
 const sampleButton = document.querySelector('#sample-button');
 const exportWordButton = document.querySelector('#export-word');
 const exportPdfButton = document.querySelector('#export-pdf');
+const exportPptButton = document.querySelector('#export-ppt');
+const pptThemeSelect = document.querySelector('#ppt-theme');
 const statusBox = document.querySelector('#status');
 const resultBox = document.querySelector('#result');
 const tabs = Array.from(document.querySelectorAll('.tab'));
@@ -53,7 +56,7 @@ function setResultMessage(title, message, tone = '') {
 }
 
 function setExportActionsEnabled(enabled) {
-  [exportWordButton, exportPdfButton].forEach((button) => {
+  [exportWordButton, exportPdfButton, exportPptButton].forEach((button) => {
     if (button) button.disabled = !enabled;
   });
 }
@@ -259,6 +262,10 @@ function exportHtml() {
 
 function downloadDocument({ html, filename, type }) {
   const blob = new Blob(['\ufeff', html], { type });
+  downloadBlob(blob, filename);
+}
+
+function downloadBlob(blob, filename) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
@@ -293,6 +300,19 @@ function exportPdf() {
   preview.focus();
   setTimeout(() => preview.print(), 250);
   setStatus('已打开 PDF', 'success');
+}
+
+function exportPpt() {
+  if (!currentResult) return;
+  const input = exportInput();
+  const bytes = buildPptx({
+    result: currentResult,
+    input,
+    themeId: pptThemeSelect?.value || 'formal-blue'
+  });
+  const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' });
+  downloadBlob(blob, pptFileName(input));
+  setStatus('已导出 PPT', 'success');
 }
 
 async function requestJson(url, options) {
@@ -349,6 +369,7 @@ form.addEventListener('submit', (event) => {
 sampleButton.addEventListener('click', loadSample);
 exportWordButton?.addEventListener('click', exportWord);
 exportPdfButton?.addEventListener('click', exportPdf);
+exportPptButton?.addEventListener('click', exportPpt);
 setExportActionsEnabled(false);
 
 if (materialsInput) {

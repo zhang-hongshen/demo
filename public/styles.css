@@ -359,6 +359,26 @@ button:disabled {
   flex-wrap: wrap;
   gap: 8px;
   justify-content: flex-end;
+  align-items: center;
+}
+
+.theme-control {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.theme-control span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.theme-control select {
+  width: 112px;
+  height: 34px;
+  background: var(--surface);
+  font-size: 13px;
 }
 
 .export-button {
