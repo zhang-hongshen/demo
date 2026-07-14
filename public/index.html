@@ -16,6 +16,12 @@
         <div id="status" class="status">准备就绪</div>
       </header>
 
+      <nav class="tabs feature-tabs" aria-label="功能选择">
+        <button class="tab active" type="button" data-feature="slides">课件生成</button>
+        <button class="tab" type="button" data-feature="grading">作业批改</button>
+        <button class="tab" type="button" data-feature="analysis">学情分析</button>
+      </nav>
+
       <section class="workspace" aria-label="课堂方案工作台">
         <aside class="input-panel">
           <div class="panel-heading">
@@ -23,52 +29,73 @@
           </div>
 
           <form id="request-form" class="request-form">
-            <label>
-              <span>课程名称</span>
-              <input name="course" value="数据结构" autocomplete="off">
-            </label>
+            <input id="feature-input" name="feature" type="hidden" value="slides">
 
-            <label>
-              <span>本节主题</span>
-              <input name="topic" value="二叉树遍历" autocomplete="off">
-            </label>
+            <div class="feature-panel" data-feature-panel="slides">
+              <label>
+                <span>课程名称</span>
+                <input name="course" value="数据结构" autocomplete="off">
+              </label>
 
-            <label>
-              <span>班级画像</span>
-              <textarea name="classProfile" rows="3">软件工程大二，48人；约三分之一学生递归基础薄弱，课堂练习提交速度差异明显。</textarea>
-            </label>
+              <label>
+                <span>本节主题</span>
+                <input name="topic" value="二叉树遍历" autocomplete="off">
+              </label>
 
-            <label>
-              <span>学生痛点</span>
-              <textarea name="painPoints" rows="3">容易混淆前序、中序、后序；只会背顺序，不理解递归调用过程。</textarea>
-            </label>
+              <label>
+                <span>教学目标</span>
+                <textarea name="objectives" rows="3">掌握三种遍历规则，能根据样例树写出遍历序列，并解释递归边界。</textarea>
+              </label>
 
-            <label>
-              <span>教学目标</span>
-              <textarea name="objectives" rows="3">掌握三种遍历规则，能根据样例树写出遍历序列，并解释递归边界。</textarea>
-            </label>
+              <div class="form-grid">
+                <label>
+                  <span>课堂时长</span>
+                  <input name="duration" value="45分钟" autocomplete="off">
+                </label>
+                <label>
+                  <span>输出风格</span>
+                  <select name="outputStyle">
+                    <option>竞标答辩演示</option>
+                    <option>校方领导汇报</option>
+                    <option>教师备课助手</option>
+                  </select>
+                </label>
+              </div>
+            </div>
 
-            <div class="form-section-title">作业批改</div>
+            <div class="feature-panel" data-feature-panel="grading" hidden>
+              <label>
+                <span>作业名称</span>
+                <input name="assignmentTitle" value="二叉树遍历练习" autocomplete="off">
+              </label>
 
-            <label>
-              <span>作业名称</span>
-              <input name="assignmentTitle" value="二叉树遍历练习" autocomplete="off">
-            </label>
+              <label>
+                <span>作业要求</span>
+                <textarea name="assignmentRequirement" rows="3">写出给定二叉树的前序、中序、后序遍历序列，并说明递归边界。</textarea>
+              </label>
 
-            <label>
-              <span>作业要求</span>
-              <textarea name="assignmentRequirement" rows="3">写出给定二叉树的前序、中序、后序遍历序列，并说明递归边界。</textarea>
-            </label>
+              <label>
+                <span>评分标准</span>
+                <textarea name="gradingRubric" rows="3">遍历序列60分，递归过程解释30分，书写规范10分。</textarea>
+              </label>
 
-            <label>
-              <span>评分标准</span>
-              <textarea name="gradingRubric" rows="3">遍历序列60分，递归过程解释30分，书写规范10分。</textarea>
-            </label>
+              <label>
+                <span>学生提交</span>
+                <textarea name="studentSubmission" rows="5">前序：A B D E C；中序：D B E A C；后序：D E B C A。递归结束条件为空节点。</textarea>
+              </label>
+            </div>
 
-            <label>
-              <span>学生提交</span>
-              <textarea name="studentSubmission" rows="4">前序：A B D E C；中序：D B E A C；后序：D E B C A。递归结束条件为空节点。</textarea>
-            </label>
+            <div class="feature-panel" data-feature-panel="analysis" hidden>
+              <label>
+                <span>班级画像</span>
+                <textarea name="classProfile" rows="4">软件工程大二，48人；约三分之一学生递归基础薄弱，课堂练习提交速度差异明显。</textarea>
+              </label>
+
+              <label>
+                <span>学生痛点</span>
+                <textarea name="painPoints" rows="4">容易混淆前序、中序、后序；只会背顺序，不理解递归调用过程。</textarea>
+              </label>
+            </div>
 
             <div class="material-card">
               <label class="material-upload" for="materials">
@@ -85,25 +112,10 @@
               <div id="material-summary" class="material-summary">暂未加入材料</div>
             </div>
 
-            <div class="form-grid">
-              <label>
-                <span>课堂时长</span>
-                <input name="duration" value="45分钟" autocomplete="off">
-              </label>
-              <label>
-                <span>输出风格</span>
-                <select name="outputStyle">
-                  <option>竞标答辩演示</option>
-                  <option>校方领导汇报</option>
-                  <option>教师备课助手</option>
-                </select>
-              </label>
-            </div>
-
             <div class="button-row">
               <button id="generate-button" class="primary-button" type="submit">
                 <span class="button-icon" aria-hidden="true"></span>
-                生成课堂方案
+                生成课件
               </button>
               <button id="sample-button" class="secondary-button" type="button">查看样例</button>
             </div>
@@ -112,7 +124,10 @@
 
         <section class="output-panel" aria-live="polite">
           <div class="output-header">
-            <h2>生成结果</h2>
+            <div class="output-title-group">
+              <h2>生成结果</h2>
+              <span id="output-title">课件生成</span>
+            </div>
             <div class="export-actions" aria-label="导出操作">
               <div class="export-menu-wrap">
                 <button id="export-button" class="export-button" type="button" aria-haspopup="menu" aria-expanded="false" disabled>导出</button>
@@ -124,15 +139,6 @@
               </div>
             </div>
           </div>
-
-          <nav class="tabs" aria-label="结果分类">
-            <button class="tab active" type="button" data-tab="teachingPlan">教案</button>
-            <button class="tab" type="button" data-tab="slideOutline">课件</button>
-            <button class="tab" type="button" data-tab="quiz">测验</button>
-            <button class="tab" type="button" data-tab="learningAnalysis">学情分析</button>
-            <button class="tab" type="button" data-tab="assignmentReview">作业批改</button>
-            <button class="tab" type="button" data-tab="pitchScript">演示稿</button>
-          </nav>
 
           <div id="result" class="result-surface">
             <div class="empty-state">

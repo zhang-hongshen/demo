@@ -96,13 +96,25 @@ function renderPitch(script = '') {
   return section('演示稿', `<p>${escapeHtml(script || '暂无内容')}</p>`);
 }
 
-export function buildExportHtml({ result = {}, input = {} } = {}) {
+export function buildExportHtml({ result = {}, input = {}, feature = 'all' } = {}) {
   const course = input.course || '课堂方案';
   const topic = input.topic || '';
   const title = topic ? `${course} · ${topic}` : course;
+  const featureSections = {
+    slides: () => [
+      renderTeachingPlan(result.teachingPlan, input),
+      renderSlides(result.slideOutline),
+      renderQuiz(result.quiz),
+      renderPitch(result.pitchScript)
+    ].join(''),
+    grading: () => renderAssignmentReview(result.assignmentReview),
+    analysis: () => renderAnalysis(result.learningAnalysis)
+  };
   const body = result.rawText
     ? section('原始输出', `<p>${escapeHtml(result.rawText)}</p>`)
-    : [
+    : featureSections[feature]
+      ? featureSections[feature]()
+      : [
         renderTeachingPlan(result.teachingPlan, input),
         renderSlides(result.slideOutline),
         renderQuiz(result.quiz),

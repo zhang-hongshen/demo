@@ -1,6 +1,18 @@
 export function buildTeachingMessages(input) {
   const referenceMaterials = String(input.referenceMaterials || '').trim().slice(0, 12000);
+  const featureLabels = {
+    slides: '课件生成',
+    grading: '作业批改',
+    analysis: '学情分析'
+  };
+  const featureGuidance = {
+    slides: '只需要重点返回课件生成结果，包括教案、课件大纲、随堂测验和演示话术；其他字段可以保持简洁。',
+    grading: '只需要重点返回作业批改结果，包括得分、等级、评分细则、亮点、问题、评语和改进任务；其他字段可以保持简洁。',
+    analysis: '只需要重点返回学情分析结果，包括高频误区、风险群体、干预建议和数据指标；其他字段可以保持简洁。'
+  };
+  const feature = featureLabels[input.feature] ? input.feature : 'slides';
   const normalized = {
+    feature,
     course: input.course || '人工智能导论',
     topic: input.topic || '生成式AI在校园中的应用',
     classProfile: input.classProfile || '本科二年级，45人',
@@ -28,6 +40,8 @@ export function buildTeachingMessages(input) {
       role: 'user',
       content: [
         '请根据以下需求生成“智教方案生成台”的演示结果。',
+        `当前功能：${featureLabels[normalized.feature]}`,
+        featureGuidance[normalized.feature],
         `课程名称：${normalized.course}`,
         `本节主题：${normalized.topic}`,
         `班级画像：${normalized.classProfile}`,

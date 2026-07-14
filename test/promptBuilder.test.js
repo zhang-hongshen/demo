@@ -51,6 +51,19 @@ test('buildTeachingMessages includes assignment grading inputs and output contra
   assert.match(text, /improvementTasks/);
 });
 
+test('buildTeachingMessages includes current feature intent', () => {
+  const messages = buildTeachingMessages({
+    feature: 'analysis',
+    classProfile: '48人，递归基础差异明显',
+    painPoints: '提交速度差异大'
+  });
+
+  const text = messages.map((message) => message.content).join('\n');
+
+  assert.match(text, /当前功能：学情分析/);
+  assert.match(text, /只需要重点返回学情分析结果/);
+});
+
 test('buildTeachingMessages includes uploaded reference materials when provided', () => {
   const messages = buildTeachingMessages({
     course: '数据结构',

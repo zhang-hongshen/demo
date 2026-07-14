@@ -59,3 +59,29 @@ test('buildExportHtml renders all generated sections for document export', () =>
 test('exportFileName creates a safe Chinese file name', () => {
   assert.equal(exportFileName({ course: '数据结构/算法', topic: '二叉树:遍历' }, 'doc'), '课堂方案-数据结构-算法-二叉树-遍历.doc');
 });
+
+test('buildExportHtml can render only the selected feature', () => {
+  const html = buildExportHtml({
+    feature: 'grading',
+    result: {
+      slideOutline: [{ title: '课件页', speakerNotes: '课件内容' }],
+      learningAnalysis: { misconceptions: ['学情内容'] },
+      assignmentReview: {
+        score: '92',
+        level: '优秀',
+        strengths: ['论证清楚'],
+        issues: ['格式可优化'],
+        rubric: [{ criterion: '准确性', score: '60/60', comment: '答案正确' }],
+        feedback: '整体完成质量高。',
+        improvementTasks: ['统一符号格式']
+      }
+    },
+    input: { course: '数据结构', topic: '二叉树遍历' }
+  });
+
+  assert.match(html, /作业批改/);
+  assert.match(html, /92/);
+  assert.match(html, /统一符号格式/);
+  assert.doesNotMatch(html, /课件页/);
+  assert.doesNotMatch(html, /学情内容/);
+});

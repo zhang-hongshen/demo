@@ -96,6 +96,15 @@ h3 {
   margin: 0 auto;
 }
 
+.feature-tabs {
+  max-width: 1440px;
+  margin: 0 auto 14px;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--small-shadow);
+}
+
 .input-panel,
 .output-panel {
   overflow: hidden;
@@ -126,6 +135,15 @@ h3 {
   color: var(--ink);
   font-size: 14px;
   font-weight: 700;
+}
+
+.feature-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.feature-panel[hidden] {
+  display: none;
 }
 
 label {
@@ -351,7 +369,7 @@ button:disabled {
 
 .output-panel {
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 .output-header {
@@ -361,6 +379,18 @@ button:disabled {
   align-items: center;
   padding: 19px 22px;
   border-bottom: 1px solid var(--line-soft);
+}
+
+.output-title-group {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.output-title-group span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .export-actions {
@@ -584,7 +614,7 @@ button:disabled {
 
 .tabs {
   display: grid;
-  grid-template-columns: repeat(6, minmax(78px, 1fr));
+  grid-template-columns: repeat(3, minmax(92px, 1fr));
   gap: 0;
   padding: 0 14px;
   border-bottom: 1px solid var(--line-soft);

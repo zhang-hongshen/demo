@@ -190,7 +190,7 @@ test('page provides a user-facing reference material picker', () => {
   assert.match(html, /id="material-summary"/);
 });
 
-test('page provides assignment grading inputs and result tab', () => {
+test('page provides assignment grading inputs and feature entry', () => {
   const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
 
   assert.match(html, /作业批改/);
@@ -198,7 +198,25 @@ test('page provides assignment grading inputs and result tab', () => {
   assert.match(html, /name="assignmentRequirement"/);
   assert.match(html, /name="gradingRubric"/);
   assert.match(html, /name="studentSubmission"/);
-  assert.match(html, /data-tab="assignmentReview"/);
+  assert.match(html, /data-feature="grading"/);
+});
+
+test('page presents three primary feature tabs with separate form panels', () => {
+  const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
+
+  assert.match(html, /data-feature="slides"/);
+  assert.match(html, /data-feature="grading"/);
+  assert.match(html, /data-feature="analysis"/);
+  assert.match(html, /data-feature-panel="slides"/);
+  assert.match(html, /data-feature-panel="grading"/);
+  assert.match(html, /data-feature-panel="analysis"/);
+  assert.match(html, /课件生成/);
+  assert.match(html, /作业批改/);
+  assert.match(html, /学情分析/);
+  assert.doesNotMatch(html, /data-tab="teachingPlan"/);
+  assert.doesNotMatch(html, /data-tab="slideOutline"/);
+  assert.doesNotMatch(html, /data-tab="quiz"/);
+  assert.doesNotMatch(html, /data-tab="pitchScript"/);
 });
 
 test('page provides disabled export actions before content is generated', () => {

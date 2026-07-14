@@ -12,11 +12,15 @@ const themeDialogCloseButton = document.querySelector('#theme-dialog-close');
 const themeButtons = Array.from(document.querySelectorAll('[data-theme-id]'));
 const statusBox = document.querySelector('#status');
 const resultBox = document.querySelector('#result');
+const outputTitle = document.querySelector('#output-title');
 const tabs = Array.from(document.querySelectorAll('.tab'));
+const featureInput = document.querySelector('#feature-input');
+const featurePanels = Array.from(document.querySelectorAll('[data-feature-panel]'));
+const pptMenuButton = document.querySelector('[data-export-format="ppt"]');
 const materialsInput = document.querySelector('#materials');
 const materialSummary = document.querySelector('#material-summary');
 
-let activeTab = 'teachingPlan';
+let activeFeature = 'slides';
 let currentResult = null;
 let referenceMaterials = '';
 let materialReadPromise = Promise.resolve();
@@ -26,13 +30,16 @@ const maxFiles = 5;
 const maxPerMaterialChars = 4200;
 const maxTotalMaterialChars = 12000;
 
-const tabTitles = {
-  teachingPlan: '教案',
-  slideOutline: '课件大纲',
-  quiz: '随堂测验',
-  learningAnalysis: '学情分析',
-  assignmentReview: '作业批改',
-  pitchScript: '演示话术'
+const featureTitles = {
+  slides: '课件生成',
+  grading: '作业批改',
+  analysis: '学情分析'
+};
+
+const generateLabels = {
+  slides: '生成课件',
+  grading: '批改作业',
+  analysis: '生成分析'
 };
 
 function escapeHtml(value) {
@@ -67,8 +74,32 @@ function setExportActionsEnabled(enabled) {
   }
 }
 
+function updateFeatureUi() {
+  tabs.forEach((tab) => tab.classList.toggle('active', tab.dataset.feature === activeFeature));
+  featurePanels.forEach((panel) => {
+    panel.hidden = panel.dataset.featurePanel !== activeFeature;
+  });
+  if (featureInput) featureInput.value = activeFeature;
+  if (outputTitle) outputTitle.textContent = featureTitles[activeFeature] || '生成结果';
+  if (generateButton?.lastChild) generateButton.lastChild.textContent = generateLabels[activeFeature] || '生成';
+  if (pptMenuButton) pptMenuButton.hidden = activeFeature !== 'slides';
+}
+
+function setActiveFeature(feature) {
+  activeFeature = featureTitles[feature] ? feature : 'slides';
+  updateFeatureUi();
+  setExportMenuOpen(false);
+  setThemeDialogOpen(false);
+  if (currentResult) {
+    renderResult();
+  } else {
+    setResultMessage('暂无内容', `填写信息后${generateLabels[activeFeature]}。`);
+  }
+}
+
 function formPayload() {
   const payload = Object.fromEntries(new FormData(form).entries());
+  payload.feature = activeFeature;
   delete payload.materials;
   if (referenceMaterials) payload.referenceMaterials = referenceMaterials;
   return payload;
@@ -272,6 +303,17 @@ function renderAssignmentReview(review = {}) {
   `;
 }
 
+function renderSlidesFeature(result = {}) {
+  return `
+    <div class="section-grid">
+      ${renderTeachingPlan(result.teachingPlan)}
+      ${renderSlides(result.slideOutline)}
+      ${renderQuiz(result.quiz)}
+      ${renderPitch(result.pitchScript)}
+    </div>
+  `;
+}
+
 function renderResult() {
   if (!currentResult) return;
 
@@ -286,15 +328,12 @@ function renderResult() {
   }
 
   const renderers = {
-    teachingPlan: () => renderTeachingPlan(currentResult.teachingPlan),
-    slideOutline: () => renderSlides(currentResult.slideOutline),
-    quiz: () => renderQuiz(currentResult.quiz),
-    learningAnalysis: () => renderAnalysis(currentResult.learningAnalysis),
-    assignmentReview: () => renderAssignmentReview(currentResult.assignmentReview),
-    pitchScript: () => renderPitch(currentResult.pitchScript)
+    slides: () => renderSlidesFeature(currentResult),
+    grading: () => renderAssignmentReview(currentResult.assignmentReview),
+    analysis: () => renderAnalysis(currentResult.learningAnalysis)
   };
 
-  resultBox.innerHTML = renderers[activeTab]?.() || `<p>暂无${escapeHtml(tabTitles[activeTab])}内容</p>`;
+  resultBox.innerHTML = renderers[activeFeature]?.() || `<p>暂无${escapeHtml(featureTitles[activeFeature])}内容</p>`;
 }
 
 function exportInput() {
@@ -302,7 +341,7 @@ function exportInput() {
 }
 
 function exportHtml() {
-  return buildExportHtml({ result: currentResult, input: exportInput() });
+  return buildExportHtml({ result: currentResult, input: exportInput(), feature: activeFeature });
 }
 
 function downloadDocument({ html, filename, type }) {
@@ -352,7 +391,7 @@ function setThemeDialogOpen(open) {
 }
 
 function openThemeDialog() {
-  if (!currentResult) return;
+  if (!currentResult || activeFeature !== 'slides') return;
   setExportMenuOpen(false);
   setThemeDialogOpen(true);
 }
@@ -389,7 +428,7 @@ function exportPdf() {
 }
 
 function exportPpt(themeId = selectedPptTheme) {
-  if (!currentResult) return;
+  if (!currentResult || activeFeature !== 'slides') return;
   updateThemeSelection(themeId);
   const input = exportInput();
   const bytes = buildPptx({
@@ -405,7 +444,7 @@ function exportPpt(themeId = selectedPptTheme) {
 function exportByFormat(format) {
   if (format === 'word') exportWord();
   if (format === 'pdf') exportPdf();
-  if (format === 'ppt') openThemeDialog();
+  if (format === 'ppt' && activeFeature === 'slides') openThemeDialog();
   if (format !== 'ppt') setExportMenuOpen(false);
 }
 
@@ -494,8 +533,8 @@ if (materialsInput) {
 
 tabs.forEach((tab) => {
   tab.addEventListener('click', () => {
-    tabs.forEach((candidate) => candidate.classList.toggle('active', candidate === tab));
-    activeTab = tab.dataset.tab;
-    renderResult();
+    setActiveFeature(tab.dataset.feature || 'slides');
   });
 });
+
+updateFeatureUi();
