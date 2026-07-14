@@ -189,3 +189,14 @@ test('page provides a user-facing reference material picker', () => {
   assert.match(html, /补充材料/);
   assert.match(html, /id="material-summary"/);
 });
+
+test('page provides disabled export actions before content is generated', () => {
+  const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
+
+  assert.match(html, /id="export-word"/);
+  assert.match(html, /id="export-pdf"/);
+  assert.match(html, /导出 Word/);
+  assert.match(html, /导出 PDF/);
+  assert.match(html, /id="export-word"[^>]*disabled/);
+  assert.match(html, /id="export-pdf"[^>]*disabled/);
+});

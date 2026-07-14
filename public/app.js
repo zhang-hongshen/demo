@@ -1,6 +1,10 @@
+import { buildExportHtml, exportFileName } from './exportDocument.js';
+
 const form = document.querySelector('#request-form');
 const generateButton = document.querySelector('#generate-button');
 const sampleButton = document.querySelector('#sample-button');
+const exportWordButton = document.querySelector('#export-word');
+const exportPdfButton = document.querySelector('#export-pdf');
 const statusBox = document.querySelector('#status');
 const resultBox = document.querySelector('#result');
 const tabs = Array.from(document.querySelectorAll('.tab'));
@@ -46,6 +50,12 @@ function setResultMessage(title, message, tone = '') {
       <p>${escapeHtml(message)}</p>
     </div>
   `;
+}
+
+function setExportActionsEnabled(enabled) {
+  [exportWordButton, exportPdfButton].forEach((button) => {
+    if (button) button.disabled = !enabled;
+  });
 }
 
 function formPayload() {
@@ -239,6 +249,52 @@ function renderResult() {
   resultBox.innerHTML = renderers[activeTab]?.() || `<p>暂无${escapeHtml(tabTitles[activeTab])}内容</p>`;
 }
 
+function exportInput() {
+  return formPayload();
+}
+
+function exportHtml() {
+  return buildExportHtml({ result: currentResult, input: exportInput() });
+}
+
+function downloadDocument({ html, filename, type }) {
+  const blob = new Blob(['\ufeff', html], { type });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function exportWord() {
+  if (!currentResult) return;
+  downloadDocument({
+    html: exportHtml(),
+    filename: exportFileName(exportInput(), 'doc'),
+    type: 'application/msword;charset=utf-8'
+  });
+  setStatus('已导出 Word', 'success');
+}
+
+function exportPdf() {
+  if (!currentResult) return;
+  const preview = window.open('', '_blank');
+  if (!preview) {
+    setStatus('请允许弹出窗口', 'error');
+    return;
+  }
+
+  preview.document.open();
+  preview.document.write(exportHtml());
+  preview.document.close();
+  preview.focus();
+  setTimeout(() => preview.print(), 250);
+  setStatus('已打开 PDF', 'success');
+}
+
 async function requestJson(url, options) {
   const response = await fetch(url, options);
   const payload = await response.json();
@@ -249,6 +305,7 @@ async function requestJson(url, options) {
 async function generate() {
   generateButton.disabled = true;
   currentResult = null;
+  setExportActionsEnabled(false);
   setStatus('生成中...', '');
   setResultMessage('正在生成', '请稍候。');
 
@@ -260,9 +317,11 @@ async function generate() {
       body: JSON.stringify(formPayload())
     });
     setStatus('已生成', 'success');
+    setExportActionsEnabled(true);
     renderResult();
   } catch (error) {
     currentResult = null;
+    setExportActionsEnabled(false);
     setStatus(error.message, 'error');
     setResultMessage('暂时无法生成', error.message, 'error-state');
   } finally {
@@ -275,6 +334,7 @@ async function loadSample() {
   try {
     currentResult = await requestJson('/api/sample');
     setStatus('样例已载入', 'success');
+    setExportActionsEnabled(true);
     renderResult();
   } catch (error) {
     setStatus(error.message, 'error');
@@ -287,6 +347,9 @@ form.addEventListener('submit', (event) => {
 });
 
 sampleButton.addEventListener('click', loadSample);
+exportWordButton?.addEventListener('click', exportWord);
+exportPdfButton?.addEventListener('click', exportPdf);
+setExportActionsEnabled(false);
 
 if (materialsInput) {
   materialsInput.addEventListener('change', () => {

@@ -354,6 +354,27 @@ button:disabled {
   border-bottom: 1px solid var(--line-soft);
 }
 
+.export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.export-button {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.export-button:hover:not(:disabled) {
+  background: #f2f2f4;
+  color: var(--ink);
+}
+
 .status {
   max-width: 300px;
   padding: 7px 11px;
@@ -563,6 +584,15 @@ button:disabled {
   .topbar {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .output-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .export-actions {
+    justify-content: flex-start;
   }
 
   .status {
