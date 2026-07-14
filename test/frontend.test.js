@@ -55,6 +55,85 @@ test('failed generation clears stale rendered output', async () => {
   assert.match(resultBox.innerHTML, /方案服务暂时不可用/);
 });
 
+test('selected text material is included in generation payload', async () => {
+  const listeners = {};
+  let materialChange;
+  let requestBody = '';
+  const resultBox = { innerHTML: '' };
+  const statusBox = { textContent: '', className: 'status' };
+  const generateButton = { disabled: false };
+  const sampleButton = { addEventListener() {} };
+  const form = {
+    addEventListener(type, handler) {
+      listeners[type] = handler;
+    }
+  };
+  const tab = {
+    dataset: { tab: 'teachingPlan' },
+    addEventListener() {},
+    classList: { toggle() {} }
+  };
+  const materialSummary = { textContent: '' };
+  const materialsInput = {
+    files: [
+      {
+        name: '课堂反馈.txt',
+        type: 'text/plain',
+        text: async () => '学生普遍卡在递归边界。'
+      }
+    ],
+    addEventListener(type, handler) {
+      if (type === 'change') materialChange = handler;
+    }
+  };
+
+  globalThis.document = {
+    querySelector(selector) {
+      return {
+        '#request-form': form,
+        '#generate-button': generateButton,
+        '#sample-button': sampleButton,
+        '#status': statusBox,
+        '#result': resultBox,
+        '#materials': materialsInput,
+        '#material-summary': materialSummary
+      }[selector];
+    },
+    querySelectorAll(selector) {
+      return selector === '.tab' ? [tab] : [];
+    }
+  };
+  globalThis.FormData = class {
+    entries() {
+      return [
+        ['course', '数据结构'],
+        ['materials', {}]
+      ];
+    }
+  };
+  globalThis.fetch = async (url, options) => {
+    requestBody = options.body;
+    return {
+      json: async () => ({
+        ok: true,
+        result: { teachingPlan: { objectives: ['目标'] } }
+      })
+    };
+  };
+
+  await import(`../public/app.js?frontend-upload-test=${Date.now()}`);
+  materialChange();
+  listeners.submit({ preventDefault() {} });
+  await new Promise((resolve) => setTimeout(resolve, 0));
+
+  const payload = JSON.parse(requestBody);
+  assert.equal(payload.course, '数据结构');
+  assert.equal(payload.materials, undefined);
+  assert.match(payload.referenceMaterials, /课堂反馈/);
+  assert.match(payload.referenceMaterials, /递归边界/);
+  assert.match(materialSummary.textContent, /已加入 1 份材料/);
+});
+
 test('public UI files do not expose provider or model names', () => {
   const publicFiles = ['index.html', 'app.js'].map((file) => fs.readFileSync(path.join('public', file), 'utf8'));
   const combined = publicFiles.join('\n');
@@ -72,4 +151,12 @@ test('user-facing page copy avoids technical terms', () => {
     .trim();
 
   assert.doesNotMatch(visibleText, userFacingTechPattern);
+});
+
+test('page provides a user-facing reference material picker', () => {
+  const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
+
+  assert.match(html, /name="materials"/);
+  assert.match(html, /补充材料/);
+  assert.match(html, /id="material-summary"/);
 });

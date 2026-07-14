@@ -29,3 +29,17 @@ test('buildTeachingMessages includes campus teaching context and all teacher inp
   assert.match(text, /learningAnalysis/);
   assert.match(text, /pitchScript/);
 });
+
+test('buildTeachingMessages includes uploaded reference materials when provided', () => {
+  const messages = buildTeachingMessages({
+    course: '数据结构',
+    topic: '二叉树遍历',
+    referenceMaterials: '资料一《课堂练习反馈》：学生普遍卡在递归边界。'
+  });
+
+  const text = messages.map((message) => message.content).join('\n');
+
+  assert.match(text, /补充材料/);
+  assert.match(text, /课堂练习反馈/);
+  assert.match(text, /递归边界/);
+});

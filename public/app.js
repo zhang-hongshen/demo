@@ -4,9 +4,17 @@ const sampleButton = document.querySelector('#sample-button');
 const statusBox = document.querySelector('#status');
 const resultBox = document.querySelector('#result');
 const tabs = Array.from(document.querySelectorAll('.tab'));
+const materialsInput = document.querySelector('#materials');
+const materialSummary = document.querySelector('#material-summary');
 
 let activeTab = 'teachingPlan';
 let currentResult = null;
+let referenceMaterials = '';
+let materialReadPromise = Promise.resolve();
+
+const maxFiles = 5;
+const maxPerMaterialChars = 4200;
+const maxTotalMaterialChars = 12000;
 
 const tabTitles = {
   teachingPlan: '教案',
@@ -41,7 +49,67 @@ function setResultMessage(title, message, tone = '') {
 }
 
 function formPayload() {
-  return Object.fromEntries(new FormData(form).entries());
+  const payload = Object.fromEntries(new FormData(form).entries());
+  delete payload.materials;
+  if (referenceMaterials) payload.referenceMaterials = referenceMaterials;
+  return payload;
+}
+
+function isReadableMaterial(file) {
+  const name = String(file?.name || '').toLowerCase();
+  const type = String(file?.type || '').toLowerCase();
+  return type.startsWith('text/') || ['.txt', '.md', '.csv', '.json', '.log'].some((suffix) => name.endsWith(suffix));
+}
+
+function compactText(value) {
+  return String(value || '').replace(/\s+/g, ' ').trim();
+}
+
+function trimWithNote(text, limit) {
+  if (text.length <= limit) return text;
+  return `${text.slice(0, limit)}\n（后续内容较长，已保留前面部分。）`;
+}
+
+async function readMaterial(file, index) {
+  const title = `资料${index + 1}《${file?.name || '未命名材料'}》`;
+  if (!isReadableMaterial(file) || typeof file?.text !== 'function') {
+    return `${title}：已加入材料名称，正文请在左侧说明中补充重点。`;
+  }
+
+  try {
+    const content = trimWithNote(compactText(await file.text()), maxPerMaterialChars);
+    return content ? `${title}：${content}` : `${title}：材料内容为空。`;
+  } catch {
+    return `${title}：暂时无法读取正文，已加入材料名称。`;
+  }
+}
+
+function renderMaterialSummary(files, text) {
+  if (!materialSummary) return;
+  const selected = Array.from(files || []).slice(0, maxFiles);
+  if (!selected.length) {
+    materialSummary.textContent = '暂未加入材料';
+    return;
+  }
+
+  const names = selected.map((file) => file.name).join('、');
+  materialSummary.textContent = text
+    ? `已加入 ${selected.length} 份材料：${names}`
+    : `已记录 ${selected.length} 份材料：${names}`;
+}
+
+async function refreshMaterials() {
+  const files = Array.from(materialsInput?.files || []).slice(0, maxFiles);
+  if (!files.length) {
+    referenceMaterials = '';
+    renderMaterialSummary(files, referenceMaterials);
+    return;
+  }
+
+  if (materialSummary) materialSummary.textContent = '正在整理材料...';
+  const entries = await Promise.all(files.map(readMaterial));
+  referenceMaterials = trimWithNote(entries.join('\n'), maxTotalMaterialChars);
+  renderMaterialSummary(files, referenceMaterials);
 }
 
 function list(items) {
@@ -185,6 +253,7 @@ async function generate() {
   setResultMessage('正在整理课堂方案', '完整方案通常需要30到60秒，请稍候。');
 
   try {
+    await materialReadPromise;
     currentResult = await requestJson('/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -218,6 +287,12 @@ form.addEventListener('submit', (event) => {
 });
 
 sampleButton.addEventListener('click', loadSample);
+
+if (materialsInput) {
+  materialsInput.addEventListener('change', () => {
+    materialReadPromise = refreshMaterials();
+  });
+}
 
 tabs.forEach((tab) => {
   tab.addEventListener('click', () => {
