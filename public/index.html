@@ -92,19 +92,14 @@
           <div class="output-header">
             <h2>生成结果</h2>
             <div class="export-actions" aria-label="导出操作">
-              <label class="theme-control">
-                <span>主题</span>
-                <select id="ppt-theme">
-                  <option value="formal-blue">正式蓝</option>
-                  <option value="academic-green">学术绿</option>
-                  <option value="minimal-mono">极简黑白</option>
-                  <option value="vitality-orange">活力橙</option>
-                  <option value="mobile-blue">移动蓝</option>
-                </select>
-              </label>
-              <button id="export-word" class="export-button" type="button" disabled>导出 Word</button>
-              <button id="export-pdf" class="export-button" type="button" disabled>导出 PDF</button>
-              <button id="export-ppt" class="export-button" type="button" disabled>导出 PPT</button>
+              <div class="export-menu-wrap">
+                <button id="export-button" class="export-button" type="button" aria-haspopup="menu" aria-expanded="false" disabled>导出</button>
+                <div id="export-menu" class="export-menu" role="menu" hidden>
+                  <button type="button" role="menuitem" data-export-format="word">Word</button>
+                  <button type="button" role="menuitem" data-export-format="pdf">PDF</button>
+                  <button type="button" role="menuitem" data-export-format="ppt">PPT</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -126,6 +121,37 @@
         </section>
       </section>
     </main>
+
+    <div id="theme-dialog" class="modal-backdrop" hidden>
+      <section class="theme-panel" role="dialog" aria-modal="true" aria-labelledby="theme-dialog-title">
+        <div class="dialog-header">
+          <h3 id="theme-dialog-title">选择主题</h3>
+          <button id="theme-dialog-close" class="icon-button" type="button" aria-label="关闭"></button>
+        </div>
+        <div class="theme-grid" aria-label="主题选择">
+          <button class="theme-card selected" type="button" data-theme-id="formal-blue" aria-pressed="true" style="--theme-accent:#0071e3; --theme-line:#d2d2d7; --theme-text:#1d1d1f;">
+            <span class="theme-preview" aria-hidden="true"><span></span><span></span><span></span></span>
+            <strong>正式蓝</strong>
+          </button>
+          <button class="theme-card" type="button" data-theme-id="academic-green" aria-pressed="false" style="--theme-accent:#0f7b5f; --theme-line:#cfe3dc; --theme-text:#18362b;">
+            <span class="theme-preview" aria-hidden="true"><span></span><span></span><span></span></span>
+            <strong>学术绿</strong>
+          </button>
+          <button class="theme-card" type="button" data-theme-id="minimal-mono" aria-pressed="false" style="--theme-accent:#1d1d1f; --theme-line:#d2d2d7; --theme-text:#1d1d1f;">
+            <span class="theme-preview" aria-hidden="true"><span></span><span></span><span></span></span>
+            <strong>极简黑白</strong>
+          </button>
+          <button class="theme-card" type="button" data-theme-id="vitality-orange" aria-pressed="false" style="--theme-accent:#f97316; --theme-line:#f2d1ba; --theme-text:#2b2118;">
+            <span class="theme-preview" aria-hidden="true"><span></span><span></span><span></span></span>
+            <strong>活力橙</strong>
+          </button>
+          <button class="theme-card" type="button" data-theme-id="mobile-blue" aria-pressed="false" style="--theme-accent:#0086d1; --theme-line:#c9e4f4; --theme-text:#1d1d1f;">
+            <span class="theme-preview" aria-hidden="true"><span></span><span></span><span></span></span>
+            <strong>移动蓝</strong>
+          </button>
+        </div>
+      </section>
+    </div>
 
     <script src="/app.js" type="module"></script>
   </body>

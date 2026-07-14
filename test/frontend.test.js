@@ -193,16 +193,19 @@ test('page provides a user-facing reference material picker', () => {
 test('page provides disabled export actions before content is generated', () => {
   const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
 
-  assert.match(html, /id="export-word"/);
-  assert.match(html, /id="export-pdf"/);
-  assert.match(html, /id="export-ppt"/);
-  assert.match(html, /id="ppt-theme"/);
-  assert.match(html, /导出 Word/);
-  assert.match(html, /导出 PDF/);
-  assert.match(html, /导出 PPT/);
+  assert.match(html, /id="export-button"/);
+  assert.match(html, /id="export-menu"/);
+  assert.match(html, /data-export-format="word"/);
+  assert.match(html, /data-export-format="pdf"/);
+  assert.match(html, /data-export-format="ppt"/);
+  assert.match(html, /id="theme-dialog"/);
+  assert.match(html, /data-theme-id="formal-blue"/);
+  assert.match(html, /data-theme-id="mobile-blue"/);
   assert.match(html, /正式蓝/);
   assert.match(html, /移动蓝/);
-  assert.match(html, /id="export-word"[^>]*disabled/);
-  assert.match(html, /id="export-pdf"[^>]*disabled/);
-  assert.match(html, /id="export-ppt"[^>]*disabled/);
+  assert.match(html, /id="export-button"[^>]*disabled/);
+  assert.doesNotMatch(html, /id="ppt-theme"/);
+  assert.doesNotMatch(html, /导出 Word/);
+  assert.doesNotMatch(html, /导出 PDF/);
+  assert.doesNotMatch(html, /导出 PPT/);
 });

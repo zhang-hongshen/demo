@@ -4,10 +4,12 @@ import { buildPptx, pptFileName } from './pptxExport.js';
 const form = document.querySelector('#request-form');
 const generateButton = document.querySelector('#generate-button');
 const sampleButton = document.querySelector('#sample-button');
-const exportWordButton = document.querySelector('#export-word');
-const exportPdfButton = document.querySelector('#export-pdf');
-const exportPptButton = document.querySelector('#export-ppt');
-const pptThemeSelect = document.querySelector('#ppt-theme');
+const exportButton = document.querySelector('#export-button');
+const exportMenu = document.querySelector('#export-menu');
+const exportFormatButtons = Array.from(document.querySelectorAll('[data-export-format]'));
+const themeDialog = document.querySelector('#theme-dialog');
+const themeDialogCloseButton = document.querySelector('#theme-dialog-close');
+const themeButtons = Array.from(document.querySelectorAll('[data-theme-id]'));
 const statusBox = document.querySelector('#status');
 const resultBox = document.querySelector('#result');
 const tabs = Array.from(document.querySelectorAll('.tab'));
@@ -18,6 +20,7 @@ let activeTab = 'teachingPlan';
 let currentResult = null;
 let referenceMaterials = '';
 let materialReadPromise = Promise.resolve();
+let selectedPptTheme = 'formal-blue';
 
 const maxFiles = 5;
 const maxPerMaterialChars = 4200;
@@ -56,9 +59,11 @@ function setResultMessage(title, message, tone = '') {
 }
 
 function setExportActionsEnabled(enabled) {
-  [exportWordButton, exportPdfButton, exportPptButton].forEach((button) => {
-    if (button) button.disabled = !enabled;
-  });
+  if (exportButton) exportButton.disabled = !enabled;
+  if (!enabled) {
+    setExportMenuOpen(false);
+    setThemeDialogOpen(false);
+  }
 }
 
 function formPayload() {
@@ -276,6 +281,47 @@ function downloadBlob(blob, filename) {
   URL.revokeObjectURL(url);
 }
 
+function setExportMenuOpen(open) {
+  if (!exportMenu || !exportButton) return;
+  exportMenu.hidden = !open;
+  exportButton.setAttribute('aria-expanded', String(open));
+}
+
+function toggleExportMenu() {
+  if (!currentResult || exportButton?.disabled) return;
+  setExportMenuOpen(Boolean(exportMenu?.hidden));
+}
+
+function updateThemeSelection(themeId) {
+  selectedPptTheme = themeId || selectedPptTheme;
+  themeButtons.forEach((button) => {
+    const selected = button.dataset.themeId === selectedPptTheme;
+    button.classList.toggle('selected', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  });
+}
+
+function setThemeDialogOpen(open) {
+  if (!themeDialog) return;
+  themeDialog.hidden = !open;
+  if (open) {
+    updateThemeSelection(selectedPptTheme);
+    const selectedButton = themeButtons.find((button) => button.dataset.themeId === selectedPptTheme) || themeButtons[0];
+    selectedButton?.focus?.();
+  }
+}
+
+function openThemeDialog() {
+  if (!currentResult) return;
+  setExportMenuOpen(false);
+  setThemeDialogOpen(true);
+}
+
+function closeAllExportSurfaces() {
+  setExportMenuOpen(false);
+  setThemeDialogOpen(false);
+}
+
 function exportWord() {
   if (!currentResult) return;
   downloadDocument({
@@ -302,17 +348,25 @@ function exportPdf() {
   setStatus('已打开 PDF', 'success');
 }
 
-function exportPpt() {
+function exportPpt(themeId = selectedPptTheme) {
   if (!currentResult) return;
+  updateThemeSelection(themeId);
   const input = exportInput();
   const bytes = buildPptx({
     result: currentResult,
     input,
-    themeId: pptThemeSelect?.value || 'formal-blue'
+    themeId: selectedPptTheme
   });
   const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' });
   downloadBlob(blob, pptFileName(input));
   setStatus('已导出 PPT', 'success');
+}
+
+function exportByFormat(format) {
+  if (format === 'word') exportWord();
+  if (format === 'pdf') exportPdf();
+  if (format === 'ppt') openThemeDialog();
+  if (format !== 'ppt') setExportMenuOpen(false);
 }
 
 async function requestJson(url, options) {
@@ -367,9 +421,29 @@ form.addEventListener('submit', (event) => {
 });
 
 sampleButton.addEventListener('click', loadSample);
-exportWordButton?.addEventListener('click', exportWord);
-exportPdfButton?.addEventListener('click', exportPdf);
-exportPptButton?.addEventListener('click', exportPpt);
+exportButton?.addEventListener('click', toggleExportMenu);
+exportFormatButtons.forEach((button) => {
+  button.addEventListener('click', () => exportByFormat(button.dataset.exportFormat));
+});
+themeDialogCloseButton?.addEventListener('click', closeAllExportSurfaces);
+themeDialog?.addEventListener('click', (event) => {
+  if (event.target === themeDialog) closeAllExportSurfaces();
+});
+themeButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    exportPpt(button.dataset.themeId);
+    closeAllExportSurfaces();
+  });
+});
+document.addEventListener?.('click', (event) => {
+  const target = event.target;
+  if (!exportMenu || exportMenu.hidden) return;
+  if (exportButton?.contains?.(target) || exportMenu.contains?.(target)) return;
+  setExportMenuOpen(false);
+});
+document.addEventListener?.('keydown', (event) => {
+  if (event.key === 'Escape') closeAllExportSurfaces();
+});
 setExportActionsEnabled(false);
 
 if (materialsInput) {

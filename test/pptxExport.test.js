@@ -18,6 +18,24 @@ function zipEntryNames(bytes) {
   return names;
 }
 
+function zipEntries(bytes) {
+  const buffer = Buffer.from(bytes);
+  const entries = new Map();
+  let offset = 0;
+  while (offset < buffer.length - 4) {
+    if (buffer.readUInt32LE(offset) !== 0x04034b50) break;
+    const nameLength = buffer.readUInt16LE(offset + 26);
+    const extraLength = buffer.readUInt16LE(offset + 28);
+    const compressedSize = buffer.readUInt32LE(offset + 18);
+    const nameStart = offset + 30;
+    const dataStart = nameStart + nameLength + extraLength;
+    const name = buffer.subarray(nameStart, nameStart + nameLength).toString('utf8');
+    entries.set(name, buffer.subarray(dataStart, dataStart + compressedSize).toString('utf8'));
+    offset = dataStart + compressedSize;
+  }
+  return entries;
+}
+
 test('pptThemes includes common built-in themes', () => {
   assert.deepEqual(
     pptThemes.map((theme) => theme.id),
@@ -64,6 +82,32 @@ test('buildPptx creates a themed seven-slide pptx package', () => {
   assert.match(text, /掌握三种遍历规则/);
   assert.match(text, /突出课堂闭环/);
   assert.match(text, /0086D1/);
+});
+
+test('buildPptx includes office-compatible package relationships and master metadata', () => {
+  const bytes = buildPptx({
+    input: { course: '数据结构', topic: '二叉树遍历' },
+    result: {
+      teachingPlan: { objectives: ['掌握三种遍历规则'], classFlow: [] },
+      slideOutline: [],
+      quiz: [],
+      learningAnalysis: {},
+      pitchScript: '突出课堂闭环。'
+    }
+  });
+  const entries = zipEntries(bytes);
+
+  assert.ok(entries.has('docProps/core.xml'));
+  assert.ok(entries.has('docProps/app.xml'));
+  assert.match(entries.get('[Content_Types].xml'), /application\/vnd\.openxmlformats-package\.core-properties\+xml/);
+  assert.match(entries.get('[Content_Types].xml'), /application\/vnd\.openxmlformats-officedocument\.extended-properties\+xml/);
+  assert.match(entries.get('_rels/.rels'), /metadata\/core-properties/);
+  assert.match(entries.get('_rels/.rels'), /extended-properties/);
+  assert.match(entries.get('ppt/presentation.xml'), /<p:defaultTextStyle>/);
+  assert.match(entries.get('ppt/slideMasters/slideMaster1.xml'), /<p:clrMap /);
+  assert.match(entries.get('ppt/slideLayouts/slideLayout1.xml'), /<p:clrMapOvr>/);
+  assert.match(entries.get('ppt/theme/theme1.xml'), /<a:sp3d>/);
+  assert.doesNotMatch(entries.get('ppt/slideMasters/slideMaster1.xml'), /<p:sldLayoutId id="1"/);
 });
 
 test('pptFileName creates a safe pptx filename', () => {
