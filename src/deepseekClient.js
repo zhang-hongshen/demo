@@ -113,11 +113,28 @@ function normalizeQuizItem(item, index) {
   };
 }
 
+function normalizeRubricItem(item, index) {
+  if (item && typeof item === 'object' && !Array.isArray(item)) {
+    return {
+      criterion: item.criterion || item.name || item.item || `评分项${index + 1}`,
+      score: item.score || item.points || item.value || '',
+      comment: item.comment || item.feedback || item.reason || item.description || ''
+    };
+  }
+
+  return {
+    criterion: `评分项${index + 1}`,
+    score: '',
+    comment: String(item ?? '').trim()
+  };
+}
+
 function normalizeTeachingResult(result) {
   if (!result || result.rawText) return result;
 
   const plan = result.teachingPlan || {};
   const analysis = result.learningAnalysis || {};
+  const assignment = result.assignmentReview || result.assignmentGrading || result.homeworkReview || {};
 
   return {
     ...result,
@@ -136,6 +153,15 @@ function normalizeTeachingResult(result) {
       riskGroups: toArray(analysis.riskGroups),
       interventions: toArray(analysis.interventions),
       dataIndicators: toArray(analysis.dataIndicators)
+    },
+    assignmentReview: {
+      score: assignment.score || assignment.totalScore || assignment.grade || '',
+      level: assignment.level || assignment.rating || assignment.performance || '',
+      strengths: toArray(assignment.strengths || assignment.highlights || assignment.advantages),
+      issues: toArray(assignment.issues || assignment.problems || assignment.mistakes),
+      rubric: toArray(assignment.rubric || assignment.scoringDetails || assignment.criteria).map(normalizeRubricItem),
+      feedback: assignment.feedback || assignment.comment || assignment.teacherComment || '',
+      improvementTasks: toArray(assignment.improvementTasks || assignment.suggestions || assignment.nextSteps)
     },
     pitchScript: result.pitchScript || ''
   };

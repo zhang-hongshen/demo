@@ -72,6 +72,26 @@ function renderAnalysis(analysis = {}) {
   ].join(''));
 }
 
+function renderAssignmentReview(review = {}) {
+  const rubric = Array.isArray(review.rubric) ? review.rubric : [];
+  return section('作业批改', [
+    `<p><strong>综合得分：</strong>${escapeHtml(review.score || '待评定')}</p>`,
+    `<p><strong>等级：</strong>${escapeHtml(review.level || '待评定')}</p>`,
+    '<h3>评分细则</h3>',
+    rubric.length
+      ? `<ol>${rubric.map((item) => `<li><strong>${escapeHtml(item.criterion)} ${escapeHtml(item.score)}</strong><br>${escapeHtml(item.comment)}</li>`).join('')}</ol>`
+      : '<p>暂无内容</p>',
+    '<h3>亮点</h3>',
+    arrayItems(review.strengths),
+    '<h3>待改进</h3>',
+    arrayItems(review.issues),
+    '<h3>评语</h3>',
+    `<p>${escapeHtml(review.feedback || '暂无内容')}</p>`,
+    '<h3>改进任务</h3>',
+    arrayItems(review.improvementTasks)
+  ].join(''));
+}
+
 function renderPitch(script = '') {
   return section('演示稿', `<p>${escapeHtml(script || '暂无内容')}</p>`);
 }
@@ -87,6 +107,7 @@ export function buildExportHtml({ result = {}, input = {} } = {}) {
         renderSlides(result.slideOutline),
         renderQuiz(result.quiz),
         renderAnalysis(result.learningAnalysis),
+        renderAssignmentReview(result.assignmentReview),
         renderPitch(result.pitchScript)
       ].join('');
 

@@ -31,6 +31,7 @@ const tabTitles = {
   slideOutline: '课件大纲',
   quiz: '随堂测验',
   learningAnalysis: '学情分析',
+  assignmentReview: '作业批改',
   pitchScript: '演示话术'
 };
 
@@ -233,6 +234,44 @@ function renderPitch(script = '') {
   `;
 }
 
+function renderAssignmentReview(review = {}) {
+  const rubric = Array.isArray(review.rubric) ? review.rubric : [];
+  return `
+    <div class="section-grid">
+      <div class="metric-row">
+        <div class="metric"><span>综合得分</span><strong>${escapeHtml(review.score || '待评定')}</strong></div>
+        <div class="metric"><span>等级</span><strong>${escapeHtml(review.level || '待评定')}</strong></div>
+        <div class="metric"><span>评分项</span><strong>${rubric.length || 3}</strong></div>
+        <div class="metric"><span>改进任务</span><strong>${Array.isArray(review.improvementTasks) ? review.improvementTasks.length : 0}</strong></div>
+      </div>
+      <section class="content-section">
+        <h3>评分细则</h3>
+        <ul class="rubric-list">
+          ${rubric.length ? rubric.map((item) => `
+            <li><strong>${escapeHtml(item.criterion)}</strong><span>${escapeHtml(item.score)}</span><br>${escapeHtml(item.comment)}</li>
+          `).join('') : '<li>暂无内容</li>'}
+        </ul>
+      </section>
+      <section class="content-section">
+        <h3>亮点</h3>
+        ${list(review.strengths)}
+      </section>
+      <section class="content-section">
+        <h3>待改进</h3>
+        ${list(review.issues)}
+      </section>
+      <section class="content-section">
+        <h3>评语</h3>
+        <p>${escapeHtml(review.feedback || '暂无内容')}</p>
+      </section>
+      <section class="content-section">
+        <h3>改进任务</h3>
+        ${list(review.improvementTasks)}
+      </section>
+    </div>
+  `;
+}
+
 function renderResult() {
   if (!currentResult) return;
 
@@ -251,6 +290,7 @@ function renderResult() {
     slideOutline: () => renderSlides(currentResult.slideOutline),
     quiz: () => renderQuiz(currentResult.quiz),
     learningAnalysis: () => renderAnalysis(currentResult.learningAnalysis),
+    assignmentReview: () => renderAssignmentReview(currentResult.assignmentReview),
     pitchScript: () => renderPitch(currentResult.pitchScript)
   };
 

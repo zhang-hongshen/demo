@@ -190,6 +190,17 @@ test('page provides a user-facing reference material picker', () => {
   assert.match(html, /id="material-summary"/);
 });
 
+test('page provides assignment grading inputs and result tab', () => {
+  const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
+
+  assert.match(html, /作业批改/);
+  assert.match(html, /name="assignmentTitle"/);
+  assert.match(html, /name="assignmentRequirement"/);
+  assert.match(html, /name="gradingRubric"/);
+  assert.match(html, /name="studentSubmission"/);
+  assert.match(html, /data-tab="assignmentReview"/);
+});
+
 test('page provides disabled export actions before content is generated', () => {
   const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
 

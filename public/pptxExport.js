@@ -52,6 +52,7 @@ function bulletItems(items, limit = 5) {
 function slideModel({ result = {}, input = {} } = {}) {
   const plan = result.teachingPlan || {};
   const analysis = result.learningAnalysis || {};
+  const review = result.assignmentReview || {};
   const flow = toArray(plan.classFlow).length ? plan.classFlow : [];
   const course = input.course || '课堂方案';
   const topic = input.topic || '';
@@ -87,6 +88,15 @@ function slideModel({ result = {}, input = {} } = {}) {
         ...bulletItems(analysis.misconceptions, 2).map((item) => `高频误区：${item}`),
         ...bulletItems(analysis.riskGroups, 1).map((item) => `风险群体：${item}`),
         ...bulletItems(analysis.interventions, 2).map((item) => `干预建议：${item}`)
+      ]
+    },
+    {
+      title: '作业批改',
+      bullets: [
+        `综合得分：${clip(review.score || '待评定', 24)}｜等级：${clip(review.level || '待评定', 18)}`,
+        ...bulletItems(review.strengths, 1).map((item) => `亮点：${item}`),
+        ...bulletItems(review.issues, 2).map((item) => `待改进：${item}`),
+        ...bulletItems(review.improvementTasks, 2).map((item) => `任务：${item}`)
       ]
     },
     { title: '演示话术', bullets: [clip(result.pitchScript || '围绕课堂目标、教学过程和闭环反馈进行汇报。', 260)] }

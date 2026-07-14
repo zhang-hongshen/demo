@@ -55,6 +55,15 @@ test('parseDeepSeekPayload normalizes common shape variations for the UI', () =>
               interventions: '提供递归展开图。',
               dataIndicators: '课堂小测正确率。'
             },
+            assignmentReview: {
+              score: '86',
+              level: '良好',
+              strengths: '遍历序列完整；表达清晰',
+              issues: '递归边界解释不够充分。',
+              rubric: [{ criterion: '遍历序列', score: '55/60', comment: '序列基本正确' }],
+              feedback: '整体掌握较好，需要补充递归出口说明。',
+              improvementTasks: '补写递归终止条件；完成一题后序遍历'
+            },
             pitchScript: '演示话术'
           })
         }
@@ -76,6 +85,16 @@ test('parseDeepSeekPayload normalizes common shape variations for the UI', () =>
   assert.equal(parsed.quiz[0].answer, '根左右');
   assert.equal(parsed.quiz[0].explanation, '先根。');
   assert.deepEqual(parsed.learningAnalysis.misconceptions, ['混淆遍历顺序。']);
+  assert.equal(parsed.assignmentReview.score, '86');
+  assert.equal(parsed.assignmentReview.level, '良好');
+  assert.deepEqual(parsed.assignmentReview.strengths, ['遍历序列完整', '表达清晰']);
+  assert.deepEqual(parsed.assignmentReview.issues, ['递归边界解释不够充分。']);
+  assert.deepEqual(parsed.assignmentReview.rubric[0], {
+    criterion: '遍历序列',
+    score: '55/60',
+    comment: '序列基本正确'
+  });
+  assert.deepEqual(parsed.assignmentReview.improvementTasks, ['补写递归终止条件', '完成一题后序遍历']);
 });
 
 test('generateTeachingPackage uses injected fetch implementation', async () => {

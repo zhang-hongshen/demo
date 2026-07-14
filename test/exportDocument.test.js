@@ -21,6 +21,15 @@ test('buildExportHtml renders all generated sections for document export', () =>
         interventions: ['用调用栈图示辅助'],
         dataIndicators: ['练习正确率']
       },
+      assignmentReview: {
+        score: '86',
+        level: '良好',
+        strengths: ['遍历序列完整'],
+        issues: ['递归边界解释不够充分'],
+        rubric: [{ criterion: '遍历序列', score: '55/60', comment: '序列基本正确' }],
+        feedback: '整体掌握较好。',
+        improvementTasks: ['补写递归终止条件']
+      },
       pitchScript: '本方案覆盖课前、课中、课后。'
     },
     input: {
@@ -37,6 +46,10 @@ test('buildExportHtml renders all generated sections for document export', () =>
   assert.match(html, /课件大纲/);
   assert.match(html, /随堂测验/);
   assert.match(html, /学情分析/);
+  assert.match(html, /作业批改/);
+  assert.match(html, /86/);
+  assert.match(html, /遍历序列完整/);
+  assert.match(html, /补写递归终止条件/);
   assert.match(html, /演示稿/);
   assert.match(html, /理解递归边界/);
   assert.doesNotMatch(html, /<script>/);

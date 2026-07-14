@@ -119,6 +119,15 @@ h3 {
   gap: 12px;
 }
 
+.form-section-title {
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+}
+
 label {
   display: grid;
   gap: 7px;
@@ -575,7 +584,7 @@ button:disabled {
 
 .tabs {
   display: grid;
-  grid-template-columns: repeat(5, minmax(84px, 1fr));
+  grid-template-columns: repeat(6, minmax(78px, 1fr));
   gap: 0;
   padding: 0 14px;
   border-bottom: 1px solid var(--line-soft);
@@ -683,7 +692,8 @@ button:disabled {
 .pill-list,
 .timeline,
 .quiz-list,
-.slide-list {
+.slide-list,
+.rubric-list {
   display: grid;
   gap: 9px;
   margin: 0;
@@ -694,7 +704,8 @@ button:disabled {
 .pill-list li,
 .timeline li,
 .quiz-list li,
-.slide-list li {
+.slide-list li,
+.rubric-list li {
   border: 1px solid var(--line-soft);
   border-radius: 8px;
   background: var(--surface);
@@ -704,8 +715,17 @@ button:disabled {
 
 .timeline strong,
 .quiz-list strong,
-.slide-list strong {
+.slide-list strong,
+.rubric-list strong {
   color: var(--ink);
+}
+
+.rubric-list span {
+  display: inline-block;
+  margin-left: 8px;
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .metric-row {

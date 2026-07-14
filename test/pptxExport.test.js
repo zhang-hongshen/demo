@@ -43,7 +43,7 @@ test('pptThemes includes common built-in themes', () => {
   );
 });
 
-test('buildPptx creates a themed seven-slide pptx package', () => {
+test('buildPptx creates a themed pptx package with assignment review', () => {
   const bytes = buildPptx({
     themeId: 'mobile-blue',
     input: { course: '数据结构', topic: '二叉树遍历' },
@@ -64,6 +64,13 @@ test('buildPptx creates a themed seven-slide pptx package', () => {
         interventions: ['用调用栈辅助讲解'],
         dataIndicators: ['练习正确率']
       },
+      assignmentReview: {
+        score: '86',
+        level: '良好',
+        strengths: ['遍历序列完整'],
+        issues: ['递归边界解释不够充分'],
+        improvementTasks: ['补写递归终止条件']
+      },
       pitchScript: '突出课堂闭环。'
     }
   });
@@ -76,10 +83,12 @@ test('buildPptx creates a themed seven-slide pptx package', () => {
   assert.ok(names.includes('[Content_Types].xml'));
   assert.ok(names.includes('ppt/presentation.xml'));
   assert.ok(names.includes('ppt/slides/slide1.xml'));
-  assert.ok(names.includes('ppt/slides/slide7.xml'));
+  assert.ok(names.includes('ppt/slides/slide8.xml'));
   assert.match(text, /数据结构/);
   assert.match(text, /二叉树遍历/);
   assert.match(text, /掌握三种遍历规则/);
+  assert.match(text, /作业批改/);
+  assert.match(text, /遍历序列完整/);
   assert.match(text, /突出课堂闭环/);
   assert.match(text, /0086D1/);
 });
