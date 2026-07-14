@@ -10,31 +10,16 @@
     <main class="app-shell">
       <header class="topbar" aria-label="页面概览">
         <div>
-          <p class="eyebrow">高校课堂方案工作台</p>
-          <h1>让备课成果更完整</h1>
+          <p class="eyebrow">课堂方案</p>
+          <h1>教学设计工作台</h1>
         </div>
-        <div class="topbar-note">面向备课、授课、测评、补救的课堂方案生成</div>
+        <div id="status" class="status">准备就绪</div>
       </header>
 
       <section class="workspace" aria-label="课堂方案工作台">
         <aside class="input-panel">
-          <div class="brand-row">
-            <div class="brand-mark" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div>
-              <p class="eyebrow">课程信息</p>
-              <h2>填写课堂背景</h2>
-              <p class="panel-subtitle">把课程主题、学生情况和教学目标整理成一份可演示的课堂方案。</p>
-            </div>
-          </div>
-
-          <div class="input-meta" aria-label="演示能力">
-            <span>课程背景</span>
-            <span>课堂目标</span>
-            <span>成果预览</span>
+          <div class="panel-heading">
+            <h2>输入信息</h2>
           </div>
 
           <form id="request-form" class="request-form">
@@ -70,8 +55,8 @@
                 <span class="material-drop">
                   <span class="material-icon" aria-hidden="true"></span>
                   <span>
-                    <strong>选择课程资料</strong>
-                    <small>文字材料会读取内容，其他资料会先记录名称。</small>
+                    <strong>选择资料</strong>
+                    <small>支持常用课程文件</small>
                   </span>
                 </span>
               </label>
@@ -105,26 +90,7 @@
 
         <section class="output-panel" aria-live="polite">
           <div class="output-header">
-            <div>
-              <p class="eyebrow">从课堂背景到成果展示</p>
-              <h2>方案成果</h2>
-            </div>
-            <div id="status" class="status">准备就绪</div>
-          </div>
-
-          <div class="summary-strip" aria-label="演示流程摘要">
-            <div>
-              <span>课堂安排</span>
-              <strong>流程清晰</strong>
-            </div>
-            <div>
-              <span>课件结构</span>
-              <strong>可直接演示</strong>
-            </div>
-            <div>
-              <span>测评反馈</span>
-              <strong>闭环完整</strong>
-            </div>
+            <h2>生成结果</h2>
           </div>
 
           <nav class="tabs" aria-label="结果分类">
@@ -138,8 +104,8 @@
           <div id="result" class="result-surface">
             <div class="empty-state">
               <div class="empty-visual" aria-hidden="true"></div>
-              <h3>等待生成课堂方案</h3>
-              <p>填写左侧内容后，可得到教案、课件结构、随堂测验、学情分析和演示稿。</p>
+              <h3>暂无内容</h3>
+              <p>填写信息后生成课堂方案。</p>
             </div>
           </div>
         </section>

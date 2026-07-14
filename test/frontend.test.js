@@ -153,6 +153,35 @@ test('user-facing page copy avoids technical terms', () => {
   assert.doesNotMatch(visibleText, userFacingTechPattern);
 });
 
+test('page copy is concise and formal', () => {
+  const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
+  const visibleText = html
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  assert.match(visibleText, /课堂方案/);
+  assert.match(visibleText, /输入信息/);
+  assert.match(visibleText, /生成结果/);
+  assert.doesNotMatch(visibleText, /让备课成果更完整/);
+  assert.doesNotMatch(visibleText, /面向备课、授课、测评、补救/);
+  assert.doesNotMatch(visibleText, /课程背景 课堂目标 成果预览/);
+  assert.doesNotMatch(visibleText, /流程清晰|可直接演示|闭环完整/);
+  assert.doesNotMatch(visibleText, /文字材料会读取内容/);
+});
+
+test('stylesheet uses restrained Apple-style surfaces', () => {
+  const css = fs.readFileSync(path.join('public', 'styles.css'), 'utf8');
+
+  assert.match(css, /--page:\s*#f5f5f7/);
+  assert.match(css, /--brand:\s*#0071e3/);
+  assert.doesNotMatch(css, /linear-gradient\(120deg/);
+  assert.doesNotMatch(css, /linear-gradient\(315deg/);
+  assert.doesNotMatch(css, /--surface-warm|--surface-green|--gold/);
+});
+
 test('page provides a user-facing reference material picker', () => {
   const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
 

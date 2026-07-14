@@ -249,8 +249,8 @@ async function requestJson(url, options) {
 async function generate() {
   generateButton.disabled = true;
   currentResult = null;
-  setStatus('方案生成中...', '');
-  setResultMessage('正在整理课堂方案', '完整方案通常需要30到60秒，请稍候。');
+  setStatus('生成中...', '');
+  setResultMessage('正在生成', '请稍候。');
 
   try {
     await materialReadPromise;
@@ -259,7 +259,7 @@ async function generate() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formPayload())
     });
-    setStatus('课堂方案已生成', 'success');
+    setStatus('已生成', 'success');
     renderResult();
   } catch (error) {
     currentResult = null;
@@ -271,7 +271,7 @@ async function generate() {
 }
 
 async function loadSample() {
-  setStatus('正在载入样例...', '');
+  setStatus('载入样例...', '');
   try {
     currentResult = await requestJson('/api/sample');
     setStatus('样例已载入', 'success');
