@@ -67,17 +67,57 @@ h3 {
 
 .app-shell {
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 220px minmax(360px, 460px) minmax(0, 1fr);
+  gap: 14px;
   padding: 22px;
 }
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: center;
-  max-width: 1440px;
-  margin: 0 auto 14px;
-  padding: 2px 2px 8px;
+.sidebar {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 22px;
+  min-height: calc(100vh - 44px);
+  padding: 18px;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow);
+}
+
+.brand-lockup {
+  display: grid;
+  gap: 13px;
+  align-content: start;
+}
+
+.brand-icon {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: var(--brand);
+  box-shadow: 0 8px 18px rgba(0, 113, 227, 0.2);
+}
+
+.brand-icon::before,
+.brand-icon::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  height: 2px;
+  border-radius: 2px;
+  background: #ffffff;
+}
+
+.brand-icon::before {
+  top: 15px;
+}
+
+.brand-icon::after {
+  top: 25px;
+  right: 18px;
 }
 
 .eyebrow {
@@ -87,22 +127,25 @@ h3 {
   font-weight: 600;
 }
 
+.brand-lockup h1 {
+  font-size: 20px;
+}
+
 .workspace {
+  grid-column: 2 / 4;
   display: grid;
-  grid-template-columns: minmax(330px, 408px) minmax(0, 1fr);
+  grid-template-columns: minmax(360px, 460px) minmax(0, 1fr);
   gap: 14px;
-  max-width: 1440px;
-  min-height: calc(100vh - 106px);
-  margin: 0 auto;
+  min-height: calc(100vh - 44px);
 }
 
 .feature-tabs {
-  max-width: 1440px;
-  margin: 0 auto 14px;
+  align-content: start;
+  margin: 0;
   border: 1px solid var(--line-soft);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: var(--small-shadow);
+  box-shadow: none;
 }
 
 .input-panel,
@@ -612,30 +655,40 @@ button:disabled {
   color: var(--green);
 }
 
+.sidebar .status {
+  max-width: none;
+  text-align: left;
+}
+
 .tabs {
   display: grid;
-  grid-template-columns: repeat(3, minmax(92px, 1fr));
-  gap: 0;
-  padding: 0 14px;
-  border-bottom: 1px solid var(--line-soft);
+  gap: 6px;
+  padding: 8px;
   background: var(--surface);
 }
 
 .tab {
-  min-height: 46px;
-  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   font-size: 13px;
+  text-align: left;
 }
 
 .tab:hover {
+  background: #f2f2f4;
   color: var(--ink);
 }
 
 .tab.active {
+  background: #eef6ff;
   color: var(--brand);
-  box-shadow: inset 0 -2px 0 var(--brand);
+  box-shadow: inset 3px 0 0 var(--brand);
 }
 
 .result-surface {
@@ -791,7 +844,12 @@ button:disabled {
 }
 
 @media (max-width: 1080px) {
+  .app-shell {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
   .workspace {
+    grid-column: 2 / 3;
     grid-template-columns: 1fr;
   }
 
@@ -802,12 +860,27 @@ button:disabled {
 
 @media (max-width: 760px) {
   .app-shell {
+    grid-template-columns: 1fr;
     padding: 14px;
   }
 
-  .topbar {
-    align-items: flex-start;
-    flex-direction: column;
+  .sidebar {
+    grid-template-rows: auto auto auto;
+    gap: 14px;
+    min-height: auto;
+  }
+
+  .brand-lockup {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .brand-lockup h1 {
+    font-size: 18px;
+  }
+
+  .workspace {
+    grid-column: 1;
   }
 
   .output-header {
@@ -825,12 +898,37 @@ button:disabled {
   }
 
   .tabs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tab {
+    justify-content: center;
+    padding: 0 8px;
+    text-align: center;
+  }
+
+  .tab.active {
+    box-shadow: inset 0 -2px 0 var(--brand);
   }
 
   .metric-row,
   .form-grid,
   .button-row {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .tab {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .tab.active {
+    box-shadow: inset 3px 0 0 var(--brand);
   }
 }

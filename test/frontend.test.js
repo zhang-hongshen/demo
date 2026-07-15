@@ -219,6 +219,21 @@ test('page presents three primary feature tabs with separate form panels', () =>
   assert.doesNotMatch(html, /data-tab="pitchScript"/);
 });
 
+test('page uses left navigation with brand icon and split work columns', () => {
+  const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
+  const css = fs.readFileSync(path.join('public', 'styles.css'), 'utf8');
+
+  assert.match(html, /<aside class="sidebar" aria-label="功能导航">/);
+  assert.match(html, /class="brand-icon"/);
+  assert.match(html, /<nav class="tabs feature-tabs" aria-label="功能选择">/);
+  assert.match(html, /<section class="workspace" aria-label="课堂方案工作台">/);
+  assert.match(html, /<aside class="input-panel">/);
+  assert.match(html, /<section class="output-panel" aria-live="polite">/);
+  assert.match(css, /\.app-shell\s*{[\s\S]*grid-template-columns:\s*220px minmax\(360px, 460px\) minmax\(0, 1fr\)/);
+  assert.match(css, /\.workspace\s*{[\s\S]*grid-column:\s*2 \/ 4/);
+  assert.doesNotMatch(html, /class="topbar"/);
+});
+
 test('page provides disabled export actions before content is generated', () => {
   const html = fs.readFileSync(path.join('public', 'index.html'), 'utf8');
 

@@ -8,19 +8,23 @@
   </head>
   <body>
     <main class="app-shell">
-      <header class="topbar" aria-label="页面概览">
-        <div>
-          <p class="eyebrow">课堂方案</p>
-          <h1>教学设计工作台</h1>
+      <aside class="sidebar" aria-label="功能导航">
+        <div class="brand-lockup">
+          <span class="brand-icon" aria-hidden="true"></span>
+          <div>
+            <p class="eyebrow">课堂方案</p>
+            <h1>教学设计工作台</h1>
+          </div>
         </div>
-        <div id="status" class="status">准备就绪</div>
-      </header>
 
-      <nav class="tabs feature-tabs" aria-label="功能选择">
-        <button class="tab active" type="button" data-feature="slides">课件生成</button>
-        <button class="tab" type="button" data-feature="grading">作业批改</button>
-        <button class="tab" type="button" data-feature="analysis">学情分析</button>
-      </nav>
+        <nav class="tabs feature-tabs" aria-label="功能选择">
+          <button class="tab active" type="button" data-feature="slides">课件生成</button>
+          <button class="tab" type="button" data-feature="grading">作业批改</button>
+          <button class="tab" type="button" data-feature="analysis">学情分析</button>
+        </nav>
+
+        <div id="status" class="status">准备就绪</div>
+      </aside>
 
       <section class="workspace" aria-label="课堂方案工作台">
         <aside class="input-panel">
