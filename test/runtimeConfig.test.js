@@ -10,14 +10,15 @@ test('configFromEnv builds runtime config from Cloudflare bindings', () => {
   assert.equal(config.model, 'deepseek-v4-flash');
 });
 
-test('configFromEnv accepts explicit service overrides', () => {
+test('configFromEnv accepts explicit endpoint and key overrides but fixes model', () => {
   const config = configFromEnv({
     deepseek_base_url: 'https://example.test/v1',
     deepseek_api_key: 'named-secret',
-    deepseek_model: 'custom-model'
+    deepseek_model: 'deepseek-v4-pro',
+    MODEL: 'custom-model'
   });
 
   assert.equal(config.baseUrl, 'https://example.test/v1');
   assert.equal(config.apiKey, 'named-secret');
-  assert.equal(config.model, 'custom-model');
+  assert.equal(config.model, 'deepseek-v4-flash');
 });

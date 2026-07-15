@@ -23,7 +23,7 @@ test('Cloudflare generate function reads api key from context env', async () => 
   });
   const response = await handleGenerateRequest({
     request,
-    env: { api_key: 'secret-key' },
+    env: { api_key: 'secret-key', MODEL: 'deepseek-v4-pro' },
     generate: async (input, config) => {
       assert.equal(input.course, '数据结构');
       assert.equal(config.baseUrl, 'https://api.deepseek.com');

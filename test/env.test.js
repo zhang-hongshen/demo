@@ -23,10 +23,12 @@ test('loadEnv ignores legacy base_url and accepts DeepSeek-specific override', (
   fs.writeFileSync(envPath, [
     'base_url=http://183.230.58.2:3000/v1',
     'deepseek_base_url=https://api.deepseek.com/beta',
+    'model=deepseek-v4-pro',
     'api_key=secret-key'
   ].join('\n'));
 
   const config = loadEnv(envPath);
 
   assert.equal(config.baseUrl, 'https://api.deepseek.com/beta');
+  assert.equal(config.model, 'deepseek-v4-flash');
 });

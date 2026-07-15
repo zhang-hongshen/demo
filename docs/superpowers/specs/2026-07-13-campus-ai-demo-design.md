@@ -63,11 +63,10 @@ The backend reads:
 
 1. `api_key`
 2. optional `deepseek_base_url`
-3. optional `deepseek_model`
 
 The client uses DeepSeek's official OpenAI-compatible base URL `https://api.deepseek.com` and `POST /chat/completions`.
 
-If `.env` includes `deepseek_model`, use it. Otherwise default to `deepseek-v4-flash`.
+The model is fixed to `deepseek-v4-flash`; environment variables must not override it.
 
 ## Output Contract
 

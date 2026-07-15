@@ -12,7 +12,7 @@
 
 - The app opens directly to the working demo, not a marketing landing page.
 - `.env` remains server-only and is never exposed to browser code.
-- Backend reads `base_url` and `api_key`; it also supports optional `model` and defaults to `deepseek-v4-flash`.
+- Backend reads `deepseek_base_url` and `api_key`; the model is fixed to `deepseek-v4-flash`.
 - Output tabs are 教案, 课件大纲, 随堂测验, 学情分析, and 演示话术.
 - Error responses must not leak API keys.
 - Include sample fallback output so the presenter can keep the demo moving.
@@ -312,9 +312,9 @@ export function parseEnv(text) {
 export function loadEnv(filePath = path.resolve(process.cwd(), '.env')) {
   const fileValues = fs.existsSync(filePath) ? parseEnv(fs.readFileSync(filePath, 'utf8')) : {};
   return {
-    baseUrl: process.env.base_url || process.env.BASE_URL || fileValues.base_url || fileValues.BASE_URL,
-    apiKey: process.env.api_key || process.env.API_KEY || fileValues.api_key || fileValues.API_KEY,
-    model: process.env.model || process.env.MODEL || fileValues.model || fileValues.MODEL || 'deepseek-v4-flash'
+    baseUrl: process.env.deepseek_base_url || process.env.DEEPSEEK_BASE_URL || fileValues.deepseek_base_url || fileValues.DEEPSEEK_BASE_URL || 'https://api.deepseek.com',
+    apiKey: process.env.deepseek_api_key || process.env.DEEPSEEK_API_KEY || process.env.api_key || process.env.API_KEY || fileValues.deepseek_api_key || fileValues.DEEPSEEK_API_KEY || fileValues.api_key || fileValues.API_KEY,
+    model: 'deepseek-v4-flash'
   };
 }
 ```
