@@ -80,6 +80,14 @@ function slideModel({ result = {}, input = {} } = {}) {
       title: '随堂测验',
       bullets: asArray(result.quiz).slice(0, 5).map((item, index) => `${index + 1}. ${clip(item.question, 78)}｜答案：${clip(item.answer, 28)}`)
     },
+    {
+      title: '课后分层任务',
+      bullets: [
+        `基础巩固：${bulletItems(result.tieredTasks?.basic, 3).join('；') || '暂无内容'}`,
+        `能力提升：${bulletItems(result.tieredTasks?.advanced, 3).join('；') || '暂无内容'}`,
+        `挑战拓展：${bulletItems(result.tieredTasks?.challenge, 3).join('；') || '暂无内容'}`
+      ]
+    },
     { title: '演示话术', bullets: [clip(result.pitchScript || '围绕课堂目标、教学过程和闭环反馈进行汇报。', 260)] }
   ];
 }

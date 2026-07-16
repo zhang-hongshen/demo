@@ -1,4 +1,5 @@
-import { buildTeachingMessages } from './promptBuilder.js';
+import { buildRewriteMessages, buildTeachingMessages } from './promptBuilder.js';
+import { isRewriteValue, validateRewriteRequest } from './rewriteContract.js';
 
 function joinUrl(baseUrl, suffix) {
   return `${baseUrl.replace(/\/+$/, '')}${suffix}`;
@@ -26,6 +27,31 @@ export function buildDeepSeekRequest({ input, config }) {
   };
 }
 
+export function buildRewriteRequest({ input, config }) {
+  if (!config?.baseUrl) throw new Error('Missing DeepSeek base URL');
+  if (!config?.apiKey) throw new Error('Missing api_key in .env');
+
+  const validation = validateRewriteRequest(input);
+  if (!validation.ok) throw new Error(validation.error);
+
+  return {
+    url: joinUrl(config.baseUrl, '/chat/completions'),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${config.apiKey}`
+    },
+    body: {
+      model: config.model || 'deepseek-v4-flash',
+      temperature: 0.4,
+      max_tokens: 1200,
+      response_format: { type: 'json_object' },
+      thinking: { type: 'disabled' },
+      stream: false,
+      messages: buildRewriteMessages(validation.value)
+    }
+  };
+}
+
 export function parseDeepSeekPayload(payload) {
   const content = payload?.choices?.[0]?.message?.content;
   if (!content) {
@@ -40,6 +66,32 @@ export function parseDeepSeekPayload(payload) {
   }
 }
 
+export function parseRewritePayload(payload, valueType) {
+  const content = payload?.choices?.[0]?.message?.content;
+  if (!content) throw new Error('DeepSeek rewrite response did not include message content');
+
+  const cleaned = String(content)
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/\s*```$/i, '')
+    .trim();
+
+  let parsed;
+  try {
+    parsed = JSON.parse(cleaned);
+  } catch {
+    throw new Error('DeepSeek rewrite response was not valid JSON');
+  }
+
+  if (!isRewriteValue(parsed?.value, valueType)) {
+    throw new Error('DeepSeek rewrite response had an invalid value');
+  }
+
+  return valueType === 'text'
+    ? parsed.value.trim()
+    : parsed.value.map((item) => item.trim()).filter(Boolean);
+}
+
 function toArray(value) {
   if (Array.isArray(value)) return value;
   if (value == null || value === '') return [];
@@ -51,6 +103,14 @@ function toArray(value) {
     .filter(Boolean);
 
   return parts.length > 1 ? parts : [value.trim()];
+}
+
+function normalizeTieredTasks(tasks = {}) {
+  return {
+    basic: toArray(tasks.basic),
+    advanced: toArray(tasks.advanced),
+    challenge: toArray(tasks.challenge)
+  };
 }
 
 function normalizeFlowItem(item, index) {
@@ -148,6 +208,7 @@ function normalizeTeachingResult(result) {
     },
     slideOutline: toArray(result.slideOutline).map(normalizeSlideItem),
     quiz: toArray(result.quiz).map(normalizeQuizItem),
+    tieredTasks: normalizeTieredTasks(result.tieredTasks),
     learningAnalysis: {
       misconceptions: toArray(analysis.misconceptions),
       riskGroups: toArray(analysis.riskGroups),
@@ -196,4 +257,37 @@ export async function generateTeachingPackage({ input, config, fetchImpl = fetch
   }
 
   return parseDeepSeekPayload(await response.json());
+}
+
+export async function rewriteTeachingSection({ input, config, fetchImpl = fetch, timeoutMs = 60000 }) {
+  const validation = validateRewriteRequest(input);
+  if (!validation.ok) throw new Error(validation.error);
+  const request = buildRewriteRequest({ input: validation.value, config });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  let response;
+
+  try {
+    response = await fetchImpl(request.url, {
+      method: 'POST',
+      headers: request.headers,
+      body: JSON.stringify(request.body),
+      signal: controller.signal
+    });
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      throw new Error(`DeepSeek rewrite request timed out after ${timeoutMs}ms`);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
+
+  if (!response.ok) {
+    const detail = await response.text();
+    const suffix = detail ? `: ${detail.slice(0, 500)}` : '';
+    throw new Error(`DeepSeek rewrite request failed with status ${response.status || 'unknown'}${suffix}`);
+  }
+
+  return parseRewritePayload(await response.json(), validation.value.target.valueType);
 }

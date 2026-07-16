@@ -31,6 +31,11 @@ export const sampleResult = {
     { type: '单选', question: '递归遍历必须明确什么？', answer: '递归边界', explanation: '没有边界会导致无限递归。' },
     { type: '应用', question: '请写出给定三节点树的中序遍历。', answer: '左、根、右', explanation: '按中序规则依次访问。' }
   ],
+  tieredTasks: {
+    basic: ['完成一道核心概念辨析题', '根据示例树写出中序遍历'],
+    advanced: ['解释一次递归调用栈变化', '完成一道遍历顺序变式题'],
+    challenge: ['把遍历规则迁移到校园组织架构数据', '设计一道能区分三类遍历的题目']
+  },
   learningAnalysis: {
     misconceptions: ['把前序和层序混淆', '忽略空子树递归边界', '只背顺序不理解调用过程'],
     riskGroups: ['程序基础薄弱学生', '缺课学生', '课堂练习提交过慢学生'],

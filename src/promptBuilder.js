@@ -1,12 +1,15 @@
+import { targetDescription, validateRewriteRequest } from './rewriteContract.js';
+
+const featureLabels = {
+  slides: '课件生成',
+  grading: '作业批改',
+  analysis: '学情分析'
+};
+
 export function buildTeachingMessages(input) {
   const referenceMaterials = String(input.referenceMaterials || '').trim().slice(0, 12000);
-  const featureLabels = {
-    slides: '课件生成',
-    grading: '作业批改',
-    analysis: '学情分析'
-  };
   const featureGuidance = {
-    slides: '只需要重点返回课件生成结果，包括教案、课件大纲、随堂测验和演示话术；其他字段可以保持简洁。',
+    slides: '只需要重点返回课件生成结果，包括教案、课件大纲、随堂测验、课后分层任务和演示话术；其他字段可以保持简洁。',
     grading: '只需要重点返回作业批改结果，包括得分、等级、评分细则、亮点、问题、评语和改进任务；其他字段可以保持简洁。',
     analysis: '只需要重点返回学情分析结果，包括高频误区、风险群体、干预建议和数据指标；其他字段可以保持简洁。'
   };
@@ -58,13 +61,52 @@ export function buildTeachingMessages(input) {
           ? `补充材料：\n${normalized.referenceMaterials}\n请优先结合补充材料中的课程内容、学生反馈和课堂证据。`
           : '补充材料：未提供',
         '返回JSON字段必须包含：',
-        '示例JSON结构：{"teachingPlan":{"objectives":["目标"]},"slideOutline":[{"title":"标题","speakerNotes":"讲稿"}],"quiz":[{"type":"单选","question":"题目","answer":"答案","explanation":"解析"}],"learningAnalysis":{"misconceptions":["误区"],"riskGroups":["风险群体"],"interventions":["干预"],"dataIndicators":["指标"]},"assignmentReview":{"score":"86","level":"良好","strengths":["优点"],"issues":["问题"],"rubric":[{"criterion":"评分项","score":"分值","comment":"说明"}],"feedback":"评语","improvementTasks":["改进任务"]},"pitchScript":"话术"}',
+        '示例JSON结构：{"teachingPlan":{"objectives":["目标"]},"slideOutline":[{"title":"标题","speakerNotes":"讲稿"}],"quiz":[{"type":"单选","question":"题目","answer":"答案","explanation":"解析"}],"tieredTasks":{"basic":["基础任务"],"advanced":["提升任务"],"challenge":["挑战任务"]},"learningAnalysis":{"misconceptions":["误区"],"riskGroups":["风险群体"],"interventions":["干预"],"dataIndicators":["指标"]},"assignmentReview":{"score":"86","level":"良好","strengths":["优点"],"issues":["问题"],"rubric":[{"criterion":"评分项","score":"分值","comment":"说明"}],"feedback":"评语","improvementTasks":["改进任务"]},"pitchScript":"话术"}',
         'teachingPlan: { objectives, keyPoints, classFlow, teacherActions, studentActions, assessment }',
         'slideOutline: [{ title, speakerNotes }]',
         'quiz: [{ type, question, answer, explanation }]',
+        'tieredTasks: { basic, advanced, challenge }',
         'learningAnalysis: { misconceptions, riskGroups, interventions, dataIndicators }',
         'assignmentReview: { score, level, strengths, issues, rubric, feedback, improvementTasks }',
         'pitchScript: string'
+      ].join('\n')
+    }
+  ];
+}
+
+export function buildRewriteMessages(input) {
+  const validation = validateRewriteRequest(input);
+  if (!validation.ok) throw new Error(validation.error);
+
+  const normalized = validation.value;
+  const context = normalized.inputContext;
+  const currentValue = normalized.target.valueType === 'lines'
+    ? normalized.currentValue.join('\n')
+    : normalized.currentValue;
+
+  return [
+    {
+      role: 'system',
+      content: [
+        '你是高校教师备课助手，负责对一段已经生成的教学内容做局部改写。',
+        '保持学科事实、课程主题和教学目标准确，只修改当前字段，不补写其他字段。',
+        '只输出JSON，不要使用Markdown代码块。JSON必须可被JSON.parse解析。'
+      ].join('\n')
+    },
+    {
+      role: 'user',
+      content: [
+        `当前功能：${featureLabels[normalized.feature]}`,
+        `目标字段：${targetDescription(normalized.target)}`,
+        `改写方式：${normalized.instruction}`,
+        `课程名称：${context.course || '未提供'}`,
+        `本节主题：${context.topic || '未提供'}`,
+        `班级画像：${context.classProfile || '未提供'}`,
+        `当前内容：\n${currentValue}`,
+        normalized.target.valueType === 'lines'
+          ? '返回值必须是有序字符串数组，保留每项独立成任务或要点。'
+          : '返回值必须是单个字符串，保留原字段的用途和长度适配。',
+        '只输出JSON对象，格式必须是 {"value":"..."} 或 {"value":["..."]}，不要输出Markdown、解释或其他字段。'
       ].join('\n')
     }
   ];

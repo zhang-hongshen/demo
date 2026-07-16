@@ -3,7 +3,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadEnv } from './env.js';
-import { generateTeachingPackage } from './deepseekClient.js';
+import { generateTeachingPackage, rewriteTeachingSection } from './deepseekClient.js';
+import { validateRewriteRequest } from './rewriteContract.js';
 import { sampleResult } from './sampleResult.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -46,6 +47,10 @@ function safeGenerateError(message, secrets = []) {
   return '方案服务暂时不可用，请稍后重试或查看样例。';
 }
 
+function safeRewriteError() {
+  return '内容重写暂时不可用，请稍后重试。';
+}
+
 async function serveStatic(request, response) {
   const requestPath = new URL(request.url, 'http://localhost').pathname;
   const relativePath = requestPath === '/' ? 'index.html' : requestPath.slice(1);
@@ -68,12 +73,29 @@ async function serveStatic(request, response) {
 export function createServer(options = {}) {
   const config = options.config || loadEnv();
   const generate = options.generate || ((input) => generateTeachingPackage({ input, config }));
+  const rewrite = options.rewrite || ((input) => rewriteTeachingSection({ input, config }));
 
   return http.createServer(async (request, response) => {
     const url = new URL(request.url, 'http://localhost');
 
     if (request.method === 'GET' && url.pathname === '/api/sample') {
       sendJson(response, 200, { ok: true, result: sampleResult });
+      return;
+    }
+
+    if (request.method === 'POST' && url.pathname === '/api/rewrite-section') {
+      try {
+        const input = await readJson(request);
+        const validation = validateRewriteRequest(input);
+        if (!validation.ok) {
+          sendJson(response, 400, { ok: false, error: '重写参数无效。' });
+          return;
+        }
+        const value = await rewrite(validation.value);
+        sendJson(response, 200, { ok: true, value });
+      } catch {
+        sendJson(response, 502, { ok: false, error: safeRewriteError() });
+      }
       return;
     }
 

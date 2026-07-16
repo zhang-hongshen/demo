@@ -59,6 +59,17 @@ function renderQuiz(quiz = []) {
   );
 }
 
+function renderTieredTasks(tasks = {}) {
+  return section('课后分层任务', [
+    '<h3>基础巩固</h3>',
+    arrayItems(tasks.basic),
+    '<h3>能力提升</h3>',
+    arrayItems(tasks.advanced),
+    '<h3>挑战拓展</h3>',
+    arrayItems(tasks.challenge)
+  ].join(''));
+}
+
 function renderAnalysis(analysis = {}) {
   return section('学情分析', [
     '<h3>高频误区</h3>',
@@ -105,6 +116,7 @@ export function buildExportHtml({ result = {}, input = {}, feature = 'all' } = {
       renderTeachingPlan(result.teachingPlan, input),
       renderSlides(result.slideOutline),
       renderQuiz(result.quiz),
+      renderTieredTasks(result.tieredTasks),
       renderPitch(result.pitchScript)
     ].join(''),
     grading: () => renderAssignmentReview(result.assignmentReview),
@@ -118,6 +130,7 @@ export function buildExportHtml({ result = {}, input = {}, feature = 'all' } = {
         renderTeachingPlan(result.teachingPlan, input),
         renderSlides(result.slideOutline),
         renderQuiz(result.quiz),
+        renderTieredTasks(result.tieredTasks),
         renderAnalysis(result.learningAnalysis),
         renderAssignmentReview(result.assignmentReview),
         renderPitch(result.pitchScript)
