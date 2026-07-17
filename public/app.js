@@ -18,6 +18,11 @@ const exportFormatButtons = Array.from(document.querySelectorAll('[data-export-f
 const themeDialog = document.querySelector('#theme-dialog');
 const themeDialogCloseButton = document.querySelector('#theme-dialog-close');
 const themeButtons = Array.from(document.querySelectorAll('[data-theme-id]'));
+const settingsButton = document.querySelector('#settings-button');
+const settingsDialog = document.querySelector('#settings-dialog');
+const settingsDialogCloseButton = document.querySelector('#settings-dialog-close');
+const languageSelect = document.querySelector('#language-select');
+const darkModeToggle = document.querySelector('#dark-mode-toggle');
 const workspaceButton = document.querySelector('#workspace-button');
 const workspaceDialog = document.querySelector('#workspace-dialog');
 const workspaceDialogCloseButton = document.querySelector('#workspace-dialog-close');
@@ -54,6 +59,29 @@ const reflectionCloseButton = document.querySelector('#reflection-close');
 const reflectionForm = document.querySelector('#reflection-form');
 const reflectionUpdated = document.querySelector('#reflection-updated');
 const reflectionStorageKey = 'campus-ai-lesson-reflections-v1';
+const calendarButton = document.querySelector('#calendar-button');
+const calendarDialog = document.querySelector('#calendar-dialog');
+const calendarCloseButton = document.querySelector('#calendar-close');
+const calendarPrevButton = document.querySelector('#calendar-prev');
+const calendarNextButton = document.querySelector('#calendar-next');
+const calendarTodayButton = document.querySelector('#calendar-today');
+const calendarMonthLabel = document.querySelector('#calendar-month-label');
+const calendarEventForm = document.querySelector('#calendar-event-form');
+const calendarEventDate = document.querySelector('#calendar-event-date');
+const calendarGrid = document.querySelector('#calendar-grid');
+const calendarSelectedLabel = document.querySelector('#calendar-selected-label');
+const calendarSelectedCount = document.querySelector('#calendar-selected-count');
+const calendarSelectedList = document.querySelector('#calendar-selected-list');
+const calendarStorageKey = 'campus-ai-teaching-calendar-v1';
+const batchSubmissionsInput = document.querySelector('#batch-submissions');
+const batchSubmissionSummary = document.querySelector('#batch-submission-summary');
+const batchGradeButton = document.querySelector('#batch-grade-button');
+const batchGradingDialog = document.querySelector('#batch-grading-dialog');
+const batchGradingCloseButton = document.querySelector('#batch-grading-close');
+const batchGradingStatus = document.querySelector('#batch-grading-status');
+const batchGradingCount = document.querySelector('#batch-grading-count');
+const batchProgressBar = document.querySelector('#batch-progress-bar');
+const batchGradingResults = document.querySelector('#batch-grading-results');
 const copyResultButton = document.querySelector('#copy-result-button');
 const statusBox = document.querySelector('#status');
 const resultBox = document.querySelector('#result');
@@ -64,6 +92,356 @@ const featurePanels = Array.from(document.querySelectorAll('[data-feature-panel]
 const pptMenuButton = document.querySelector('[data-export-format="ppt"]');
 const materialsInput = document.querySelector('#materials');
 const materialSummary = document.querySelector('#material-summary');
+const generateButtonLabel = document.querySelector('#generate-button .button-label');
+
+const translations = {
+  en: {
+    '课堂方案': 'Lesson planning',
+    '教学设计工作台': 'Teaching design workspace',
+    '功能导航': 'Feature navigation',
+    '功能选择': 'Feature selection',
+    '课件生成': 'Slide generator',
+    '作业批改': 'Assignment grading',
+    '学情分析': 'Learning analysis',
+    '课程空间': 'Course workspace',
+    '教学模板': 'Teaching templates',
+    '备课清单': 'Preparation checklist',
+    '课堂助手': 'Classroom assistant',
+    '课后复盘': 'Lesson reflection',
+    '课表日历': 'Teaching calendar',
+    '设置': 'Settings',
+    '准备就绪': 'Ready',
+    '课堂方案工作台': 'Lesson planning workspace',
+    '输入信息': 'Input',
+    '课程名称': 'Course name',
+    '本节主题': 'Lesson topic',
+    '教学目标': 'Learning objectives',
+    '课堂时长': 'Class duration',
+    '输出风格': 'Output style',
+    '竞标答辩演示': 'Pitch presentation',
+    '校方领导汇报': 'Leadership briefing',
+    '教师备课助手': 'Teacher planning assistant',
+    '作业名称': 'Assignment name',
+    '作业要求': 'Assignment requirements',
+    '评分标准': 'Grading rubric',
+    '学生提交': 'Student submission',
+    '批量作业批改': 'Batch grading',
+    '导入多份作业': 'Import multiple submissions',
+    '选择作业文件': 'Choose assignment files',
+    '支持 TXT、Markdown、CSV、JSON': 'TXT, Markdown, CSV, and JSON supported',
+    '尚未加入作业': 'No assignments added',
+    '批量批改': 'Grade in batch',
+    '班级画像': 'Class profile',
+    '学生痛点': 'Student pain points',
+    '补充材料': 'Supporting materials',
+    '选择资料': 'Choose materials',
+    '支持常用课程文件': 'Common course files supported',
+    '暂未加入材料': 'No materials added',
+    '生成课件': 'Generate slides',
+    '填充样例': 'Fill sample',
+    '样例已填充': 'Sample filled',
+    '样例已填充，可以继续修改后生成课堂方案。': 'Sample filled. Edit it and generate the lesson plan when ready.',
+    '保存课程': 'Save course',
+    '生成结果': 'Generated result',
+    '复制当前页': 'Copy current page',
+    '导出操作': 'Export actions',
+    '导出': 'Export',
+    '暂无内容': 'No content yet',
+    '填写信息后': 'After filling in the form, ',
+    '填写信息后生成课堂方案。': 'Fill in the form to generate a lesson plan.',
+    '例如：数据结构': 'e.g. Data Structures',
+    '例如：二叉树遍历': 'e.g. Binary tree traversal',
+    '填写本节课希望学生达成的目标': 'Describe what students should achieve in this lesson',
+    '例如：45分钟': 'e.g. 45 minutes',
+    '例如：二叉树遍历练习': 'e.g. Binary tree traversal practice',
+    '填写作业要求': 'Describe the assignment requirements',
+    '填写评分标准': 'Describe the grading rubric',
+    '粘贴学生提交内容': 'Paste a student submission',
+    '描述班级基础、人数和学习状态': 'Describe the class profile, size, and learning state',
+    '描述学生当前的主要困难': 'Describe the students’ current difficulties',
+    '哪些环节按计划完成了？哪里超时或卡住了？': 'Which parts went as planned? Where did the lesson run long or stall?',
+    '学生在哪些地方最投入，哪些地方仍然困惑？': 'Where were students most engaged, and where were they still confused?',
+    '下次准备保留、删减或重新设计什么？': 'What should be kept, removed, or redesigned next time?',
+    '选择主题': 'Choose a theme',
+    '主题选择': 'Theme selection',
+    '正式蓝': 'Formal blue',
+    '学术绿': 'Academic green',
+    '极简黑白': 'Minimal mono',
+    '活力橙': 'Vitality orange',
+    '移动蓝': 'Mobile blue',
+    '关闭': 'Close',
+    '保存课程输入、生成结果和历史版本': 'Save course inputs, generated results, and history',
+    '暂无保存课程': 'No saved courses',
+    '搜索课程': 'Search courses',
+    '搜索课程或主题': 'Search courses or topics',
+    '新建课程': 'New course',
+    '按当前功能套用一组可直接修改的备课起点': 'Apply an editable planning starting point for the current feature',
+    '把生成内容变成课前真正要完成的动作': 'Turn generated content into concrete preparation actions',
+    '项已完成': 'items completed',
+    '上次保存': 'Last saved',
+    '安排': 'events',
+    '项': 'items',
+    '未关联课程': 'No linked course',
+    '当天没有安排': 'No events for this day',
+    '已加入': 'Added',
+    '份作业': 'submissions',
+    '份无法读取': 'could not be read',
+    '已完成': 'Completed',
+    '批改结果已生成': 'Grading result generated',
+    '打开结果': 'Open result',
+    '批量批改结果会显示在这里。': 'Batch grading results will appear here.',
+    '正在批改': 'Grading in progress',
+    '批量批改完成': 'Batch grading completed',
+    '请先选择可读取的作业文件。': 'Choose readable assignment files first.',
+    '批改失败': 'Grading failed',
+    '课堂计时结束': 'Class timer ended',
+    '进行中': 'In progress',
+    '已结束': 'Finished',
+    '已暂停': 'Paused',
+    '重新开始': 'Restart',
+    '暂停': 'Pause',
+    '调整中...': 'Adjusting...',
+    '调整': 'Adjust',
+    '撤销': 'Undo',
+    '编辑': 'Edit',
+    '保存': 'Save',
+    '取消': 'Cancel',
+    '原始输出': 'Raw output',
+    '流程节点': 'Flow steps',
+    '测评方式': 'Assessment',
+    '随堂闭环': 'In-class loop',
+    '适配场景': 'Use case',
+    '高校课堂': 'Higher education',
+    '重点难点': 'Key points',
+    '课堂流程': 'Lesson flow',
+    '课堂活动': 'Classroom activity',
+    '师生活动与评估': 'Teacher, student, and assessment actions',
+    '教师动作': 'Teacher actions',
+    '学生动作': 'Student actions',
+    '评估方式': 'Assessment method',
+    '课后分层任务': 'Tiered after-class tasks',
+    '基础巩固': 'Core practice',
+    '能力提升': 'Skill building',
+    '挑战拓展': 'Challenge extension',
+    '现场演示话术': 'Live demo script',
+    '综合得分': 'Overall score',
+    '等级': 'Level',
+    '评分项': 'Rubric items',
+    '批改结论': 'Grading conclusion',
+    '亮点': 'Strengths',
+    '待改进': 'Needs improvement',
+    '评语': 'Feedback',
+    '分值': 'Points',
+    '说明': 'Comment',
+    '题目': 'Question',
+    '答案': 'Answer',
+    '解析': 'Explanation',
+    '标题': 'Title',
+    '讲稿': 'Speaker notes',
+    '第': 'Page ',
+    '页': '',
+    '课堂计时': 'Class timer',
+    '未开始': 'Not started',
+    '计时预设': 'Timer presets',
+    '5 分钟': '5 min',
+    '15 分钟': '15 min',
+    '30 分钟': '30 min',
+    '45 分钟': '45 min',
+    '90 分钟': '90 min',
+    '开始': 'Start',
+    '重置': 'Reset',
+    '课堂提问卡': 'Question card',
+    '下一个问题': 'Next question',
+    '复制问题': 'Copy question',
+    '上课时快速控制节奏，并随时拿到一个可追问的问题': 'Control the class pace and get a follow-up question when needed',
+    '记录一次课堂，下一次备课会更快': 'Record the lesson to make the next plan faster',
+    '课堂表现': 'Lesson performance',
+    '学生反馈': 'Student feedback',
+    '下次调整': 'Next adjustment',
+    '尚未保存': 'Not saved yet',
+    '保存复盘': 'Save reflection',
+    '课表与备课日历': 'Teaching and planning calendar',
+    '把授课、备课、作业和复盘安排放在同一个地方': 'Keep teaching, planning, assignments, and reflections in one place',
+    '上月': 'Previous month',
+    '下月': 'Next month',
+    '今天': 'Today',
+    '日期': 'Date',
+    '安排类型': 'Type',
+    '授课': 'Class',
+    '备课': 'Planning',
+    '作业': 'Assignment',
+    '复盘': 'Reflection',
+    '安排内容': 'Details',
+    '例如：数据结构第 4 次课': 'e.g. Data Structures, lesson 4',
+    '添加安排': 'Add event',
+    '一': 'Mon',
+    '二': 'Tue',
+    '三': 'Wed',
+    '四': 'Thu',
+    '五': 'Fri',
+    '六': 'Sat',
+    '日': 'Sun',
+    '今日安排': "Today's events",
+    '准备批改': 'Ready to grade',
+    '按当前评分标准逐份处理，并集中查看结果': 'Process each submission with the current rubric and review results together',
+    '调整工作台的语言和显示方式': 'Adjust the workspace language and appearance',
+    '界面语言': 'Interface language',
+    '选择工作台显示语言': 'Choose the workspace display language',
+    '中文': 'Chinese',
+    '深色模式': 'Dark mode',
+    '降低夜间使用时的界面亮度': 'Reduce interface brightness for night use',
+    '切换深色模式': 'Toggle dark mode',
+    '教案': 'Lesson plan',
+    '课件大纲': 'Slide outline',
+    '随堂测验': 'In-class quiz',
+    '分层任务': 'Tiered tasks',
+    '演示话术': 'Presentation script',
+    '批改总览': 'Grading overview',
+    '评分细则': 'Rubric',
+    '亮点与问题': 'Strengths and issues',
+    '改进任务': 'Improvement tasks',
+    '高频误区': 'Common misconceptions',
+    '风险群体': 'At-risk groups',
+    '干预建议': 'Intervention suggestions',
+    '数据指标': 'Data indicators',
+    '结果分类': 'Result categories',
+    '先让学生说出这一步的判断依据，再请另一位同学补充一个反例。': 'Ask a student to explain the reasoning for this step, then invite another student to add a counterexample.',
+    '如果把这个条件改掉，结果会发生什么变化？请先独立思考，再和同桌核对。': 'What changes if this condition is removed? Think independently, then compare with a partner.',
+    '请用一句话解释这个结论，再举一个你认为不满足它的例子。': 'Explain this conclusion in one sentence, then give an example where it does not hold.',
+    '哪一个步骤最容易出错？请指出原因，并给出一个检查方法。': 'Which step is most error-prone? Explain why and give one way to check it.',
+    '结果': 'result',
+    '输入草稿': 'Input draft',
+    '显示': 'Showing',
+    '已保存': 'Saved',
+    '门课程': 'courses',
+    '没有匹配课程': 'No matching courses',
+    '还没有课程': 'No courses yet',
+    '换一个课程名称或主题关键词试试。': 'Try another course name or topic keyword.',
+    '保存当前课程后，可以继续编辑并恢复历史版本。': 'Save the current course to keep editing and restore history.',
+    '附件': 'Attachments',
+    '打开': 'Open',
+    '用于课件生成': 'Use for slide generation',
+    '复制': 'Duplicate',
+    '删除': 'Delete',
+    '历史版本': 'Version history',
+    '课程版本': 'Course version',
+    '暂无版本记录': 'No version history',
+    '方案已保存': 'Plan saved',
+    '方案已保存，但附件暂未能持久化': 'Plan saved, but attachments could not be persisted',
+    '确认教学目标': 'Confirm learning objectives',
+    '目标要能对应到课堂活动或测评。': 'Objectives should map to classroom activities or assessment.',
+    '整理课堂材料': 'Organize class materials',
+    '讲义、案例、数据或演示文件已准备。': 'Handouts, cases, data, or demo files are ready.',
+    '检查课堂流程': 'Check the lesson flow',
+    '时间分配、师生活动和过渡语可执行。': 'Timing, activities, and transitions are actionable.',
+    '准备课堂测评': 'Prepare classroom assessment',
+    '随堂题、作业或观察点已安排。': 'In-class questions, assignments, or observation points are ready.',
+    '保存课程版本': 'Save course version',
+    '把本次修改留在课程空间，便于下次继续。': 'Keep this revision in the workspace for next time.',
+    '讲授新课': 'New lesson',
+    '适合首次引入一个新概念，强调目标、示例和即时检查。': 'For introducing a new concept with objectives, examples, and quick checks.',
+    '翻转课堂': 'Flipped classroom',
+    '适合课前自学、课中讨论，把课堂时间用于诊断和应用。': 'For pre-class study and in-class discussion, diagnosis, and application.',
+    '项目制实践': 'Project-based practice',
+    '适合实验课或项目课，突出任务拆解、分工和阶段产出。': 'For labs or project courses, emphasizing task breakdown, roles, and milestones.',
+    '复习与测评': 'Review and assessment',
+    '适合章节复习，快速串联知识点并形成可操作的补救任务。': 'For chapter review, connecting concepts and creating actionable recovery tasks.',
+    '套用': 'Apply'
+  }
+};
+
+let currentLocale = 'zh';
+let darkModeEnabled = false;
+const localeStorageKey = 'campus-ai-ui-locale-v1';
+const appearanceStorageKey = 'campus-ai-ui-appearance-v1';
+
+function t(value) {
+  const source = String(value ?? '');
+  return currentLocale === 'en' ? translations.en[source] || source : source;
+}
+
+function translateDom() {
+  if (document.documentElement) {
+    document.documentElement.lang = currentLocale === 'en' ? 'en' : 'zh-CN';
+  }
+  document.title = t('课堂方案工作台');
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    element.textContent = t(element.dataset.i18n);
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((element) => {
+    element.placeholder = t(element.dataset.i18nPlaceholder);
+  });
+  document.querySelectorAll('[data-i18n-aria-label]').forEach((element) => {
+    element.setAttribute('aria-label', t(element.dataset.i18nAriaLabel));
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach((element) => {
+    element.title = t(element.dataset.i18nTitle);
+  });
+  [
+    ['.sidebar', '功能导航'],
+    ['.feature-tabs', '功能选择'],
+    ['.workspace', '课堂方案工作台']
+  ].forEach(([selector, key]) => {
+    const element = document.querySelector(selector);
+    if (element) element.setAttribute('aria-label', t(key));
+  });
+}
+
+function readUiPreference(key, fallback) {
+  try {
+    const value = globalThis.localStorage?.getItem(key);
+    return value === null ? fallback : value;
+  } catch {
+    return fallback;
+  }
+}
+
+function writeUiPreference(key, value) {
+  try {
+    globalThis.localStorage?.setItem(key, value);
+  } catch {
+    // Preferences remain active for the current session when storage is unavailable.
+  }
+}
+
+function applyDarkMode(enabled, persist = true) {
+  darkModeEnabled = Boolean(enabled);
+  if (document.body) {
+    document.body.dataset.themeMode = darkModeEnabled ? 'dark' : 'light';
+  }
+  if (darkModeToggle) darkModeToggle.checked = darkModeEnabled;
+  if (persist) writeUiPreference(appearanceStorageKey, darkModeEnabled ? 'dark' : 'light');
+}
+
+function setSettingsDialogOpen(open) {
+  if (!settingsDialog) return;
+  settingsDialog.hidden = !open;
+  if (open) {
+    if (languageSelect) languageSelect.value = currentLocale;
+    if (darkModeToggle) darkModeToggle.checked = darkModeEnabled;
+    settingsDialogCloseButton?.focus?.();
+  }
+}
+
+function applyLocale(locale, persist = true) {
+  currentLocale = locale === 'en' ? 'en' : 'zh';
+  if (persist) writeUiPreference(localeStorageKey, currentLocale);
+  if (languageSelect) languageSelect.value = currentLocale;
+  translateDom();
+  updateFeatureUi();
+  renderWorkspaceList();
+  renderTemplateList();
+  renderChecklist();
+  renderCalendar();
+  renderBatchResults();
+  if (currentResult) renderResult();
+  else setResultMessage(t('暂无内容'), `${t('填写信息后')}${t(generateLabels[activeFeature])}${currentLocale === 'en' ? '.' : '。'}`);
+}
+
+function initializeUiPreferences() {
+  applyLocale(readUiPreference(localeStorageKey, 'zh'), false);
+  applyDarkMode(readUiPreference(appearanceStorageKey, 'light') === 'dark', false);
+}
 
 let activeFeature = 'slides';
 let currentResult = null;
@@ -83,6 +461,13 @@ let timerRemaining = 2700;
 let timerRunning = false;
 let timerInterval = null;
 let promptIndexValue = 0;
+let calendarCursor = new Date();
+let calendarSelectedDate = '';
+let calendarRecords = [];
+let batchSubmissions = [];
+let batchResults = [];
+let batchRunning = false;
+let batchReadPromise = Promise.resolve();
 const resultTabDefinitions = {
   slides: [
     { id: 'plan', label: '教案' },
@@ -260,7 +645,7 @@ function escapeHtml(value) {
 }
 
 function setStatus(message, type = '') {
-  statusBox.textContent = message;
+  statusBox.textContent = t(message);
   statusBox.className = `status ${type}`.trim();
 }
 
@@ -294,9 +679,9 @@ function formatTimer(seconds) {
 function renderTimer() {
   if (timerDisplay) timerDisplay.textContent = formatTimer(timerRemaining);
   if (timerStatus) {
-    timerStatus.textContent = timerRunning ? '进行中' : timerRemaining === 0 ? '已结束' : timerRemaining === timerSeconds ? '未开始' : '已暂停';
+    timerStatus.textContent = t(timerRunning ? '进行中' : timerRemaining === 0 ? '已结束' : timerRemaining === timerSeconds ? '未开始' : '已暂停');
   }
-  if (timerToggleButton) timerToggleButton.textContent = timerRunning ? '暂停' : timerRemaining === 0 ? '重新开始' : '开始';
+  if (timerToggleButton) timerToggleButton.textContent = t(timerRunning ? '暂停' : timerRemaining === 0 ? '重新开始' : '开始');
 }
 
 function setTimerDuration(seconds) {
@@ -351,7 +736,7 @@ function classroomPromptItems() {
       '如果把这个条件改掉，结果会发生什么变化？请先独立思考，再和同桌核对。',
       '请用一句话解释这个结论，再举一个你认为不满足它的例子。',
       '哪一个步骤最容易出错？请指出原因，并给出一个检查方法。'
-    ];
+    ].map((prompt) => t(prompt));
 }
 
 function renderClassroomPrompt() {
@@ -405,7 +790,7 @@ function renderReflection() {
   reflectionForm.elements.lessonReflection.value = record.lessonReflection || '';
   reflectionForm.elements.studentFeedback.value = record.studentFeedback || '';
   reflectionForm.elements.nextAdjustment.value = record.nextAdjustment || '';
-  if (reflectionUpdated) reflectionUpdated.textContent = record.updatedAt ? `上次保存 ${formatWorkspaceTime(record.updatedAt)}` : '尚未保存';
+  if (reflectionUpdated) reflectionUpdated.textContent = record.updatedAt ? `${t('上次保存')} ${formatWorkspaceTime(record.updatedAt)}` : t('尚未保存');
 }
 
 function setReflectionDialogOpen(open) {
@@ -470,6 +855,301 @@ function copyCurrentResult() {
   copyText(resultBox?.innerText || '', '当前结果页已复制');
 }
 
+function calendarDateKey(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function calendarDateFromKey(value) {
+  const [year, month, day] = String(value || '').split('-').map(Number);
+  return year && month && day ? new Date(year, month - 1, day) : new Date();
+}
+
+function readCalendarRecords() {
+  const storage = workspaceStorage();
+  if (!storage) return [];
+  try {
+    const parsed = JSON.parse(storage.getItem(calendarStorageKey) || '[]');
+    return Array.isArray(parsed) ? parsed.filter((item) => item?.id && item.date && item.title) : [];
+  } catch {
+    return [];
+  }
+}
+
+function persistCalendarRecords() {
+  const storage = workspaceStorage();
+  if (!storage) return false;
+  try {
+    storage.setItem(calendarStorageKey, JSON.stringify(calendarRecords.slice(0, 300)));
+    return true;
+  } catch {
+    setStatus('日历保存失败，浏览器存储空间可能已满。', 'error');
+    return false;
+  }
+}
+
+function calendarRecordsForDate(dateKey) {
+  return calendarRecords.filter((item) => item.date === dateKey);
+}
+
+function calendarCurrentContext() {
+  const payload = formPayload();
+  if (activeFeature === 'grading') return payload.assignmentTitle || '当前作业';
+  if (activeFeature === 'analysis') return '当前学情分析';
+  return payload.course || '当前课程';
+}
+
+function renderCalendarSelectedList() {
+  if (!calendarSelectedList || !calendarSelectedLabel || !calendarSelectedCount) return;
+  const selectedDate = calendarDateFromKey(calendarSelectedDate);
+  const events = calendarRecordsForDate(calendarSelectedDate);
+  calendarSelectedLabel.textContent = `${selectedDate.getMonth() + 1}/${selectedDate.getDate()} ${t('安排')}`;
+  calendarSelectedCount.textContent = `${events.length} ${t('项')}`;
+  calendarSelectedList.innerHTML = events.length
+    ? events.map((item) => `
+      <div class="calendar-selected-item">
+        <span class="calendar-event-kind">${escapeHtml(t(item.type))}</span>
+        <div>
+          <strong>${escapeHtml(item.title)}</strong>
+          <small>${escapeHtml(item.context || t('未关联课程'))}</small>
+        </div>
+        <button type="button" class="calendar-delete-button" data-calendar-delete="${escapeHtml(item.id)}" aria-label="删除安排">${escapeHtml(t('删除'))}</button>
+      </div>
+    `).join('')
+    : `<div class="calendar-empty">${escapeHtml(t('当天没有安排'))}</div>`;
+}
+
+function renderCalendar() {
+  if (!calendarGrid || !calendarMonthLabel) return;
+  const year = calendarCursor.getFullYear();
+  const month = calendarCursor.getMonth();
+  calendarMonthLabel.textContent = new Intl.DateTimeFormat(currentLocale === 'en' ? 'en-US' : 'zh-CN', { year: 'numeric', month: 'long' }).format(calendarCursor);
+  const firstDayOffset = (new Date(year, month, 1).getDay() + 6) % 7;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const todayKey = calendarDateKey(new Date());
+  const cells = [];
+
+  for (let index = 0; index < 42; index += 1) {
+    const dayNumber = index - firstDayOffset + 1;
+    const date = new Date(year, month, dayNumber);
+    const dateKey = calendarDateKey(date);
+    const inMonth = dayNumber >= 1 && dayNumber <= daysInMonth;
+    const events = calendarRecordsForDate(dateKey);
+    cells.push(`
+      <div class="calendar-day${inMonth ? '' : ' outside'}${dateKey === todayKey ? ' today' : ''}${dateKey === calendarSelectedDate ? ' selected' : ''}" data-calendar-date="${dateKey}" role="button" tabindex="0">
+        <strong>${date.getDate()}</strong>
+        <div class="calendar-day-events">
+          ${events.slice(0, 2).map((item) => `<span class="calendar-day-event ${escapeHtml(item.type)}">${escapeHtml(item.title)}</span>`).join('')}
+          ${events.length > 2 ? `<small>+${events.length - 2} ${escapeHtml(t('项'))}</small>` : ''}
+        </div>
+      </div>
+    `);
+  }
+
+  calendarGrid.innerHTML = cells.join('');
+  if (calendarEventDate) calendarEventDate.value = calendarSelectedDate;
+  renderCalendarSelectedList();
+}
+
+function setCalendarDialogOpen(open) {
+  if (!calendarDialog) return;
+  calendarDialog.hidden = !open;
+  if (open) {
+    calendarRecords = readCalendarRecords();
+    if (!calendarSelectedDate) calendarSelectedDate = calendarDateKey(new Date());
+    calendarCursor = calendarDateFromKey(calendarSelectedDate);
+    renderCalendar();
+    calendarCloseButton?.focus?.();
+  }
+}
+
+function shiftCalendarMonth(offset) {
+  calendarCursor = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() + offset, 1);
+  renderCalendar();
+}
+
+function handleCalendarClick(event) {
+  const deleteButton = event.target.closest?.('[data-calendar-delete]');
+  if (deleteButton) {
+    calendarRecords = calendarRecords.filter((item) => item.id !== deleteButton.dataset.calendarDelete);
+    persistCalendarRecords();
+    renderCalendar();
+    setStatus('日历安排已删除', 'success');
+    return;
+  }
+
+  const day = event.target.closest?.('[data-calendar-date]');
+  if (!day || !calendarGrid?.contains?.(day)) return;
+  calendarSelectedDate = day.dataset.calendarDate;
+  calendarCursor = calendarDateFromKey(calendarSelectedDate);
+  renderCalendar();
+}
+
+function handleCalendarKeydown(event) {
+  if (event.key !== 'Enter' && event.key !== ' ') return;
+  const day = event.target.closest?.('[data-calendar-date]');
+  if (!day || !calendarGrid?.contains?.(day)) return;
+  event.preventDefault();
+  calendarSelectedDate = day.dataset.calendarDate;
+  calendarCursor = calendarDateFromKey(calendarSelectedDate);
+  renderCalendar();
+}
+
+function saveCalendarEvent(event) {
+  event.preventDefault();
+  if (!calendarEventForm) return;
+  const values = Object.fromEntries(new FormData(calendarEventForm).entries());
+  const title = String(values.title || '').trim();
+  if (!title || !values.date) return;
+
+  calendarRecords = [
+    {
+      id: createWorkspaceId('calendar'),
+      date: values.date,
+      type: values.type || '备课',
+      title,
+      context: calendarCurrentContext(),
+      workspaceId: activeWorkspaceId,
+      createdAt: new Date().toISOString()
+    },
+    ...calendarRecords
+  ];
+  persistCalendarRecords();
+  calendarSelectedDate = values.date;
+  calendarCursor = calendarDateFromKey(values.date);
+  calendarEventForm.elements.title.value = '';
+  renderCalendar();
+  setStatus('日历安排已添加', 'success');
+}
+
+async function readBatchSubmissions() {
+  const files = Array.from(batchSubmissionsInput?.files || []);
+  batchSubmissions = await Promise.all(files.map(async (file, index) => {
+    let text = '';
+    try {
+      text = typeof file.text === 'function' ? await file.text() : '';
+    } catch {
+      text = '';
+    }
+    return {
+      id: `batch-${Date.now()}-${index}`,
+      name: file.name || `作业 ${index + 1}`,
+      text: text.trim()
+    };
+  }));
+  const readableCount = batchSubmissions.filter((item) => item.text).length;
+  if (batchSubmissionSummary) {
+    batchSubmissionSummary.textContent = readableCount
+      ? `${t('已加入')} ${readableCount} ${t('份作业')}${readableCount < batchSubmissions.length ? `，${batchSubmissions.length - readableCount} ${t('份无法读取')}` : ''}`
+      : t('尚未加入作业');
+  }
+  if (batchGradeButton) batchGradeButton.disabled = !readableCount || batchRunning;
+}
+
+function setBatchDialogOpen(open) {
+  if (!batchGradingDialog) return;
+  batchGradingDialog.hidden = !open;
+  if (open) batchGradingCloseButton?.focus?.();
+}
+
+function renderBatchResults() {
+  if (!batchGradingResults) return;
+  batchGradingResults.innerHTML = batchResults.length
+    ? batchResults.map((item, index) => {
+      if (item.error) {
+        return `<article class="batch-result-item error"><div><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.error)}</small></div></article>`;
+      }
+      const review = item.result?.assignmentReview || {};
+      return `
+        <article class="batch-result-item">
+          <div class="batch-result-main">
+            <strong>${escapeHtml(item.name)}</strong>
+            <span>${escapeHtml(review.level || t('已完成'))}</span>
+            <small>${escapeHtml(review.feedback || t('批改结果已生成'))}</small>
+          </div>
+          <div class="batch-result-actions">
+            <strong>${escapeHtml(review.score || '待评定')}</strong>
+            <button type="button" class="secondary-button" data-batch-action="load" data-batch-index="${index}">${escapeHtml(t('打开结果'))}</button>
+          </div>
+        </article>
+      `;
+    }).join('')
+    : `<div class="batch-empty">${escapeHtml(t('批量批改结果会显示在这里。'))}</div>`;
+}
+
+function updateBatchProgress(completed, total) {
+  if (batchGradingCount) batchGradingCount.textContent = `${completed} / ${total}`;
+  if (batchProgressBar) batchProgressBar.style.width = `${total ? Math.round((completed / total) * 100) : 0}%`;
+}
+
+async function runBatchGrading() {
+  if (batchRunning) return;
+  await batchReadPromise;
+  const readableSubmissions = batchSubmissions.filter((item) => item.text);
+  if (!readableSubmissions.length) {
+    setStatus('请先选择可读取的作业文件。', 'error');
+    return;
+  }
+
+  batchRunning = true;
+  batchResults = [];
+  setBatchDialogOpen(true);
+  if (batchGradingStatus) batchGradingStatus.textContent = '正在批改';
+  updateBatchProgress(0, readableSubmissions.length);
+  renderBatchResults();
+  if (batchGradeButton) batchGradeButton.disabled = true;
+
+  const basePayload = formPayload();
+  for (let index = 0; index < readableSubmissions.length; index += 1) {
+    const submission = readableSubmissions[index];
+    if (batchGradingStatus) batchGradingStatus.textContent = `正在处理：${submission.name}`;
+    try {
+      const result = await requestJson('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...basePayload,
+          feature: 'grading',
+          studentSubmission: submission.text
+        })
+      });
+      batchResults.push({ ...submission, result });
+    } catch (error) {
+      batchResults.push({ ...submission, error: error.message || '批改失败' });
+    }
+    updateBatchProgress(index + 1, readableSubmissions.length);
+    renderBatchResults();
+  }
+
+  batchRunning = false;
+  if (batchGradeButton) batchGradeButton.disabled = false;
+  if (batchGradingStatus) batchGradingStatus.textContent = '批量批改完成';
+  setStatus('批量批改完成', 'success');
+}
+
+function handleBatchResultClick(event) {
+  const button = event.target.closest?.('[data-batch-action="load"]');
+  if (!button) return;
+  const item = batchResults[Number(button.dataset.batchIndex)];
+  if (!item?.result) return;
+
+  activeFeature = 'grading';
+  applyInputValues({ studentSubmission: item.text });
+  currentResult = cloneResult(item.result);
+  resultRevision += 1;
+  editingTargetKey = '';
+  lastRewrite = null;
+  pendingRewriteKeys.clear();
+  resetResultTab('grading');
+  updateFeatureUi();
+  setExportActionsEnabled(true);
+  renderResult();
+  setBatchDialogOpen(false);
+  setStatus(`已打开${item.name}的批改结果`, 'success');
+}
+
 function setExportActionsEnabled(enabled) {
   if (exportButton) exportButton.disabled = !enabled;
   if (copyResultButton) copyResultButton.disabled = !enabled;
@@ -485,9 +1165,9 @@ function updateFeatureUi() {
     panel.hidden = panel.dataset.featurePanel !== activeFeature;
   });
   if (featureInput) featureInput.value = activeFeature;
-  if (outputTitle) outputTitle.textContent = featureTitles[activeFeature] || '生成结果';
-  if (generateButton?.lastChild) generateButton.lastChild.textContent = generateLabels[activeFeature] || '生成';
-  if (saveWorkspaceButton) saveWorkspaceButton.textContent = workspaceSaveLabels[activeFeature] || '保存到课程空间';
+  if (outputTitle) outputTitle.textContent = t(featureTitles[activeFeature] || '生成结果');
+  if (generateButtonLabel) generateButtonLabel.textContent = t(generateLabels[activeFeature] || '生成');
+  if (saveWorkspaceButton) saveWorkspaceButton.textContent = t(workspaceSaveLabels[activeFeature] || '保存到课程空间');
   if (pptMenuButton) pptMenuButton.hidden = activeFeature !== 'slides';
 }
 
@@ -499,7 +1179,7 @@ function setActiveFeature(feature) {
   if (currentResult) {
     renderResult();
   } else {
-    setResultMessage('暂无内容', `填写信息后${generateLabels[activeFeature]}。`);
+    setResultMessage(t('暂无内容'), `${t('填写信息后')}${t(generateLabels[activeFeature])}。`);
   }
 }
 
@@ -742,8 +1422,8 @@ function renderChecklist() {
       <input type="checkbox" data-checklist-id="${escapeHtml(item.id)}"${state[item.id] ? ' checked' : ''}>
       <span class="checklist-mark" aria-hidden="true"></span>
       <span class="checklist-item-copy">
-        <strong>${escapeHtml(item.label)}</strong>
-        <small>${escapeHtml(item.hint)}</small>
+        <strong>${escapeHtml(t(item.label))}</strong>
+        <small>${escapeHtml(t(item.hint))}</small>
       </span>
     </label>
   `).join('');
@@ -773,10 +1453,10 @@ function renderTemplateList() {
   templateList.innerHTML = teachingTemplates.map((template) => `
     <article class="template-item">
       <div class="template-item-copy">
-        <strong>${escapeHtml(template.label)}</strong>
-        <p>${escapeHtml(template.description)}</p>
+        <strong>${escapeHtml(t(template.label))}</strong>
+        <p>${escapeHtml(t(template.description))}</p>
       </div>
-      <button type="button" class="secondary-button" data-template-id="${escapeHtml(template.id)}">套用</button>
+      <button type="button" class="secondary-button" data-template-id="${escapeHtml(template.id)}">${escapeHtml(t('套用'))}</button>
     </article>
   `).join('');
 }
@@ -825,7 +1505,7 @@ function createWorkspaceSnapshot(payload) {
   return {
     id: createWorkspaceId('version'),
     createdAt: new Date().toISOString(),
-    label: currentResult ? `${featureTitles[activeFeature]}结果` : '输入草稿',
+    label: currentResult ? `${t(featureTitles[activeFeature])} ${t('结果')}` : t('输入草稿'),
     feature: activeFeature,
     payload,
     attachments: describeAttachments(),
@@ -919,8 +1599,8 @@ async function saveWorkspace() {
   renderWorkspaceList();
   setStatus(
     attachmentsSaved || !attachedFiles.length
-      ? workspaceSavedStatusLabels[activeFeature] || '方案已保存'
-      : '方案已保存，但附件暂未能持久化',
+      ? t(workspaceSavedStatusLabels[activeFeature] || '方案已保存')
+      : t('方案已保存，但附件暂未能持久化'),
     attachmentsSaved || !attachedFiles.length ? 'success' : 'error'
   );
 }
@@ -932,14 +1612,14 @@ function renderWorkspaceList() {
     ? workspaceRecords.filter((record) => `${record.name} ${record.topic}`.toLowerCase().includes(normalizedQuery))
     : workspaceRecords;
   workspaceCount.textContent = normalizedQuery
-    ? `显示 ${visibleRecords.length} / ${workspaceRecords.length} 门课程`
-    : workspaceRecords.length ? `已保存 ${workspaceRecords.length} 门课程` : '暂无保存课程';
+    ? `${t('显示')} ${visibleRecords.length} / ${workspaceRecords.length} ${t('门课程')}`
+    : workspaceRecords.length ? `${t('已保存')} ${workspaceRecords.length} ${t('门课程')}` : t('暂无保存课程');
 
   if (!visibleRecords.length) {
     workspaceList.innerHTML = `
       <div class="workspace-empty">
-        <strong>${normalizedQuery ? '没有匹配课程' : '还没有课程'}</strong>
-        <p>${normalizedQuery ? '换一个课程名称或主题关键词试试。' : '保存当前课程后，可以继续编辑并恢复历史版本。'}</p>
+        <strong>${normalizedQuery ? t('没有匹配课程') : t('还没有课程')}</strong>
+        <p>${normalizedQuery ? t('换一个课程名称或主题关键词试试。') : t('保存当前课程后，可以继续编辑并恢复历史版本。')}</p>
       </div>
     `;
     return;
@@ -952,27 +1632,27 @@ function renderWorkspaceList() {
       <article class="workspace-item">
         <div class="workspace-item-main">
           <strong>${escapeHtml(record.name)}</strong>
-          <span class="workspace-item-kind">${escapeHtml(featureTitles[record.feature] || '课堂方案')}</span>
-          <span>${escapeHtml(record.topic || '未填写主题')}</span>
-          <small>${attachmentCount ? `附件 ${attachmentCount} · ` : ''}${escapeHtml(formatWorkspaceTime(record.updatedAt))}</small>
+          <span class="workspace-item-kind">${escapeHtml(t(featureTitles[record.feature] || '课堂方案'))}</span>
+          <span>${escapeHtml(record.topic || t('未填写主题'))}</span>
+          <small>${attachmentCount ? `${t('附件')} ${attachmentCount} · ` : ''}${escapeHtml(formatWorkspaceTime(record.updatedAt))}</small>
         </div>
         <div class="workspace-item-actions">
-          <button type="button" data-workspace-action="load" data-workspace-id="${escapeHtml(record.id)}">打开</button>
-          ${record.feature === 'slides' ? '' : `<button type="button" data-workspace-action="slides" data-workspace-id="${escapeHtml(record.id)}">用于课件生成</button>`}
-          <button type="button" data-workspace-action="duplicate" data-workspace-id="${escapeHtml(record.id)}">复制</button>
-          <button type="button" data-workspace-action="delete" data-workspace-id="${escapeHtml(record.id)}">删除</button>
+          <button type="button" data-workspace-action="load" data-workspace-id="${escapeHtml(record.id)}">${escapeHtml(t('打开'))}</button>
+          ${record.feature === 'slides' ? '' : `<button type="button" data-workspace-action="slides" data-workspace-id="${escapeHtml(record.id)}">${escapeHtml(t('用于课件生成'))}</button>`}
+          <button type="button" data-workspace-action="duplicate" data-workspace-id="${escapeHtml(record.id)}">${escapeHtml(t('复制'))}</button>
+          <button type="button" data-workspace-action="delete" data-workspace-id="${escapeHtml(record.id)}">${escapeHtml(t('删除'))}</button>
         </div>
         <details class="workspace-history">
-          <summary>历史版本（${versions.length || 1}）</summary>
+          <summary>${escapeHtml(t('历史版本'))}（${versions.length || 1}）</summary>
           <div class="workspace-version-list">
             ${versions.length
               ? versions.map((version) => `
                 <button type="button" data-workspace-action="restore" data-workspace-id="${escapeHtml(record.id)}" data-workspace-version-id="${escapeHtml(version.id)}">
-                  <span>${escapeHtml(version.label || '课程版本')}</span>
+                  <span>${escapeHtml(version.label || t('课程版本'))}</span>
                   <small>${escapeHtml(formatWorkspaceTime(version.createdAt))}</small>
                 </button>
               `).join('')
-              : '<span class="workspace-version-empty">暂无版本记录</span>'}
+              : `<span class="workspace-version-empty">${escapeHtml(t('暂无版本记录'))}</span>`}
           </div>
         </details>
       </article>
@@ -1155,7 +1835,7 @@ function renderRewriteActions(target, valueType) {
   const key = targetKey(target);
   const encodedTarget = targetData(target, valueType);
   if (pendingRewriteKeys.has(key)) {
-    return '<span class="rewrite-status">调整中...</span>';
+    return `<span class="rewrite-status">${escapeHtml(t('调整中...'))}</span>`;
   }
 
   const actions = rewriteInstructions.map((instruction) => `
@@ -1165,10 +1845,10 @@ function renderRewriteActions(target, valueType) {
 
   return `
     <details class="rewrite-menu">
-      <summary>调整</summary>
+      <summary>${escapeHtml(t('调整'))}</summary>
       <div class="rewrite-options">${actions}</div>
     </details>
-    ${canUndo ? `<button class="undo-rewrite" type="button" data-result-action="undo" data-result-target="${encodedTarget}">撤销</button>` : ''}
+    ${canUndo ? `<button class="undo-rewrite" type="button" data-result-action="undo" data-result-target="${encodedTarget}">${escapeHtml(t('撤销'))}</button>` : ''}
   `;
 }
 
@@ -1184,8 +1864,8 @@ function renderEditor({ label, value, target, valueType }) {
           : `<input name="value" value="${escapeHtml(editorValue)}" autocomplete="off">`}
       </label>
       <div class="result-editor-actions">
-        <button class="primary-button" type="submit">保存</button>
-        <button class="secondary-button" type="button" data-result-action="cancel">取消</button>
+        <button class="primary-button" type="submit">${escapeHtml(t('保存'))}</button>
+        <button class="secondary-button" type="button" data-result-action="cancel">${escapeHtml(t('取消'))}</button>
       </div>
     </form>
   `;
@@ -1201,11 +1881,11 @@ function renderEditableText({ label, value, target }) {
       <div class="editable-heading">
         <strong>${escapeHtml(label)}</strong>
         <div class="result-actions">
-          <button type="button" data-result-action="edit" data-result-target="${targetData(target, valueType)}">编辑</button>
+          <button type="button" data-result-action="edit" data-result-target="${targetData(target, valueType)}">${escapeHtml(t('编辑'))}</button>
           ${renderRewriteActions(target, valueType)}
         </div>
       </div>
-      <p class="editable-value raw-text">${escapeHtml(value || '暂无内容')}</p>
+      <p class="editable-value raw-text">${escapeHtml(value || t('暂无内容'))}</p>
     </div>
   `;
 }
@@ -1221,13 +1901,13 @@ function renderEditableLines({ label, value, target }) {
       <div class="editable-heading">
         <strong>${escapeHtml(label)}</strong>
         <div class="result-actions">
-          <button type="button" data-result-action="edit" data-result-target="${targetData(target, valueType)}">编辑</button>
+          <button type="button" data-result-action="edit" data-result-target="${targetData(target, valueType)}">${escapeHtml(t('编辑'))}</button>
           ${renderRewriteActions(target, valueType)}
         </div>
       </div>
       ${lines.length
         ? `<ul class="pill-list editable-list">${lines.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`
-        : '<p class="editable-value">暂无内容</p>'}
+        : `<p class="editable-value">${escapeHtml(t('暂无内容'))}</p>`}
     </div>
   `;
 }
@@ -1237,29 +1917,29 @@ function renderTeachingPlan(plan = {}) {
   return `
     <div class="section-grid">
       <div class="metric-row">
-        <div class="metric"><span>课堂时长</span><strong>${escapeHtml(formPayload().duration || '45分钟')}</strong></div>
-        <div class="metric"><span>流程节点</span><strong>${flow.length || 4}</strong></div>
-        <div class="metric"><span>测评方式</span><strong>随堂闭环</strong></div>
-        <div class="metric"><span>适配场景</span><strong>高校课堂</strong></div>
+        <div class="metric"><span>${escapeHtml(t('课堂时长'))}</span><strong>${escapeHtml(formPayload().duration || '45分钟')}</strong></div>
+        <div class="metric"><span>${escapeHtml(t('流程节点'))}</span><strong>${flow.length || 4}</strong></div>
+        <div class="metric"><span>${escapeHtml(t('测评方式'))}</span><strong>${escapeHtml(t('随堂闭环'))}</strong></div>
+        <div class="metric"><span>${escapeHtml(t('适配场景'))}</span><strong>${escapeHtml(t('高校课堂'))}</strong></div>
       </div>
-      <section class="content-section">${renderEditableLines({ label: '教学目标', value: plan.objectives, target: { section: 'teachingPlan', field: 'objectives' } })}</section>
-      <section class="content-section">${renderEditableLines({ label: '重点难点', value: plan.keyPoints, target: { section: 'teachingPlan', field: 'keyPoints' } })}</section>
+      <section class="content-section">${renderEditableLines({ label: t('教学目标'), value: plan.objectives, target: { section: 'teachingPlan', field: 'objectives' } })}</section>
+      <section class="content-section">${renderEditableLines({ label: t('重点难点'), value: plan.keyPoints, target: { section: 'teachingPlan', field: 'keyPoints' } })}</section>
       <section class="content-section">
-        <h3>课堂流程</h3>
+        <h3>${escapeHtml(t('课堂流程'))}</h3>
         <ul class="timeline">
           ${flow.map((item, index) => `
             <li>
-              <strong>${escapeHtml(item.stage)} · ${escapeHtml(item.minutes)}分钟</strong>
-              ${renderEditableText({ label: '课堂活动', value: item.activity, target: { section: 'teachingPlan', field: 'classFlow.activity', index } })}
+              <strong>${escapeHtml(item.stage)} · ${escapeHtml(item.minutes)} ${escapeHtml(currentLocale === 'en' ? 'min' : '分钟')}</strong>
+              ${renderEditableText({ label: t('课堂活动'), value: item.activity, target: { section: 'teachingPlan', field: 'classFlow.activity', index } })}
             </li>
           `).join('')}
         </ul>
       </section>
       <section class="content-section">
-        <h3>师生活动与评估</h3>
-        ${renderEditableLines({ label: '教师动作', value: plan.teacherActions, target: { section: 'teachingPlan', field: 'teacherActions' } })}
-        ${renderEditableLines({ label: '学生动作', value: plan.studentActions, target: { section: 'teachingPlan', field: 'studentActions' } })}
-        ${renderEditableText({ label: '评估方式', value: plan.assessment || '根据课堂练习与测验结果评估。', target: { section: 'teachingPlan', field: 'assessment' } })}
+        <h3>${escapeHtml(t('师生活动与评估'))}</h3>
+        ${renderEditableLines({ label: t('教师动作'), value: plan.teacherActions, target: { section: 'teachingPlan', field: 'teacherActions' } })}
+        ${renderEditableLines({ label: t('学生动作'), value: plan.studentActions, target: { section: 'teachingPlan', field: 'studentActions' } })}
+        ${renderEditableText({ label: t('评估方式'), value: plan.assessment || '根据课堂练习与测验结果评估。', target: { section: 'teachingPlan', field: 'assessment' } })}
       </section>
     </div>
   `;
@@ -1268,13 +1948,13 @@ function renderTeachingPlan(plan = {}) {
 function renderSlides(slides = []) {
   return `
     <section class="content-section">
-      <h3>课件大纲</h3>
+      <h3>${escapeHtml(t('课件大纲'))}</h3>
       <ul class="slide-list">
         ${slides.map((slide, index) => `
           <li>
-            <strong>第${index + 1}页</strong>
-            ${renderEditableText({ label: '标题', value: slide.title, target: { section: 'slideOutline', field: 'title', index } })}
-            ${renderEditableText({ label: '讲稿', value: slide.speakerNotes, target: { section: 'slideOutline', field: 'speakerNotes', index } })}
+            <strong>${escapeHtml(t('第'))}${index + 1}${escapeHtml(t('页'))}</strong>
+            ${renderEditableText({ label: t('标题'), value: slide.title, target: { section: 'slideOutline', field: 'title', index } })}
+            ${renderEditableText({ label: t('讲稿'), value: slide.speakerNotes, target: { section: 'slideOutline', field: 'speakerNotes', index } })}
           </li>
         `).join('')}
       </ul>
@@ -1285,14 +1965,14 @@ function renderSlides(slides = []) {
 function renderQuiz(quiz = []) {
   return `
     <section class="content-section">
-      <h3>随堂测验</h3>
+      <h3>${escapeHtml(t('随堂测验'))}</h3>
       <ul class="quiz-list">
         ${quiz.map((item, index) => `
           <li>
             <strong>${index + 1}. [${escapeHtml(item.type)}]</strong>
-            ${renderEditableText({ label: '题目', value: item.question, target: { section: 'quiz', field: 'question', index } })}
-            ${renderEditableText({ label: '答案', value: item.answer, target: { section: 'quiz', field: 'answer', index } })}
-            ${renderEditableText({ label: '解析', value: item.explanation, target: { section: 'quiz', field: 'explanation', index } })}
+            ${renderEditableText({ label: t('题目'), value: item.question, target: { section: 'quiz', field: 'question', index } })}
+            ${renderEditableText({ label: t('答案'), value: item.answer, target: { section: 'quiz', field: 'answer', index } })}
+            ${renderEditableText({ label: t('解析'), value: item.explanation, target: { section: 'quiz', field: 'explanation', index } })}
           </li>
         `).join('')}
       </ul>
@@ -1303,10 +1983,10 @@ function renderQuiz(quiz = []) {
 function renderTieredTasks(tasks = {}) {
   return `
     <section class="content-section tiered-tasks">
-      <h3>课后分层任务</h3>
-      ${renderEditableLines({ label: '基础巩固', value: tasks.basic, target: { section: 'tieredTasks', field: 'basic' } })}
-      ${renderEditableLines({ label: '能力提升', value: tasks.advanced, target: { section: 'tieredTasks', field: 'advanced' } })}
-      ${renderEditableLines({ label: '挑战拓展', value: tasks.challenge, target: { section: 'tieredTasks', field: 'challenge' } })}
+      <h3>${escapeHtml(t('课后分层任务'))}</h3>
+      ${renderEditableLines({ label: t('基础巩固'), value: tasks.basic, target: { section: 'tieredTasks', field: 'basic' } })}
+      ${renderEditableLines({ label: t('能力提升'), value: tasks.advanced, target: { section: 'tieredTasks', field: 'advanced' } })}
+      ${renderEditableLines({ label: t('挑战拓展'), value: tasks.challenge, target: { section: 'tieredTasks', field: 'challenge' } })}
     </section>
   `;
 }
@@ -1314,7 +1994,7 @@ function renderTieredTasks(tasks = {}) {
 function renderPitch(script = '') {
   return `
     <section class="content-section">
-      ${renderEditableText({ label: '现场演示话术', value: script, target: { section: 'pitchScript', field: '' } })}
+      ${renderEditableText({ label: t('现场演示话术'), value: script, target: { section: 'pitchScript', field: '' } })}
     </section>
   `;
 }
@@ -1324,12 +2004,12 @@ function renderAssignmentSummary(review = {}) {
   return `
     <div class="section-grid">
       <div class="metric-row">
-        <div class="metric">${renderEditableText({ label: '综合得分', value: review.score || '待评定', target: { section: 'assignmentReview', field: 'score' } })}</div>
-        <div class="metric">${renderEditableText({ label: '等级', value: review.level || '待评定', target: { section: 'assignmentReview', field: 'level' } })}</div>
-        <div class="metric"><span>评分项</span><strong>${rubric.length || 3}</strong></div>
-        <div class="metric"><span>改进任务</span><strong>${Array.isArray(review.improvementTasks) ? review.improvementTasks.length : 0}</strong></div>
+        <div class="metric">${renderEditableText({ label: t('综合得分'), value: review.score || '待评定', target: { section: 'assignmentReview', field: 'score' } })}</div>
+        <div class="metric">${renderEditableText({ label: t('等级'), value: review.level || '待评定', target: { section: 'assignmentReview', field: 'level' } })}</div>
+        <div class="metric"><span>${escapeHtml(t('评分项'))}</span><strong>${rubric.length || 3}</strong></div>
+        <div class="metric"><span>${escapeHtml(t('改进任务'))}</span><strong>${Array.isArray(review.improvementTasks) ? review.improvementTasks.length : 0}</strong></div>
       </div>
-      <section class="content-section">${renderEditableText({ label: '批改结论', value: review.feedback || '暂无内容', target: { section: 'assignmentReview', field: 'feedback' } })}</section>
+      <section class="content-section">${renderEditableText({ label: t('批改结论'), value: review.feedback || t('暂无内容'), target: { section: 'assignmentReview', field: 'feedback' } })}</section>
     </div>
   `;
 }
@@ -1338,15 +2018,15 @@ function renderAssignmentRubric(review = {}) {
   const rubric = Array.isArray(review.rubric) ? review.rubric : [];
   return `
     <section class="content-section">
-      <h3>评分细则</h3>
+      <h3>${escapeHtml(t('评分细则'))}</h3>
       <ul class="rubric-list">
         ${rubric.length ? rubric.map((item, index) => `
           <li>
-            ${renderEditableText({ label: '评分项', value: item.criterion, target: { section: 'assignmentReview', field: 'rubric.criterion', index } })}
-            ${renderEditableText({ label: '分值', value: item.score, target: { section: 'assignmentReview', field: 'rubric.score', index } })}
-            ${renderEditableText({ label: '说明', value: item.comment, target: { section: 'assignmentReview', field: 'rubric.comment', index } })}
+            ${renderEditableText({ label: t('评分项'), value: item.criterion, target: { section: 'assignmentReview', field: 'rubric.criterion', index } })}
+            ${renderEditableText({ label: t('分值'), value: item.score, target: { section: 'assignmentReview', field: 'rubric.score', index } })}
+            ${renderEditableText({ label: t('说明'), value: item.comment, target: { section: 'assignmentReview', field: 'rubric.comment', index } })}
           </li>
-        `).join('') : '<li>暂无内容</li>'}
+        `).join('') : `<li>${escapeHtml(t('暂无内容'))}</li>`}
       </ul>
     </section>
   `;
@@ -1355,9 +2035,9 @@ function renderAssignmentRubric(review = {}) {
 function renderAssignmentFeedback(review = {}) {
   return `
     <div class="section-grid">
-      <section class="content-section">${renderEditableLines({ label: '亮点', value: review.strengths, target: { section: 'assignmentReview', field: 'strengths' } })}</section>
-      <section class="content-section">${renderEditableLines({ label: '待改进', value: review.issues, target: { section: 'assignmentReview', field: 'issues' } })}</section>
-      <section class="content-section">${renderEditableText({ label: '评语', value: review.feedback || '暂无内容', target: { section: 'assignmentReview', field: 'feedback' } })}</section>
+      <section class="content-section">${renderEditableLines({ label: t('亮点'), value: review.strengths, target: { section: 'assignmentReview', field: 'strengths' } })}</section>
+      <section class="content-section">${renderEditableLines({ label: t('待改进'), value: review.issues, target: { section: 'assignmentReview', field: 'issues' } })}</section>
+      <section class="content-section">${renderEditableText({ label: t('评语'), value: review.feedback || t('暂无内容'), target: { section: 'assignmentReview', field: 'feedback' } })}</section>
     </div>
   `;
 }
@@ -1365,7 +2045,7 @@ function renderAssignmentFeedback(review = {}) {
 function renderAssignmentTasks(review = {}) {
   return `
     <section class="content-section">
-      ${renderEditableLines({ label: '改进任务', value: review.improvementTasks, target: { section: 'assignmentReview', field: 'improvementTasks' } })}
+      ${renderEditableLines({ label: t('改进任务'), value: review.improvementTasks, target: { section: 'assignmentReview', field: 'improvementTasks' } })}
     </section>
   `;
 }
@@ -1382,10 +2062,10 @@ function renderAssignmentReview(review = {}) {
 
 function renderAnalysis(analysis = {}) {
   const sections = {
-    misconceptions: ['高频误区', analysis.misconceptions],
-    riskGroups: ['风险群体', analysis.riskGroups],
-    interventions: ['干预建议', analysis.interventions],
-    dataIndicators: ['数据指标', analysis.dataIndicators]
+    misconceptions: [t('高频误区'), analysis.misconceptions],
+    riskGroups: [t('风险群体'), analysis.riskGroups],
+    interventions: [t('干预建议'), analysis.interventions],
+    dataIndicators: [t('数据指标'), analysis.dataIndicators]
   };
   const [label, value] = sections[activeResultTabs.analysis] || sections.misconceptions;
   return `<section class="content-section">${renderEditableLines({ label, value, target: { section: 'learningAnalysis', field: activeResultTabs.analysis || 'misconceptions' } })}</section>`;
@@ -1405,7 +2085,7 @@ function renderSlidesFeature(result = {}) {
 function renderResultTabs() {
   const tabsForFeature = resultTabDefinitions[activeFeature] || [];
   return `
-    <nav class="result-tabs" aria-label="结果分类" role="tablist">
+    <nav class="result-tabs" aria-label="${escapeHtml(t('结果分类'))}" role="tablist">
       ${tabsForFeature.map((tab) => `
         <button
           class="result-tab${activeResultTabs[activeFeature] === tab.id ? ' active' : ''}"
@@ -1413,7 +2093,7 @@ function renderResultTabs() {
           role="tab"
           aria-selected="${activeResultTabs[activeFeature] === tab.id}"
           data-result-tab="${escapeHtml(tab.id)}"
-        >${escapeHtml(tab.label)}</button>
+        >${escapeHtml(t(tab.label))}</button>
       `).join('')}
     </nav>
   `;
@@ -1429,7 +2109,7 @@ function renderResult() {
   if (currentResult.rawText) {
     resultBox.innerHTML = `
       <section class="content-section">
-        <h3>原始输出</h3>
+        <h3>${escapeHtml(t('原始输出'))}</h3>
         <p class="raw-text">${escapeHtml(currentResult.rawText)}</p>
       </section>
     `;
@@ -1442,7 +2122,7 @@ function renderResult() {
     analysis: () => renderAnalysis(currentResult.learningAnalysis)
   };
 
-  resultBox.innerHTML = `${renderResultTabs()}${renderers[activeFeature]?.() || `<p>暂无${escapeHtml(featureTitles[activeFeature])}内容</p>`}`;
+  resultBox.innerHTML = `${renderResultTabs()}${renderers[activeFeature]?.() || `<p>${escapeHtml(t('暂无内容'))}</p>`}`;
 }
 
 function parseTarget(element) {
@@ -1639,11 +2319,14 @@ function openThemeDialog() {
 function closeAllExportSurfaces() {
   setExportMenuOpen(false);
   setThemeDialogOpen(false);
+  setSettingsDialogOpen(false);
   setWorkspaceDialogOpen(false);
   setTemplatesDialogOpen(false);
   setChecklistDialogOpen(false);
   setClassroomAssistantOpen(false);
   setReflectionDialogOpen(false);
+  setCalendarDialogOpen(false);
+  setBatchDialogOpen(false);
 }
 
 function exportWord() {
@@ -1672,14 +2355,13 @@ function exportPdf() {
   setStatus('已打开 PDF', 'success');
 }
 
-function exportPpt(themeId = selectedPptTheme) {
+function exportPpt() {
   if (!currentResult || activeFeature !== 'slides') return;
-  updateThemeSelection(themeId);
   const input = exportInput();
   const bytes = buildPptx({
     result: currentResult,
     input,
-    themeId: selectedPptTheme
+    themeId: 'formal-blue'
   });
   const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' });
   downloadBlob(blob, pptFileName(input));
@@ -1689,8 +2371,8 @@ function exportPpt(themeId = selectedPptTheme) {
 function exportByFormat(format) {
   if (format === 'word') exportWord();
   if (format === 'pdf') exportPdf();
-  if (format === 'ppt' && activeFeature === 'slides') openThemeDialog();
-  if (format !== 'ppt') setExportMenuOpen(false);
+  if (format === 'ppt' && activeFeature === 'slides') exportPpt();
+  setExportMenuOpen(false);
 }
 
 async function requestJson(url, options) {
@@ -1733,27 +2415,54 @@ async function generate() {
   }
 }
 
-async function loadSample() {
-  setStatus('载入样例...', '');
-  try {
-    currentResult = await requestJson('/api/sample');
-    resetResultTab();
-    resultRevision += 1;
-    editingTargetKey = '';
-    lastRewrite = null;
-    pendingRewriteKeys.clear();
-    setStatus('样例已载入', 'success');
-    setExportActionsEnabled(true);
-    renderResult();
-  } catch (error) {
-    setStatus(error.message, 'error');
+const sampleInputValues = {
+  slides: {
+    course: '数据结构',
+    topic: '二叉树遍历',
+    objectives: '掌握三种遍历规则，能根据样例树写出遍历序列，并解释递归边界。',
+    duration: '45分钟',
+    outputStyle: '教师备课助手'
+  },
+  grading: {
+    assignmentTitle: '二叉树遍历练习',
+    assignmentRequirement: '写出给定二叉树的前序、中序、后序遍历序列，并说明递归边界。',
+    gradingRubric: '遍历序列60分，递归过程解释30分，书写规范10分。',
+    studentSubmission: '前序：A B D E C；中序：D B E A C；后序：D E B C A。递归结束条件为空节点。'
+  },
+  analysis: {
+    classProfile: '软件工程大二，48人；约三分之一学生递归基础薄弱，课堂练习提交速度差异明显。',
+    painPoints: '容易混淆前序、中序、后序；只会背顺序，不理解递归调用过程。'
   }
+};
+
+function loadSample() {
+  const values = sampleInputValues[activeFeature];
+  if (!values) return;
+  applyInputValues(values);
+  referenceMaterials = '';
+  attachedFiles = [];
+  materialReadPromise = Promise.resolve();
+  setMaterialsFiles([]);
+  renderMaterialSummary([], '');
+  clearGeneratedResult(t('样例已填充，可以继续修改后生成课堂方案。'));
+  setStatus('样例已填充', 'success');
 }
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   generate();
 });
+
+settingsButton?.addEventListener('click', () => {
+  closeAllExportSurfaces();
+  setSettingsDialogOpen(true);
+});
+settingsDialogCloseButton?.addEventListener('click', () => setSettingsDialogOpen(false));
+settingsDialog?.addEventListener('click', (event) => {
+  if (event.target === settingsDialog) setSettingsDialogOpen(false);
+});
+languageSelect?.addEventListener('change', (event) => applyLocale(event.target.value));
+darkModeToggle?.addEventListener('change', (event) => applyDarkMode(event.target.checked));
 
 resultBox?.addEventListener?.('click', handleResultClick);
 resultBox?.addEventListener?.('submit', handleResultSubmit);
@@ -1808,6 +2517,31 @@ reflectionForm?.addEventListener('submit', (event) => {
   event.preventDefault();
   saveReflection();
 });
+calendarButton?.addEventListener('click', () => setCalendarDialogOpen(true));
+calendarCloseButton?.addEventListener('click', () => setCalendarDialogOpen(false));
+calendarDialog?.addEventListener('click', (event) => {
+  if (event.target === calendarDialog) setCalendarDialogOpen(false);
+});
+calendarPrevButton?.addEventListener('click', () => shiftCalendarMonth(-1));
+calendarNextButton?.addEventListener('click', () => shiftCalendarMonth(1));
+calendarTodayButton?.addEventListener('click', () => {
+  calendarSelectedDate = calendarDateKey(new Date());
+  calendarCursor = new Date();
+  renderCalendar();
+});
+calendarEventForm?.addEventListener('submit', saveCalendarEvent);
+calendarGrid?.addEventListener('click', handleCalendarClick);
+calendarGrid?.addEventListener('keydown', handleCalendarKeydown);
+calendarSelectedList?.addEventListener('click', handleCalendarClick);
+batchSubmissionsInput?.addEventListener('change', () => {
+  batchReadPromise = readBatchSubmissions();
+});
+batchGradeButton?.addEventListener('click', runBatchGrading);
+batchGradingCloseButton?.addEventListener('click', () => setBatchDialogOpen(false));
+batchGradingDialog?.addEventListener('click', (event) => {
+  if (event.target === batchGradingDialog && !batchRunning) setBatchDialogOpen(false);
+});
+batchGradingResults?.addEventListener('click', handleBatchResultClick);
 
 sampleButton.addEventListener('click', loadSample);
 exportButton?.addEventListener('click', toggleExportMenu);
@@ -1834,6 +2568,7 @@ document.addEventListener?.('click', (event) => {
 document.addEventListener?.('keydown', (event) => {
   if (event.key === 'Escape') closeAllExportSurfaces();
 });
+initializeUiPreferences();
 renderTimer();
 setExportActionsEnabled(false);
 

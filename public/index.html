@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>课堂方案工作台</title>
+    <title id="page-title">课堂方案工作台</title>
     <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
@@ -12,48 +12,56 @@
         <div class="brand-lockup">
           <span class="brand-icon" aria-hidden="true"></span>
           <div>
-            <p class="eyebrow">课堂方案</p>
-            <h1>教学设计工作台</h1>
+            <p class="eyebrow" data-i18n="课堂方案">课堂方案</p>
+            <h1 data-i18n="教学设计工作台">教学设计工作台</h1>
           </div>
         </div>
 
         <nav class="tabs feature-tabs" aria-label="功能选择">
-          <button class="tab active" type="button" data-feature="slides">课件生成</button>
-          <button class="tab" type="button" data-feature="grading">作业批改</button>
-          <button class="tab" type="button" data-feature="analysis">学情分析</button>
+          <button class="tab active" type="button" data-feature="slides"><span data-i18n="课件生成">课件生成</span></button>
+          <button class="tab" type="button" data-feature="grading"><span data-i18n="作业批改">作业批改</span></button>
+          <button class="tab" type="button" data-feature="analysis"><span data-i18n="学情分析">学情分析</span></button>
         </nav>
 
         <button id="workspace-button" class="workspace-button" type="button">
           <span class="workspace-button-icon" aria-hidden="true"></span>
-          课程空间
+          <span data-i18n="课程空间">课程空间</span>
         </button>
 
         <div class="sidebar-tools">
           <button id="templates-button" class="sidebar-tool-button" type="button">
             <span class="sidebar-tool-icon template-tool-icon" aria-hidden="true"></span>
-            教学模板
+            <span data-i18n="教学模板">教学模板</span>
           </button>
           <button id="checklist-button" class="sidebar-tool-button" type="button">
             <span class="sidebar-tool-icon checklist-tool-icon" aria-hidden="true"></span>
-            备课清单
+            <span data-i18n="备课清单">备课清单</span>
           </button>
           <button id="classroom-assistant-button" class="sidebar-tool-button" type="button">
             <span class="sidebar-tool-icon timer-tool-icon" aria-hidden="true"></span>
-            课堂助手
+            <span data-i18n="课堂助手">课堂助手</span>
           </button>
           <button id="reflection-button" class="sidebar-tool-button" type="button">
             <span class="sidebar-tool-icon reflection-tool-icon" aria-hidden="true"></span>
-            课后复盘
+            <span data-i18n="课后复盘">课后复盘</span>
+          </button>
+          <button id="calendar-button" class="sidebar-tool-button" type="button">
+            <span class="sidebar-tool-icon calendar-tool-icon" aria-hidden="true"></span>
+            <span data-i18n="课表日历">课表日历</span>
+          </button>
+          <button id="settings-button" class="sidebar-tool-button" type="button">
+            <span class="sidebar-tool-icon settings-tool-icon" aria-hidden="true"></span>
+            <span data-i18n="设置">设置</span>
           </button>
         </div>
 
-        <div id="status" class="status">准备就绪</div>
+        <div id="status" class="status" data-i18n="准备就绪">准备就绪</div>
       </aside>
 
       <section class="workspace" aria-label="课堂方案工作台">
         <aside class="input-panel">
           <div class="panel-heading">
-            <h2>输入信息</h2>
+            <h2 data-i18n="输入信息">输入信息</h2>
           </div>
 
           <form id="request-form" class="request-form">
@@ -61,31 +69,31 @@
 
             <div class="feature-panel" data-feature-panel="slides">
               <label>
-                <span>课程名称</span>
-                <input name="course" value="数据结构" autocomplete="off">
+                <span data-i18n="课程名称">课程名称</span>
+                <input name="course" placeholder="例如：数据结构" data-i18n-placeholder="例如：数据结构" autocomplete="off">
               </label>
 
               <label>
-                <span>本节主题</span>
-                <input name="topic" value="二叉树遍历" autocomplete="off">
+                <span data-i18n="本节主题">本节主题</span>
+                <input name="topic" placeholder="例如：二叉树遍历" data-i18n-placeholder="例如：二叉树遍历" autocomplete="off">
               </label>
 
               <label>
-                <span>教学目标</span>
-                <textarea name="objectives" rows="3">掌握三种遍历规则，能根据样例树写出遍历序列，并解释递归边界。</textarea>
+                <span data-i18n="教学目标">教学目标</span>
+                <textarea name="objectives" rows="3" placeholder="填写本节课希望学生达成的目标" data-i18n-placeholder="填写本节课希望学生达成的目标"></textarea>
               </label>
 
               <div class="form-grid">
                 <label>
-                  <span>课堂时长</span>
-                  <input name="duration" value="45分钟" autocomplete="off">
+                  <span data-i18n="课堂时长">课堂时长</span>
+                  <input name="duration" placeholder="例如：45分钟" data-i18n-placeholder="例如：45分钟" autocomplete="off">
                 </label>
                 <label>
-                  <span>输出风格</span>
+                  <span data-i18n="输出风格">输出风格</span>
                   <select name="outputStyle">
-                    <option>竞标答辩演示</option>
-                    <option>校方领导汇报</option>
-                    <option>教师备课助手</option>
+                    <option data-i18n="竞标答辩演示">竞标答辩演示</option>
+                    <option data-i18n="校方领导汇报">校方领导汇报</option>
+                    <option data-i18n="教师备课助手">教师备课助手</option>
                   </select>
                 </label>
               </div>
@@ -93,60 +101,74 @@
 
             <div class="feature-panel" data-feature-panel="grading" hidden>
               <label>
-                <span>作业名称</span>
-                <input name="assignmentTitle" value="二叉树遍历练习" autocomplete="off">
+                <span data-i18n="作业名称">作业名称</span>
+                <input name="assignmentTitle" placeholder="例如：二叉树遍历练习" data-i18n-placeholder="例如：二叉树遍历练习" autocomplete="off">
               </label>
 
               <label>
-                <span>作业要求</span>
-                <textarea name="assignmentRequirement" rows="3">写出给定二叉树的前序、中序、后序遍历序列，并说明递归边界。</textarea>
+                <span data-i18n="作业要求">作业要求</span>
+                <textarea name="assignmentRequirement" rows="3" placeholder="填写作业要求" data-i18n-placeholder="填写作业要求"></textarea>
               </label>
 
               <label>
-                <span>评分标准</span>
-                <textarea name="gradingRubric" rows="3">遍历序列60分，递归过程解释30分，书写规范10分。</textarea>
+                <span data-i18n="评分标准">评分标准</span>
+                <textarea name="gradingRubric" rows="3" placeholder="填写评分标准" data-i18n-placeholder="填写评分标准"></textarea>
               </label>
 
               <label>
-                <span>学生提交</span>
-                <textarea name="studentSubmission" rows="5">前序：A B D E C；中序：D B E A C；后序：D E B C A。递归结束条件为空节点。</textarea>
+                <span data-i18n="学生提交">学生提交</span>
+                <textarea name="studentSubmission" rows="5" placeholder="粘贴学生提交内容" data-i18n-placeholder="粘贴学生提交内容"></textarea>
               </label>
+
+              <div class="batch-grading-card">
+                <div class="form-section-title" data-i18n="批量作业批改">批量作业批改</div>
+                <label class="batch-upload" for="batch-submissions">
+                  <span data-i18n="导入多份作业">导入多份作业</span>
+                  <input id="batch-submissions" class="material-input" type="file" multiple accept=".txt,.md,.csv,.json,text/plain,text/markdown,text/csv,application/json">
+                  <span class="batch-upload-control">
+                    <strong data-i18n="选择作业文件">选择作业文件</strong>
+                    <small data-i18n="支持 TXT、Markdown、CSV、JSON">支持 TXT、Markdown、CSV、JSON</small>
+                  </span>
+                </label>
+                <div id="batch-submission-summary" class="material-summary" data-i18n="尚未加入作业">尚未加入作业</div>
+                <button id="batch-grade-button" class="secondary-button" type="button" disabled data-i18n="批量批改">批量批改</button>
+              </div>
             </div>
 
             <div class="feature-panel" data-feature-panel="analysis" hidden>
               <label>
-                <span>班级画像</span>
-                <textarea name="classProfile" rows="4">软件工程大二，48人；约三分之一学生递归基础薄弱，课堂练习提交速度差异明显。</textarea>
+                <span data-i18n="班级画像">班级画像</span>
+                <textarea name="classProfile" rows="4" placeholder="描述班级基础、人数和学习状态" data-i18n-placeholder="描述班级基础、人数和学习状态"></textarea>
               </label>
 
               <label>
-                <span>学生痛点</span>
-                <textarea name="painPoints" rows="4">容易混淆前序、中序、后序；只会背顺序，不理解递归调用过程。</textarea>
+                <span data-i18n="学生痛点">学生痛点</span>
+                <textarea name="painPoints" rows="4" placeholder="描述学生当前的主要困难" data-i18n-placeholder="描述学生当前的主要困难"></textarea>
               </label>
             </div>
 
             <div class="material-card">
               <label class="material-upload" for="materials">
-                <span class="material-label">补充材料</span>
+                <span class="material-label" data-i18n="补充材料">补充材料</span>
                 <input id="materials" class="material-input" name="materials" type="file" multiple accept=".txt,.md,.csv,.json,.log,.pdf,.doc,.docx,.ppt,.pptx,text/plain,text/markdown,text/csv,application/json,application/pdf">
                 <span class="material-drop">
                   <span class="material-icon" aria-hidden="true"></span>
                   <span>
-                    <strong>选择资料</strong>
-                    <small>支持常用课程文件</small>
+                  <strong data-i18n="选择资料">选择资料</strong>
+                  <small data-i18n="支持常用课程文件">支持常用课程文件</small>
                   </span>
                 </span>
               </label>
-              <div id="material-summary" class="material-summary">暂未加入材料</div>
+              <div id="material-summary" class="material-summary" data-i18n="暂未加入材料">暂未加入材料</div>
             </div>
 
             <div class="button-row">
               <button id="generate-button" class="primary-button" type="submit">
                 <span class="button-icon" aria-hidden="true"></span>
-                生成课件
+                <span class="button-label" data-i18n="生成课件">生成课件</span>
               </button>
-              <button id="sample-button" class="secondary-button" type="button">查看样例</button>
-              <button id="save-workspace-button" class="secondary-button" type="button">保存课程</button>
+              <button id="sample-button" class="secondary-button" type="button" data-i18n="填充样例">填充样例</button>
+              <button id="save-workspace-button" class="secondary-button" type="button" data-i18n="保存课程">保存课程</button>
             </div>
           </form>
         </aside>
@@ -154,17 +176,17 @@
         <section class="output-panel" aria-live="polite">
           <div class="output-header">
             <div class="output-title-group">
-              <h2>生成结果</h2>
-              <span id="output-title">课件生成</span>
+              <h2 data-i18n="生成结果">生成结果</h2>
+              <span id="output-title" data-i18n="课件生成">课件生成</span>
             </div>
-            <div class="export-actions" aria-label="导出操作">
-              <button id="copy-result-button" class="export-button" type="button" disabled>复制当前页</button>
+            <div class="export-actions" aria-label="导出操作" data-i18n-aria-label="导出操作">
+              <button id="copy-result-button" class="export-button" type="button" disabled data-i18n="复制当前页">复制当前页</button>
               <div class="export-menu-wrap">
-                <button id="export-button" class="export-button" type="button" aria-haspopup="menu" aria-expanded="false" disabled>导出</button>
+                <button id="export-button" class="export-button" type="button" aria-haspopup="menu" aria-expanded="false" disabled data-i18n="导出">导出</button>
                 <div id="export-menu" class="export-menu" role="menu" hidden>
-                  <button type="button" role="menuitem" data-export-format="word">Word</button>
-                  <button type="button" role="menuitem" data-export-format="pdf">PDF</button>
-                  <button type="button" role="menuitem" data-export-format="ppt">PPT</button>
+                  <button type="button" role="menuitem" data-export-format="word" data-i18n="Word">Word</button>
+                  <button type="button" role="menuitem" data-export-format="pdf" data-i18n="PDF">PDF</button>
+                  <button type="button" role="menuitem" data-export-format="ppt" data-i18n="PPT">PPT</button>
                 </div>
               </div>
             </div>
@@ -173,40 +195,75 @@
           <div id="result" class="result-surface">
             <div class="empty-state">
               <div class="empty-visual" aria-hidden="true"></div>
-              <h3>暂无内容</h3>
-              <p>填写信息后生成课堂方案。</p>
+              <h3 data-i18n="暂无内容">暂无内容</h3>
+              <p data-i18n="填写信息后生成课堂方案。">填写信息后生成课堂方案。</p>
             </div>
           </div>
         </section>
       </section>
     </main>
 
+    <div id="settings-dialog" class="modal-backdrop" hidden>
+      <section class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-dialog-title">
+        <div class="dialog-header">
+          <div>
+            <h3 id="settings-dialog-title" data-i18n="设置">设置</h3>
+            <p class="dialog-subtitle" data-i18n="调整工作台的语言和显示方式">调整工作台的语言和显示方式</p>
+          </div>
+          <button id="settings-dialog-close" class="icon-button" type="button" aria-label="关闭" data-i18n-aria-label="关闭"></button>
+        </div>
+        <div class="settings-list">
+          <label class="settings-row" for="language-select">
+            <span>
+              <strong data-i18n="界面语言">界面语言</strong>
+              <small data-i18n="选择工作台显示语言">选择工作台显示语言</small>
+            </span>
+            <select id="language-select">
+              <option value="zh" data-i18n="中文">中文</option>
+              <option value="en" data-i18n="English">English</option>
+            </select>
+          </label>
+          <div class="settings-row settings-switch-row">
+            <span>
+              <strong data-i18n="深色模式">深色模式</strong>
+              <small data-i18n="降低夜间使用时的界面亮度">降低夜间使用时的界面亮度</small>
+            </span>
+            <label class="switch-control" for="dark-mode-toggle">
+              <input id="dark-mode-toggle" type="checkbox">
+              <span class="switch-track" aria-hidden="true"></span>
+              <span class="sr-only" data-i18n="切换深色模式">切换深色模式</span>
+            </label>
+          </div>
+        </div>
+      </section>
+    </div>
+
     <div id="theme-dialog" class="modal-backdrop" hidden>
       <section class="theme-panel" role="dialog" aria-modal="true" aria-labelledby="theme-dialog-title">
         <div class="dialog-header">
-          <h3 id="theme-dialog-title">选择主题</h3>
-          <button id="theme-dialog-close" class="icon-button" type="button" aria-label="关闭"></button>
+          <h3 id="theme-dialog-title" data-i18n="选择主题">选择主题</h3>
+          <button id="theme-dialog-close" class="icon-button" type="button" aria-label="关闭" data-i18n-aria-label="关闭"></button>
         </div>
-        <div class="theme-grid" aria-label="主题选择">
+        <div class="theme-grid" aria-label="主题选择" data-i18n-aria-label="主题选择">
           <button class="theme-card selected" type="button" data-theme-id="formal-blue" aria-pressed="true" style="--theme-accent:#0071e3; --theme-line:#d2d2d7; --theme-text:#1d1d1f;">
             <span class="theme-preview" aria-hidden="true"><span></span><span></span><span></span></span>
-            <strong>正式蓝</strong>
+            <strong data-i18n="正式蓝">正式蓝</strong>
           </button>
           <button class="theme-card" type="button" data-theme-id="academic-green" aria-pressed="false" style="--theme-accent:#0f7b5f; --theme-line:#cfe3dc; --theme-text:#18362b;">
             <span class="theme-preview" aria-hidden="true"><span></span><span></span><span></span></span>
-            <strong>学术绿</strong>
+            <strong data-i18n="学术绿">学术绿</strong>
           </button>
           <button class="theme-card" type="button" data-theme-id="minimal-mono" aria-pressed="false" style="--theme-accent:#1d1d1f; --theme-line:#d2d2d7; --theme-text:#1d1d1f;">
             <span class="theme-preview" aria-hidden="true"><span></span><span></span><span></span></span>
-            <strong>极简黑白</strong>
+            <strong data-i18n="极简黑白">极简黑白</strong>
           </button>
           <button class="theme-card" type="button" data-theme-id="vitality-orange" aria-pressed="false" style="--theme-accent:#f97316; --theme-line:#f2d1ba; --theme-text:#2b2118;">
             <span class="theme-preview" aria-hidden="true"><span></span><span></span><span></span></span>
-            <strong>活力橙</strong>
+            <strong data-i18n="活力橙">活力橙</strong>
           </button>
           <button class="theme-card" type="button" data-theme-id="mobile-blue" aria-pressed="false" style="--theme-accent:#0086d1; --theme-line:#c9e4f4; --theme-text:#1d1d1f;">
             <span class="theme-preview" aria-hidden="true"><span></span><span></span><span></span></span>
-            <strong>移动蓝</strong>
+            <strong data-i18n="移动蓝">移动蓝</strong>
           </button>
         </div>
       </section>
@@ -216,19 +273,19 @@
       <section class="workspace-panel" role="dialog" aria-modal="true" aria-labelledby="workspace-dialog-title">
         <div class="dialog-header">
           <div>
-            <h3 id="workspace-dialog-title">课程空间</h3>
-            <p class="dialog-subtitle">保存课程输入、生成结果和历史版本</p>
+            <h3 id="workspace-dialog-title" data-i18n="课程空间">课程空间</h3>
+            <p class="dialog-subtitle" data-i18n="保存课程输入、生成结果和历史版本">保存课程输入、生成结果和历史版本</p>
           </div>
-          <button id="workspace-dialog-close" class="icon-button" type="button" aria-label="关闭"></button>
+          <button id="workspace-dialog-close" class="icon-button" type="button" aria-label="关闭" data-i18n-aria-label="关闭"></button>
         </div>
         <div class="workspace-toolbar">
-          <span id="workspace-count" class="workspace-count">暂无保存课程</span>
+          <span id="workspace-count" class="workspace-count" data-i18n="暂无保存课程">暂无保存课程</span>
           <div class="workspace-toolbar-actions">
             <label class="workspace-search">
-              <span class="sr-only">搜索课程</span>
-              <input id="workspace-search" type="search" placeholder="搜索课程或主题" autocomplete="off">
+              <span class="sr-only" data-i18n="搜索课程">搜索课程</span>
+              <input id="workspace-search" type="search" placeholder="搜索课程或主题" data-i18n-placeholder="搜索课程或主题" autocomplete="off">
             </label>
-            <button id="new-workspace-button" class="secondary-button" type="button">新建课程</button>
+            <button id="new-workspace-button" class="secondary-button" type="button" data-i18n="新建课程">新建课程</button>
           </div>
         </div>
         <div id="workspace-list" class="workspace-list"></div>
@@ -239,10 +296,10 @@
       <section class="templates-panel" role="dialog" aria-modal="true" aria-labelledby="templates-dialog-title">
         <div class="dialog-header">
           <div>
-            <h3 id="templates-dialog-title">教学模板</h3>
-            <p class="dialog-subtitle">按当前功能套用一组可直接修改的备课起点</p>
+            <h3 id="templates-dialog-title" data-i18n="教学模板">教学模板</h3>
+            <p class="dialog-subtitle" data-i18n="按当前功能套用一组可直接修改的备课起点">按当前功能套用一组可直接修改的备课起点</p>
           </div>
-          <button id="templates-dialog-close" class="icon-button" type="button" aria-label="关闭"></button>
+          <button id="templates-dialog-close" class="icon-button" type="button" aria-label="关闭" data-i18n-aria-label="关闭"></button>
         </div>
         <div id="template-list" class="template-list"></div>
       </section>
@@ -252,15 +309,15 @@
       <section class="checklist-panel" role="dialog" aria-modal="true" aria-labelledby="checklist-dialog-title">
         <div class="dialog-header">
           <div>
-            <h3 id="checklist-dialog-title">备课清单</h3>
-            <p class="dialog-subtitle">把生成内容变成课前真正要完成的动作</p>
+            <h3 id="checklist-dialog-title" data-i18n="备课清单">备课清单</h3>
+            <p class="dialog-subtitle" data-i18n="把生成内容变成课前真正要完成的动作">把生成内容变成课前真正要完成的动作</p>
           </div>
-          <button id="checklist-dialog-close" class="icon-button" type="button" aria-label="关闭"></button>
+          <button id="checklist-dialog-close" class="icon-button" type="button" aria-label="关闭" data-i18n-aria-label="关闭"></button>
         </div>
         <div class="checklist-summary">
           <div>
             <strong id="checklist-progress">0 / 5</strong>
-            <span>项已完成</span>
+            <span data-i18n="项已完成">项已完成</span>
           </div>
           <div class="checklist-progress-track" aria-hidden="true"><span id="checklist-progress-bar"></span></div>
         </div>
@@ -272,40 +329,40 @@
       <section class="classroom-assistant-panel" role="dialog" aria-modal="true" aria-labelledby="classroom-assistant-title">
         <div class="dialog-header">
           <div>
-            <h3 id="classroom-assistant-title">课堂助手</h3>
-            <p class="dialog-subtitle">上课时快速控制节奏，并随时拿到一个可追问的问题</p>
+            <h3 id="classroom-assistant-title" data-i18n="课堂助手">课堂助手</h3>
+            <p class="dialog-subtitle" data-i18n="上课时快速控制节奏，并随时拿到一个可追问的问题">上课时快速控制节奏，并随时拿到一个可追问的问题</p>
           </div>
-          <button id="classroom-assistant-close" class="icon-button" type="button" aria-label="关闭"></button>
+          <button id="classroom-assistant-close" class="icon-button" type="button" aria-label="关闭" data-i18n-aria-label="关闭"></button>
         </div>
         <div class="classroom-assistant-body">
           <section class="timer-section" aria-labelledby="timer-title">
             <div class="assistant-section-heading">
-              <h4 id="timer-title">课堂计时</h4>
-              <span id="timer-status" class="timer-status">未开始</span>
+              <h4 id="timer-title" data-i18n="课堂计时">课堂计时</h4>
+              <span id="timer-status" class="timer-status" data-i18n="未开始">未开始</span>
             </div>
             <div id="timer-display" class="timer-display" aria-live="polite">45:00</div>
-            <div class="timer-presets" aria-label="计时预设">
-              <button type="button" data-timer-seconds="300">5 分钟</button>
-              <button type="button" data-timer-seconds="900">15 分钟</button>
-              <button type="button" data-timer-seconds="1800">30 分钟</button>
-              <button class="selected" type="button" data-timer-seconds="2700">45 分钟</button>
-              <button type="button" data-timer-seconds="5400">90 分钟</button>
+            <div class="timer-presets" aria-label="计时预设" data-i18n-aria-label="计时预设">
+              <button type="button" data-timer-seconds="300" data-i18n="5 分钟">5 分钟</button>
+              <button type="button" data-timer-seconds="900" data-i18n="15 分钟">15 分钟</button>
+              <button type="button" data-timer-seconds="1800" data-i18n="30 分钟">30 分钟</button>
+              <button class="selected" type="button" data-timer-seconds="2700" data-i18n="45 分钟">45 分钟</button>
+              <button type="button" data-timer-seconds="5400" data-i18n="90 分钟">90 分钟</button>
             </div>
             <div class="timer-actions">
-              <button id="timer-toggle-button" class="primary-button" type="button">开始</button>
-              <button id="timer-reset-button" class="secondary-button" type="button">重置</button>
+              <button id="timer-toggle-button" class="primary-button" type="button" data-i18n="开始">开始</button>
+              <button id="timer-reset-button" class="secondary-button" type="button" data-i18n="重置">重置</button>
             </div>
           </section>
 
           <section class="prompt-section" aria-labelledby="prompt-title">
             <div class="assistant-section-heading">
-              <h4 id="prompt-title">课堂提问卡</h4>
+              <h4 id="prompt-title" data-i18n="课堂提问卡">课堂提问卡</h4>
               <span id="prompt-index" class="timer-status">1 / 1</span>
             </div>
             <p id="classroom-prompt" class="classroom-prompt">先让学生说出这一步的判断依据，再请另一位同学补充一个反例。</p>
             <div class="prompt-actions">
-              <button id="next-prompt-button" class="secondary-button" type="button">下一个问题</button>
-              <button id="copy-prompt-button" class="secondary-button" type="button">复制问题</button>
+              <button id="next-prompt-button" class="secondary-button" type="button" data-i18n="下一个问题">下一个问题</button>
+              <button id="copy-prompt-button" class="secondary-button" type="button" data-i18n="复制问题">复制问题</button>
             </div>
           </section>
         </div>
@@ -316,29 +373,94 @@
       <section class="reflection-panel" role="dialog" aria-modal="true" aria-labelledby="reflection-title">
         <div class="dialog-header">
           <div>
-            <h3 id="reflection-title">课后复盘</h3>
-            <p class="dialog-subtitle">记录一次课堂，下一次备课会更快</p>
+            <h3 id="reflection-title" data-i18n="课后复盘">课后复盘</h3>
+            <p class="dialog-subtitle" data-i18n="记录一次课堂，下一次备课会更快">记录一次课堂，下一次备课会更快</p>
           </div>
-          <button id="reflection-close" class="icon-button" type="button" aria-label="关闭"></button>
+          <button id="reflection-close" class="icon-button" type="button" aria-label="关闭" data-i18n-aria-label="关闭"></button>
         </div>
         <form id="reflection-form" class="reflection-form">
           <label>
-            <span>课堂表现</span>
-            <textarea id="lesson-reflection" name="lessonReflection" rows="4" placeholder="哪些环节按计划完成了？哪里超时或卡住了？"></textarea>
+            <span data-i18n="课堂表现">课堂表现</span>
+            <textarea id="lesson-reflection" name="lessonReflection" rows="4" placeholder="哪些环节按计划完成了？哪里超时或卡住了？" data-i18n-placeholder="哪些环节按计划完成了？哪里超时或卡住了？"></textarea>
           </label>
           <label>
-            <span>学生反馈</span>
-            <textarea id="student-feedback" name="studentFeedback" rows="4" placeholder="学生在哪些地方最投入，哪些地方仍然困惑？"></textarea>
+            <span data-i18n="学生反馈">学生反馈</span>
+            <textarea id="student-feedback" name="studentFeedback" rows="4" placeholder="学生在哪些地方最投入，哪些地方仍然困惑？" data-i18n-placeholder="学生在哪些地方最投入，哪些地方仍然困惑？"></textarea>
           </label>
           <label>
-            <span>下次调整</span>
-            <textarea id="next-adjustment" name="nextAdjustment" rows="4" placeholder="下次准备保留、删减或重新设计什么？"></textarea>
+            <span data-i18n="下次调整">下次调整</span>
+            <textarea id="next-adjustment" name="nextAdjustment" rows="4" placeholder="下次准备保留、删减或重新设计什么？" data-i18n-placeholder="下次准备保留、删减或重新设计什么？"></textarea>
           </label>
           <div class="reflection-actions">
-            <span id="reflection-updated" class="reflection-updated">尚未保存</span>
-            <button class="primary-button" type="submit">保存复盘</button>
+            <span id="reflection-updated" class="reflection-updated" data-i18n="尚未保存">尚未保存</span>
+            <button class="primary-button" type="submit" data-i18n="保存复盘">保存复盘</button>
           </div>
         </form>
+      </section>
+    </div>
+
+    <div id="calendar-dialog" class="modal-backdrop" hidden>
+      <section class="calendar-panel" role="dialog" aria-modal="true" aria-labelledby="calendar-title">
+        <div class="dialog-header">
+          <div>
+            <h3 id="calendar-title" data-i18n="课表与备课日历">课表与备课日历</h3>
+            <p class="dialog-subtitle" data-i18n="把授课、备课、作业和复盘安排放在同一个地方">把授课、备课、作业和复盘安排放在同一个地方</p>
+          </div>
+          <button id="calendar-close" class="icon-button" type="button" aria-label="关闭" data-i18n-aria-label="关闭"></button>
+        </div>
+        <div class="calendar-toolbar">
+          <button id="calendar-prev" class="calendar-nav-button" type="button" data-i18n="上月">上月</button>
+          <strong id="calendar-month-label">2026 年 7 月</strong>
+          <button id="calendar-next" class="calendar-nav-button" type="button" data-i18n="下月">下月</button>
+          <button id="calendar-today" class="secondary-button" type="button" data-i18n="今天">今天</button>
+        </div>
+        <form id="calendar-event-form" class="calendar-event-form">
+          <label>
+            <span data-i18n="日期">日期</span>
+            <input id="calendar-event-date" name="date" type="date" required>
+          </label>
+          <label>
+            <span data-i18n="安排类型">安排类型</span>
+            <select id="calendar-event-type" name="type">
+              <option value="授课" data-i18n="授课">授课</option>
+              <option value="备课" data-i18n="备课">备课</option>
+              <option value="作业" data-i18n="作业">作业</option>
+              <option value="复盘" data-i18n="复盘">复盘</option>
+            </select>
+          </label>
+          <label class="calendar-event-title-field">
+            <span data-i18n="安排内容">安排内容</span>
+            <input id="calendar-event-title" name="title" type="text" placeholder="例如：数据结构第 4 次课" data-i18n-placeholder="例如：数据结构第 4 次课" required>
+          </label>
+          <button class="primary-button" type="submit" data-i18n="添加安排">添加安排</button>
+        </form>
+        <div class="calendar-weekdays" aria-hidden="true">
+          <span data-i18n="一">一</span><span data-i18n="二">二</span><span data-i18n="三">三</span><span data-i18n="四">四</span><span data-i18n="五">五</span><span data-i18n="六">六</span><span data-i18n="日">日</span>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
+        <div class="calendar-selected-heading">
+          <strong id="calendar-selected-label" data-i18n="今日安排">今日安排</strong>
+          <span id="calendar-selected-count">0 项</span>
+        </div>
+        <div id="calendar-selected-list" class="calendar-selected-list"></div>
+      </section>
+    </div>
+
+    <div id="batch-grading-dialog" class="modal-backdrop" hidden>
+      <section class="batch-grading-panel" role="dialog" aria-modal="true" aria-labelledby="batch-grading-title">
+        <div class="dialog-header">
+          <div>
+            <h3 id="batch-grading-title" data-i18n="批量作业批改">批量作业批改</h3>
+            <p class="dialog-subtitle" data-i18n="按当前评分标准逐份处理，并集中查看结果">按当前评分标准逐份处理，并集中查看结果</p>
+          </div>
+          <button id="batch-grading-close" class="icon-button" type="button" aria-label="关闭" data-i18n-aria-label="关闭"></button>
+        </div>
+        <div class="batch-grading-progress">
+          <strong id="batch-grading-status" data-i18n="准备批改">准备批改</strong>
+          <span id="batch-grading-count">0 / 0</span>
+        </div>
+        <div class="batch-progress-track" aria-hidden="true"><span id="batch-progress-bar"></span></div>
+        <div id="batch-grading-results" class="batch-grading-results"></div>
       </section>
     </div>
 

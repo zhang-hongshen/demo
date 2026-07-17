@@ -1,0 +1,290 @@
+{"kind":"deck","id":"pr/x45dwo","name":"Deck"}
+{"kind":"layout","layoutId":"3a59a987-9933-4cbe-849e-4f5714ec016e","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"2d491097-8496-4592-b55e-08a5406da886","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/tkwsm9","slide":1,"title":"课","textShapes":6}
+{"kind":"shape","id":"sh/p8b290fq","slide":1,"bbox":[42,42,36,36]}
+{"kind":"textbox","id":"sh/25k3elgz","slide":1,"text":"课","textPreview":"课","textChars":1,"textLines":1,"bbox":[42,94,80,26]}
+{"kind":"textbox","id":"sh/36tk7qxk","slide":1,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,158,650,90]}
+{"kind":"textbox","id":"sh/cv2lkfyh","slide":1,"text":"让一节课，从备课到复盘形成一个连续工作流","textPreview":"让一节课，从备课到复盘形成一个连续工作流","textChars":20,"textLines":1,"bbox":[46,274,640,42]}
+{"kind":"shape","id":"sh/dwv2dkfm","slide":1,"bbox":[46,354,126,6]}
+{"kind":"textbox","id":"sh/q9k3i5gb","slide":1,"text":"产品讲解 · 教师工作场景","textPreview":"产品讲解 · 教师工作场景","textChars":13,"textLines":1,"bbox":[46,388,360,28]}
+{"kind":"shape","id":"sh/ratkbaxw","slide":1,"bbox":[692,58,542,520]}
+{"kind":"textbox","id":"sh/l0vmhkfy","slide":1,"text":"真实产品界面","textPreview":"真实产品界面","textChars":6,"textLines":1,"bbox":[714,526,180,22]}
+{"kind":"textbox","id":"sh/xobul07q","slide":1,"text":"备课 · 授课 · 批改 · 分析","textPreview":"备课 · 授课 · 批改 · 分析","textChars":17,"textLines":1,"bbox":[980,526,232,22]}
+{"kind":"image","id":"im/twfidg3q","slide":1,"name":"","geometry":"roundRect","alt":"产品界面截图","bbox":[714,80,498,420]}
+{"kind":"notes","id":"nt/tkwsm9","slide":1,"text":"开场：这不是一个单点工具，而是一张教师工作台。它把一节课前后的关键动作放在同一个连续工作流里：先准备课程，再生成课件，课堂中用助手控节奏，课后批改、分析并沉淀复盘。右侧是真实产品界面截图。\n\n讲解时长建议：40 秒。"}
+{"kind":"slide","id":"sl/o6536l","slide":2,"title":"教学设计工作台","textShapes":22}
+{"kind":"textbox","id":"sh/vupcvq9s","slide":2,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,34,220,24]}
+{"kind":"textbox","id":"sh/gvyd4vqd","slide":2,"text":"为什么需要一个教师工作台","textPreview":"为什么需要一个教师工作台","textChars":12,"textLines":1,"bbox":[42,654,420,20]}
+{"kind":"textbox","id":"sh/hw7ux0ry","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1180,650,58,24]}
+{"kind":"textbox","id":"sh/ix0v6583","slide":2,"text":"老师真正需要的，不是更多工具","textPreview":"老师真正需要的，不是更多工具","textChars":14,"textLines":1,"bbox":[42,76,1196,66]}
+{"kind":"textbox","id":"sh/3y9czq9o","slide":2,"text":"而是一条不用反复搬运信息的教学路径","textPreview":"而是一条不用反复搬运信息的教学路径","textChars":17,"textLines":1,"bbox":[44,143,920,32]}
+{"kind":"textbox","id":"sh/4zid8vq9","slide":2,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[52,238,48,28]}
+{"kind":"shape","id":"sh/50ru10ru","slide":2,"bbox":[120,258,410,0]}
+{"kind":"textbox","id":"sh/q10va58f","slide":2,"text":"材料散落","textPreview":"材料散落","textChars":4,"textLines":1,"bbox":[148,228,260,32]}
+{"kind":"textbox","id":"sh/r29c3a90","slide":2,"text":"课程文件、附件、历史版本，常常分布在不同位置","textPreview":"课程文件、附件、历史版本，常常分布在不同位置","textChars":22,"textLines":1,"bbox":[148,270,410,46]}
+{"kind":"textbox","id":"sh/32xwvihk","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[52,350,48,28]}
+{"kind":"shape","id":"sh/2hovmd0z","slide":2,"bbox":[120,370,410,0]}
+{"kind":"textbox","id":"sh/p4fexsza","slide":2,"text":"批改耗时","textPreview":"批改耗时","textChars":4,"textLines":1,"bbox":[148,340,260,32]}
+{"kind":"textbox","id":"sh/436xonip","slide":2,"text":"作业量一上来，评分标准和反馈很难保持一致","textPreview":"作业量一上来，评分标准和反馈很难保持一致","textChars":20,"textLines":1,"bbox":[148,382,410,46]}
+{"kind":"textbox","id":"sh/fexwryh8","slide":2,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[52,462,48,28]}
+{"kind":"shape","id":"sh/ud4vit0n","slide":2,"bbox":[120,482,410,0]}
+{"kind":"textbox","id":"sh/hgfet8ze","slide":2,"text":"复盘靠记忆","textPreview":"复盘靠记忆","textChars":5,"textLines":1,"bbox":[148,452,260,32]}
+{"kind":"textbox","id":"sh/gf6dk3it","slide":2,"text":"课堂发生过什么、学生卡在哪里，课后容易被日常工作冲淡","textPreview":"课堂发生过什么、学生卡在哪里，课后容易被日常工作冲淡","textChars":26,"textLines":1,"bbox":[148,494,410,46]}
+{"kind":"shape","id":"sh/zahw32hc","slide":2,"bbox":[702,218,480,360]}
+{"kind":"textbox","id":"sh/e98fux07","slide":2,"text":"一个工作台","textPreview":"一个工作台","textChars":5,"textLines":1,"bbox":[742,252,360,44]}
+{"kind":"textbox","id":"sh/a5cz21kf","slide":2,"text":"把教师的判断留在教学现场","textPreview":"把教师的判断留在教学现场","textChars":12,"textLines":1,"bbox":[744,304,360,28]}
+{"kind":"shape","id":"sh/b6l0v61k","slide":2,"bbox":[744,390,66,66]}
+{"kind":"textbox","id":"sh/w7uh4b25","slide":2,"text":"课程","textPreview":"课程","textChars":2,"textLines":1,"bbox":[744,411,66,24]}
+{"kind":"shape","id":"sh/xs3ixgjq","slide":2,"bbox":[812,415,26,16]}
+{"kind":"shape","id":"sh/ytcz61kb","slide":2,"bbox":[822,390,66,66]}
+{"kind":"textbox","id":"sh/jul0z61w","slide":2,"text":"课件","textPreview":"课件","textChars":2,"textLines":1,"bbox":[822,411,66,24]}
+{"kind":"shape","id":"sh/kvuh8b2h","slide":2,"bbox":[890,415,26,16]}
+{"kind":"shape","id":"sh/lwni1gj2","slide":2,"bbox":[900,390,66,66]}
+{"kind":"textbox","id":"sh/ex8zuhk7","slide":2,"text":"课堂","textPreview":"课堂","textChars":2,"textLines":1,"bbox":[900,411,66,24]}
+{"kind":"shape","id":"sh/zy1gnm1s","slide":2,"bbox":[968,415,26,16]}
+{"kind":"shape","id":"sh/hs72tk3a","slide":2,"bbox":[978,390,66,66]}
+{"kind":"textbox","id":"sh/gry10fmp","slide":2,"text":"批改","textPreview":"批改","textChars":2,"textLines":1,"bbox":[978,411,66,24]}
+{"kind":"shape","id":"sh/fqpkral4","slide":2,"bbox":[1046,415,26,16]}
+{"kind":"shape","id":"sh/upgjy54j","slide":2,"bbox":[1056,390,66,66]}
+{"kind":"textbox","id":"sh/pwr2x436","slide":2,"text":"分析","textPreview":"分析","textChars":2,"textLines":1,"bbox":[1056,411,66,24]}
+{"kind":"textbox","id":"sh/4vyl4zml","slide":2,"text":"信息进入一次，结果反复复用","textPreview":"信息进入一次，结果反复复用","textChars":13,"textLines":1,"bbox":[744,494,360,28]}
+{"kind":"notes","id":"nt/o6536l","slide":2,"text":"这一页先讲老师的真实工作状态，不从功能菜单开始。三类高频问题分别对应：资源管理、作业处理、教学复盘。产品的价值在于把信息从一次性输入，变成可复用的课程资产。\n\n讲解时长建议：50 秒。"}
+{"kind":"slide","id":"sl/mcn6lt","slide":3,"title":"教学设计工作台","textShapes":15}
+{"kind":"textbox","id":"sh/e5cre5gf","slide":3,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,34,220,24]}
+{"kind":"textbox","id":"sh/18na9kz6","slide":3,"text":"课前：先把课程变成可复用的空间","textPreview":"课前：先把课程变成可复用的空间","textChars":15,"textLines":1,"bbox":[42,654,420,20]}
+{"kind":"textbox","id":"sh/g7e9gfyl","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1180,650,58,24]}
+{"kind":"textbox","id":"sh/3a5sbahc","slide":3,"text":"一门课，先建立可复用的课程空间","textPreview":"一门课，先建立可复用的课程空间","textChars":15,"textLines":1,"bbox":[42,76,1196,66]}
+{"kind":"textbox","id":"sh/29wri5gr","slide":3,"text":"输入、结果、历史版本和附件，围绕课程持续沉淀","textPreview":"输入、结果、历史版本和附件，围绕课程持续沉淀","textChars":22,"textLines":1,"bbox":[44,143,920,32]}
+{"kind":"shape","id":"sh/pcnadkz2","slide":3,"bbox":[42,198,660,392]}
+{"kind":"shape","id":"sh/bepsfuh8","slide":3,"bbox":[772,226,8,26]}
+{"kind":"textbox","id":"sh/qdwrmpgn","slide":3,"text":"课程资产","textPreview":"课程资产","textChars":4,"textLines":1,"bbox":[790,225,220,28]}
+{"kind":"shape","id":"sh/wzaxsrql","slide":3,"bbox":[774,287,10,10]}
+{"kind":"textbox","id":"sh/xkje1w76","slide":3,"text":"输入","textPreview":"输入","textChars":2,"textLines":1,"bbox":[802,280,72,26]}
+{"kind":"textbox","id":"sh/axsfq18f","slide":3,"text":"课程名称、主题、目标和补充材料","textPreview":"课程名称、主题、目标和补充材料","textChars":15,"textLines":1,"bbox":[884,280,318,42]}
+{"kind":"shape","id":"sh/by1wzmp0","slide":3,"bbox":[802,328,386,0]}
+{"kind":"shape","id":"sh/knaxwbqh","slide":3,"bbox":[774,353,10,10]}
+{"kind":"textbox","id":"sh/lojypg72","slide":3,"text":"结果","textPreview":"结果","textChars":2,"textLines":1,"bbox":[802,346,72,26]}
+{"kind":"textbox","id":"sh/ylsfu18b","slide":3,"text":"课件生成、批改、分析和复盘记录","textPreview":"课件生成、批改、分析和复盘记录","textChars":15,"textLines":1,"bbox":[884,346,318,42]}
+{"kind":"shape","id":"sh/jm1w36pw","slide":3,"bbox":[802,394,386,0]}
+{"kind":"shape","id":"sh/8rux0bqt","slide":3,"bbox":[774,419,10,10]}
+{"kind":"textbox","id":"sh/ts3ytg7y","slide":3,"text":"版本","textPreview":"版本","textChars":2,"textLines":1,"bbox":[802,412,72,26]}
+{"kind":"textbox","id":"sh/h8zedgzi","slide":3,"text":"重要改动保留，下一次继续迭代","textPreview":"重要改动保留，下一次继续迭代","textChars":14,"textLines":1,"bbox":[884,412,318,42]}
+{"kind":"shape","id":"sh/g7qxkbix","slide":3,"bbox":[802,460,386,0]}
+{"kind":"shape","id":"sh/f6hwb6hc","slide":3,"bbox":[774,485,10,10]}
+{"kind":"textbox","id":"sh/u58fi10r","slide":3,"text":"复用","textPreview":"复用","textChars":2,"textLines":1,"bbox":[802,478,72,26]}
+{"kind":"textbox","id":"sh/pcjeh0ze","slide":3,"text":"保存的课程可直接用于课件生成","textPreview":"保存的课程可直接用于课件生成","textChars":14,"textLines":1,"bbox":[884,478,318,42]}
+{"kind":"shape","id":"sh/4baxovit","slide":3,"bbox":[772,548,430,42]}
+{"kind":"textbox","id":"sh/3ahwfqh8","slide":3,"text":"课程空间 = 下一次备课的起点","textPreview":"课程空间 = 下一次备课的起点","textChars":15,"textLines":1,"bbox":[790,558,394,24]}
+{"kind":"image","id":"im/1orqdwzq","slide":3,"name":"","geometry":"roundRect","alt":"产品界面截图","bbox":[56,212,632,366]}
+{"kind":"notes","id":"nt/mcn6lt","slide":3,"text":"重点说明课程空间不是单纯的保存列表。它保存的是一门课的工作上下文：输入、生成结果、历史版本与附件。展示右侧的“用于课件生成”操作时，可以强调：保存一次，后续备课可以直接继续使用。\n\n讲解时长建议：55 秒。"}
+{"kind":"slide","id":"sl/6gptlr","slide":4,"title":"教学设计工作台","textShapes":17}
+{"kind":"textbox","id":"sh/dsjaxwfe","slide":4,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,34,220,24]}
+{"kind":"textbox","id":"sh/q58rmhwn","slide":4,"text":"课前：从教学意图到课堂方案","textPreview":"课前：从教学意图到课堂方案","textChars":13,"textLines":1,"bbox":[42,654,420,20]}
+{"kind":"textbox","id":"sh/bq1svmx8","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1180,650,58,24]}
+{"kind":"textbox","id":"sh/0vatsrep","slide":4,"text":"课件生成，把教学意图变成课堂方案","textPreview":"课件生成，把教学意图变成课堂方案","textChars":16,"textLines":1,"bbox":[42,76,1196,66]}
+{"kind":"textbox","id":"sh/lwja1wva","slide":4,"text":"不是从模板开始，而是从课程目标、材料和课堂时长开始","textPreview":"不是从模板开始，而是从课程目标、材料和课堂时长开始","textChars":25,"textLines":1,"bbox":[44,143,920,32]}
+{"kind":"shape","id":"sh/ytsbq1wz","slide":4,"bbox":[54,202,230,104]}
+{"kind":"textbox","id":"sh/zu1sz6xk","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[72,218,34,24]}
+{"kind":"textbox","id":"sh/8zutwbe1","slide":4,"text":"输入目标","textPreview":"输入目标","textChars":4,"textLines":1,"bbox":[72,250,184,26]}
+{"kind":"textbox","id":"sh/903a5gvm","slide":4,"text":"主题 · 目标 · 时长","textPreview":"主题 · 目标 · 时长","textChars":12,"textLines":1,"bbox":[72,280,196,20]}
+{"kind":"shape","id":"sh/horu5c3e","slide":4,"bbox":[292,246,32,18]}
+{"kind":"shape","id":"sh/gnidwr2t","slide":4,"bbox":[336,202,230,104]}
+{"kind":"textbox","id":"sh/fmpc3ml8","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[354,218,34,24]}
+{"kind":"textbox","id":"sh/u1gvuhkn","slide":4,"text":"选择材料","textPreview":"选择材料","textChars":4,"textLines":1,"bbox":[354,250,184,26]}
+{"kind":"textbox","id":"sh/psre9wja","slide":4,"text":"课件 · 讲义 · 附件","textPreview":"课件 · 讲义 · 附件","textChars":12,"textLines":1,"bbox":[354,280,196,20]}
+{"kind":"shape","id":"sh/4rid0r2p","slide":4,"bbox":[574,246,32,18]}
+{"kind":"shape","id":"sh/3q9c7ml4","slide":4,"bbox":[618,202,230,104]}
+{"kind":"textbox","id":"sh/2p0vyhkj","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[636,218,34,24]}
+{"kind":"textbox","id":"sh/5w7uxs36","slide":4,"text":"生成方案","textPreview":"生成方案","textChars":4,"textLines":1,"bbox":[636,250,184,26]}
+{"kind":"textbox","id":"sh/kvedon2l","slide":4,"text":"课件 · 任务 · 讲解","textPreview":"课件 · 任务 · 讲解","textChars":12,"textLines":1,"bbox":[636,280,196,20]}
+{"kind":"shape","id":"sh/wr2l0red","slide":4,"bbox":[54,354,472,244]}
+{"kind":"textbox","id":"sh/xsbmtwfy","slide":4,"text":"从空白页面到可讲的一节课","textPreview":"从空白页面到可讲的一节课","textChars":12,"textLines":1,"bbox":[82,392,388,36]}
+{"kind":"textbox","id":"sh/apk3yhwn","slide":4,"text":"风格可调，材料可补充。\n结果可继续编辑。\n\n老师负责教学判断，工作台负责串起准备动作。","textPreview":"风格可调，材料可补充。 | 结果可继续编辑。 |  | 老师负责教学判断，工作台负责串起准备动作。","textChars":43,"textLines":4,"bbox":[84,456,388,112]}
+{"kind":"shape","id":"sh/vqt4rmx8","slide":4,"bbox":[582,354,634,244]}
+{"kind":"textbox","id":"sh/5gvmxgfa","slide":4,"text":"课件生成界面：输入区与结果区并列","textPreview":"课件生成界面：输入区与结果区并列","textChars":16,"textLines":1,"bbox":[604,584,420,22]}
+{"kind":"image","id":"im/byt8je18","slide":4,"name":"","geometry":"roundRect","alt":"课件生成界面截图","bbox":[602,374,594,204]}
+{"kind":"notes","id":"nt/6gptlr","slide":4,"text":"这里讲清楚产品的核心输入输出关系。输入不是一句模糊指令，而是课程名称、主题、教学目标、时长、输出风格和补充材料；输出也不局限于一页课件，而是一套可继续修改的课堂方案。\n\n讲解时长建议：55 秒。"}
+{"kind":"slide","id":"sl/0srct8","slide":5,"title":"教学设计工作台","textShapes":15}
+{"kind":"textbox","id":"sh/snalwrm1","slide":5,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,34,220,24]}
+{"kind":"textbox","id":"sh/rm14nmlg","slide":5,"text":"课前：把准备工作放进时间","textPreview":"课前：把准备工作放进时间","textChars":12,"textLines":1,"bbox":[42,654,420,20]}
+{"kind":"textbox","id":"sh/6ls3uh4v","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1180,650,58,24]}
+{"kind":"textbox","id":"sh/5kjm1c3a","slide":5,"text":"课表与备课日历，让准备工作落在时间里","textPreview":"课表与备课日历，让准备工作落在时间里","textChars":18,"textLines":1,"bbox":[42,76,1196,66]}
+{"kind":"textbox","id":"sh/4jals7mp","slide":5,"text":"授课、备课、作业和复盘，放在同一个节奏里管理","textPreview":"授课、备课、作业和复盘，放在同一个节奏里管理","textChars":22,"textLines":1,"bbox":[44,143,920,32]}
+{"kind":"shape","id":"sh/ji1kz2l4","slide":5,"bbox":[42,198,720,414]}
+{"kind":"shape","id":"sh/hgj2xs3e","slide":5,"bbox":[820,232,8,26]}
+{"kind":"textbox","id":"sh/wfqlo7mt","slide":5,"text":"一个月的教学节奏","textPreview":"一个月的教学节奏","textChars":8,"textLines":1,"bbox":[838,231,220,28]}
+{"kind":"shape","id":"sh/mlcn2x4r","slide":5,"bbox":[820,305,28,0]}
+{"kind":"textbox","id":"sh/nml4vi5c","slide":5,"text":"授课","textPreview":"授课","textChars":2,"textLines":1,"bbox":[864,290,64,24]}
+{"kind":"textbox","id":"sh/onu54nmx","slide":5,"text":"锁定课堂发生的时间","textPreview":"锁定课堂发生的时间","textChars":9,"textLines":1,"bbox":[938,290,250,30]}
+{"kind":"shape","id":"sh/983mxsni","slide":5,"bbox":[820,363,28,0]}
+{"kind":"textbox","id":"sh/ehsnyd4v","slide":5,"text":"备课","textPreview":"备课","textChars":2,"textLines":1,"bbox":[864,348,64,24]}
+{"kind":"textbox","id":"sh/zil4ri50","slide":5,"text":"提前安排材料和课件准备","textPreview":"提前安排材料和课件准备","textChars":11,"textLines":1,"bbox":[938,348,250,30]}
+{"kind":"shape","id":"sh/0ju50nml","slide":5,"bbox":[820,421,28,0]}
+{"kind":"textbox","id":"sh/1k3mtsn6","slide":5,"text":"作业","textPreview":"作业","textChars":2,"textLines":1,"bbox":[864,406,64,24]}
+{"kind":"textbox","id":"sh/qds3ud4j","slide":5,"text":"标记收集、批改和反馈节点","textPreview":"标记收集、批改和反馈节点","textChars":12,"textLines":1,"bbox":[938,406,250,30]}
+{"kind":"shape","id":"sh/re14ny54","slide":5,"bbox":[820,479,28,0]}
+{"kind":"textbox","id":"sh/vixkvelw","slide":5,"text":"复盘","textPreview":"复盘","textChars":2,"textLines":1,"bbox":[864,464,64,24]}
+{"kind":"textbox","id":"sh/uxojm9kb","slide":5,"text":"为下一次课留下回看入口","textPreview":"为下一次课留下回看入口","textChars":11,"textLines":1,"bbox":[938,464,250,30]}
+{"kind":"shape","id":"sh/hkz2x432","slide":5,"bbox":[820,528,368,0]}
+{"kind":"textbox","id":"sh/gjq1oz2h","slide":5,"text":"日历不是提醒工具，而是教学动作编排器。","textPreview":"日历不是提醒工具，而是教学动作编排器。","textChars":19,"textLines":1,"bbox":[820,552,380,44]}
+{"kind":"image","id":"im/v6pk7q9w","slide":5,"name":"","geometry":"roundRect","alt":"课表与备课日历截图","bbox":[56,212,692,386]}
+{"kind":"notes","id":"nt/0srct8","slide":5,"text":"演示课表与备课日历时，先展示月视图，再指出顶部的日期、安排类型和安排内容输入。这里的价值是让备课不再依赖临时记忆：每一个教学动作都可以落到具体日期。\n\n讲解时长建议：50 秒。\n\n演示素材建议：录制一次“新增安排”，让观众看到从选择日期到安排类型的完整动作。"}
+{"kind":"slide","id":"sl/tg38gc","slide":6,"title":"教学设计工作台","textShapes":17}
+{"kind":"textbox","id":"sh/etgzi1cr","slide":6,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,34,220,24]}
+{"kind":"textbox","id":"sh/1wrytwbi","slide":6,"text":"课中：把注意力留在学生身上","textPreview":"课中：把注意力留在学生身上","textChars":13,"textLines":1,"bbox":[42,654,420,20]}
+{"kind":"textbox","id":"sh/0vyhkrux","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1180,650,58,24]}
+{"kind":"textbox","id":"sh/r6pgnmd0","slide":6,"text":"课堂助手，把教师注意力留在学生身上","textPreview":"课堂助手，把教师注意力留在学生身上","textChars":17,"textLines":1,"bbox":[42,76,1196,66]}
+{"kind":"textbox","id":"sh/q5gzehcv","slide":6,"text":"上课时快速控节奏，随时拿到一个可追问的问题","textPreview":"上课时快速控节奏，随时拿到一个可追问的问题","textChars":21,"textLines":1,"bbox":[44,143,920,32]}
+{"kind":"shape","id":"sh/ds7ypwv6","slide":6,"bbox":[42,208,486,384]}
+{"kind":"textbox","id":"sh/c7yhgrul","slide":6,"text":"课堂计时","textPreview":"课堂计时","textChars":4,"textLines":1,"bbox":[82,246,160,28]}
+{"kind":"textbox","id":"sh/b290zqtk","slide":6,"text":"45:00","textPreview":"45:00","textChars":5,"textLines":1,"bbox":[80,296,360,92]}
+{"kind":"shape","id":"sh/a10zqlcz","slide":6,"bbox":[82,426,400,0]}
+{"kind":"textbox","id":"sh/ov6p8ryt","slide":6,"text":"当前状态","textPreview":"当前状态","textChars":4,"textLines":1,"bbox":[82,458,120,24]}
+{"kind":"textbox","id":"sh/9wzq1wfe","slide":6,"text":"未开始","textPreview":"未开始","textChars":3,"textLines":1,"bbox":[82,494,200,30]}
+{"kind":"shape","id":"sh/m9o761g3","slide":6,"bbox":[340,480,142,46]}
+{"kind":"textbox","id":"sh/nuxoz6xo","slide":6,"text":"开始课堂","textPreview":"开始课堂","textChars":4,"textLines":1,"bbox":[340,492,142,24]}
+{"kind":"textbox","id":"sh/076p4ryx","slide":6,"text":"课堂节奏","textPreview":"课堂节奏","textChars":4,"textLines":1,"bbox":[622,224,240,34]}
+{"kind":"shape","id":"sh/18f6xwfi","slide":6,"bbox":[622,294,12,56]}
+{"kind":"textbox","id":"sh/e5o72hgr","slide":6,"text":"讲授","textPreview":"讲授","textChars":2,"textLines":1,"bbox":[662,292,120,28]}
+{"kind":"textbox","id":"sh/z6xovmxc","slide":6,"text":"控制时间，避免一个环节拖长","textPreview":"控制时间，避免一个环节拖长","textChars":13,"textLines":1,"bbox":[662,328,430,30]}
+{"kind":"shape","id":"sh/c3mp07yl","slide":6,"bbox":[662,372,430,0]}
+{"kind":"shape","id":"sh/d4f6tcf6","slide":6,"bbox":[622,386,12,56]}
+{"kind":"textbox","id":"sh/t07mx8ra","slide":6,"text":"追问","textPreview":"追问","textChars":2,"textLines":1,"bbox":[662,384,120,28]}
+{"kind":"textbox","id":"sh/sze5o3qp","slide":6,"text":"随时生成一个可继续讨论的问题","textPreview":"随时生成一个可继续讨论的问题","textChars":14,"textLines":1,"bbox":[662,420,430,30]}
+{"kind":"shape","id":"sh/ry54vy94","slide":6,"bbox":[662,464,430,0]}
+{"kind":"shape","id":"sh/6xwnmt8j","slide":6,"bbox":[622,478,12,56]}
+{"kind":"textbox","id":"sh/5wnmtory","slide":6,"text":"复盘","textPreview":"复盘","textChars":2,"textLines":1,"bbox":[662,476,120,28]}
+{"kind":"textbox","id":"sh/4ve5k3qd","slide":6,"text":"下课后保留课堂观察和待跟进事项","textPreview":"下课后保留课堂观察和待跟进事项","textChars":15,"textLines":1,"bbox":[662,512,430,30]}
+{"kind":"notes","id":"nt/tg38gc","slide":6,"text":"这一页不需要强调复杂功能，而是强调课中体验：教师不必离开教学现场去查工具。课堂助手提供两个高频动作：控制节奏，以及拿到一个可以追问的问题。课后复盘再把课堂观察接回课程空间。\n\n讲解时长建议：45 秒。\n\n后续录屏可展示：打开课堂助手、开始计时、生成/查看问题卡、结束课堂。"}
+{"kind":"slide","id":"sl/sgdjnv","slide":7,"title":"教学设计工作台","textShapes":19}
+{"kind":"textbox","id":"sh/ahwjqdkv","slide":7,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,34,220,24]}
+{"kind":"textbox","id":"sh/xknils3m","slide":7,"text":"课后：把重复工作交给工作台","textPreview":"课后：把重复工作交给工作台","textChars":13,"textLines":1,"bbox":[42,654,420,20]}
+{"kind":"textbox","id":"sh/wje1sn21","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1180,650,58,24]}
+{"kind":"textbox","id":"sh/nel0filk","slide":7,"text":"作业批改，从单份作业走向批量处理","textPreview":"作业批改，从单份作业走向批量处理","textChars":16,"textLines":1,"bbox":[42,76,1196,66]}
+{"kind":"textbox","id":"sh/mdcjmdkz","slide":7,"text":"统一评分标准，连续处理多份作业，结果再进入学情分析","textPreview":"统一评分标准，连续处理多份作业，结果再进入学情分析","textChars":25,"textLines":1,"bbox":[44,143,920,32]}
+{"kind":"shape","id":"sh/9gnih83a","slide":7,"bbox":[42,190,520,420]}
+{"kind":"shape","id":"sh/7apkr2lo","slide":7,"bbox":[638,224,8,26]}
+{"kind":"textbox","id":"sh/69gjyxk3","slide":7,"text":"批量批改","textPreview":"批量批改","textChars":4,"textLines":1,"bbox":[656,223,220,28]}
+{"kind":"textbox","id":"sh/8b6x836h","slide":7,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[640,286,44,26]}
+{"kind":"textbox","id":"sh/tcfeh8n2","slide":7,"text":"导入","textPreview":"导入","textChars":2,"textLines":1,"bbox":[700,282,100,28]}
+{"kind":"textbox","id":"sh/69of6tor","slide":7,"text":"一次选择多份作业文件","textPreview":"一次选择多份作业文件","textChars":10,"textLines":1,"bbox":[812,282,350,28]}
+{"kind":"textbox","id":"sh/7axwfy5c","slide":7,"text":"TXT · Markdown · CSV · JSON","textPreview":"TXT · Markdown · CSV · JSON","textChars":27,"textLines":1,"bbox":[812,316,350,24]}
+{"kind":"shape","id":"sh/k76d436l","slide":7,"bbox":[700,350,462,0]}
+{"kind":"textbox","id":"sh/l8fed8n6","slide":7,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[640,374,44,26]}
+{"kind":"textbox","id":"sh/y54v2tof","slide":7,"text":"统一","textPreview":"统一","textChars":2,"textLines":1,"bbox":[700,370,100,28]}
+{"kind":"textbox","id":"sh/j6dwby50","slide":7,"text":"用同一套作业要求和评分标准","textPreview":"用同一套作业要求和评分标准","textChars":13,"textLines":1,"bbox":[812,370,350,28]}
+{"kind":"textbox","id":"sh/cjmd0j6p","slide":7,"text":"规则先设定，再连续执行","textPreview":"规则先设定，再连续执行","textChars":11,"textLines":1,"bbox":[812,404,350,24]}
+{"kind":"shape","id":"sh/xkve9onu","slide":7,"bbox":[700,438,462,0]}
+{"kind":"textbox","id":"sh/d0nudkfy","slide":7,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[640,462,44,26]}
+{"kind":"textbox","id":"sh/czet4fyd","slide":7,"text":"输出","textPreview":"输出","textChars":2,"textLines":1,"bbox":[700,458,100,28]}
+{"kind":"textbox","id":"sh/ry5cbaxs","slide":7,"text":"集中查看批改结果和反馈","textPreview":"集中查看批改结果和反馈","textChars":11,"textLines":1,"bbox":[812,458,350,28]}
+{"kind":"textbox","id":"sh/qdwb25g7","slide":7,"text":"为学情分析留下结构化结果","textPreview":"为学情分析留下结构化结果","textChars":12,"textLines":1,"bbox":[812,492,350,24]}
+{"kind":"shape","id":"sh/pcnu90fm","slide":7,"bbox":[638,560,524,46]}
+{"kind":"textbox","id":"sh/4but0vy1","slide":7,"text":"批改流转更快，反馈口径更一致","textPreview":"批改流转更快，反馈口径更一致","textChars":14,"textLines":1,"bbox":[660,572,478,24]}
+{"kind":"image","id":"im/p0j2h0ja","slide":7,"name":"","geometry":"roundRect","alt":"作业批改和批量作业导入界面截图","bbox":[60,204,484,390]}
+{"kind":"notes","id":"nt/sgdjnv","slide":7,"text":"这页是高优先级功能之一。先指出界面中“批量作业批改”的入口，再按三步讲：导入多份作业、使用统一评分标准、集中查看结果。注意不要把批量批改讲成完全替代教师判断，产品承担的是重复处理和结果整理，教师仍然掌握评分标准和最终反馈。\n\n讲解时长建议：55 秒。\n\n录屏建议：准备 3 份内容结构相似的作业文件，展示导入、批改按钮、进度和结果列表。"}
+{"kind":"slide","id":"sl/p9sphh","slide":8,"title":"教学设计工作台","textShapes":14}
+{"kind":"textbox","id":"sh/6pgvex83","slide":8,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,34,220,24]}
+{"kind":"textbox","id":"sh/tcru9cru","slide":8,"text":"课后：把结果变成下一次教学动作","textPreview":"课后：把结果变成下一次教学动作","textChars":15,"textLines":1,"bbox":[42,654,420,20]}
+{"kind":"textbox","id":"sh/sbydg7q9","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1180,650,58,24]}
+{"kind":"textbox","id":"sh/fe9cb290","slide":8,"text":"学情分析，把批改结果变成下一次教学动作","textPreview":"学情分析，把批改结果变成下一次教学动作","textChars":19,"textLines":1,"bbox":[42,76,1196,66]}
+{"kind":"textbox","id":"sh/ud0vih8f","slide":8,"text":"分析不是报表终点，而是下一次备课的输入","textPreview":"分析不是报表终点，而是下一次备课的输入","textChars":19,"textLines":1,"bbox":[44,143,920,32]}
+{"kind":"shape","id":"sh/1grudcrq","slide":8,"bbox":[54,226,338,250]}
+{"kind":"shape","id":"sh/gfidk7q5","slide":8,"bbox":[82,258,52,6]}
+{"kind":"textbox","id":"sh/3i9cfm9w","slide":8,"text":"看见问题","textPreview":"看见问题","textChars":4,"textLines":1,"bbox":[82,292,270,38]}
+{"kind":"textbox","id":"sh/2h0vmh8b","slide":8,"text":"从作业结果里找到高频错误和共性卡点","textPreview":"从作业结果里找到高频错误和共性卡点","textChars":17,"textLines":1,"bbox":[82,354,274,90]}
+{"kind":"shape","id":"sh/ozq1w3yl","slide":8,"bbox":[404,332,36,18]}
+{"kind":"shape","id":"sh/p0z2p8zq","slide":8,"bbox":[448,226,338,250]}
+{"kind":"shape","id":"sh/2x8jut0f","slide":8,"bbox":[476,258,52,6]}
+{"kind":"textbox","id":"sh/nyhknyh0","slide":8,"text":"分辨差异","textPreview":"分辨差异","textChars":4,"textLines":1,"bbox":[476,292,270,38]}
+{"kind":"textbox","id":"sh/c3al0nyh","slide":8,"text":"区分全班共性问题与个别学生需要的支持","textPreview":"区分全班共性问题与个别学生需要的支持","textChars":18,"textLines":1,"bbox":[476,354,274,90]}
+{"kind":"shape","id":"sh/x4j2tsz2","slide":8,"bbox":[798,332,36,18]}
+{"kind":"shape","id":"sh/a183ydgb","slide":8,"bbox":[842,226,338,250]}
+{"kind":"shape","id":"sh/b2hkrihw","slide":8,"bbox":[870,258,52,6]}
+{"kind":"textbox","id":"sh/k7al4nyd","slide":8,"text":"调整方案","textPreview":"调整方案","textChars":4,"textLines":1,"bbox":[870,292,270,38]}
+{"kind":"textbox","id":"sh/l8j2xszy","slide":8,"text":"把发现带回下一次课的目标、任务和讲解","textPreview":"把发现带回下一次课的目标、任务和讲解","textChars":18,"textLines":1,"bbox":[870,354,274,90]}
+{"kind":"shape","id":"sh/tcfa1on6","slide":8,"bbox":[146,534,988,0]}
+{"kind":"shape","id":"sh/8bmts3ml","slide":8,"bbox":[146,520,28,28]}
+{"kind":"shape","id":"sh/7adszy50","slide":8,"bbox":[1106,520,28,28]}
+{"kind":"textbox","id":"sh/m94bqt4f","slide":8,"text":"本次作业","textPreview":"本次作业","textChars":4,"textLines":1,"bbox":[100,568,120,24]}
+{"kind":"textbox","id":"sh/hgfu58n2","slide":8,"text":"下一次备课","textPreview":"下一次备课","textChars":5,"textLines":1,"bbox":[1054,568,132,24]}
+{"kind":"textbox","id":"sh/gf6tw3mh","slide":8,"text":"教师看到的，不只是分数，还有下一步该教什么。","textPreview":"教师看到的，不只是分数，还有下一步该教什么。","textChars":22,"textLines":1,"bbox":[344,518,590,32]}
+{"kind":"notes","id":"nt/p9sphh","slide":8,"text":"学情分析页重点讲“动作闭环”，不需要堆很多指标。批改结果的价值在于让老师知道下一节课应该重新解释什么、给谁补充什么、哪些内容可以加深。这里可以结合真实产品中的学情分析结果演示，但不要把产品尚未验证的具体统计口径写死在汇报稿里。\n\n讲解时长建议：45 秒。"}
+{"kind":"slide","id":"sl/2jui4n","slide":9,"title":"教学设计工作台","textShapes":19}
+{"kind":"textbox","id":"sh/up0fmdc7","slide":9,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,34,220,24]}
+{"kind":"textbox","id":"sh/hsrehsbi","slide":9,"text":"产品主线","textPreview":"产品主线","textChars":4,"textLines":1,"bbox":[42,654,420,20]}
+{"kind":"textbox","id":"sh/wrixonud","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1180,650,58,24]}
+{"kind":"textbox","id":"sh/je9wj2to","slide":9,"text":"一条闭环：课程空间把结果沉淀下来","textPreview":"一条闭环：课程空间把结果沉淀下来","textChars":16,"textLines":1,"bbox":[42,76,1196,66]}
+{"kind":"textbox","id":"sh/it0fqxc3","slide":9,"text":"每一次教学都不是一次性消耗，而是下一次备课的材料","textPreview":"每一次教学都不是一次性消耗，而是下一次备课的材料","textChars":24,"textLines":1,"bbox":[44,143,920,32]}
+{"kind":"shape","id":"sh/5gbelcbu","slide":9,"bbox":[60,266,242,166]}
+{"kind":"textbox","id":"sh/4fixs7u9","slide":9,"text":"课前","textPreview":"课前","textChars":2,"textLines":1,"bbox":[84,292,196,24]}
+{"kind":"textbox","id":"sh/ritgn2t0","slide":9,"text":"课程 + 附件","textPreview":"课程 + 附件","textChars":7,"textLines":1,"bbox":[84,334,196,36]}
+{"kind":"textbox","id":"sh/6hkfuxcf","slide":9,"text":"准备输入","textPreview":"准备输入","textChars":4,"textLines":1,"bbox":[84,392,196,24]}
+{"kind":"shape","id":"sh/kjih07ud","slide":9,"bbox":[310,338,34,18]}
+{"kind":"shape","id":"sh/lkbi9svy","slide":9,"bbox":[354,266,242,166]}
+{"kind":"textbox","id":"sh/yh0zyxc7","slide":9,"text":"课中","textPreview":"课中","textChars":2,"textLines":1,"bbox":[378,292,196,24]}
+{"kind":"textbox","id":"sh/ji9072ds","slide":9,"text":"课件 + 助手","textPreview":"课件 + 助手","textChars":7,"textLines":1,"bbox":[378,334,196,36]}
+{"kind":"textbox","id":"sh/8n2h47up","slide":9,"text":"支持讲授","textPreview":"支持讲授","textChars":4,"textLines":1,"bbox":[378,392,196,24]}
+{"kind":"shape","id":"sh/t8bidcvu","slide":9,"bbox":[604,338,34,18]}
+{"kind":"shape","id":"sh/6lkz2xcj","slide":9,"bbox":[648,266,242,166]}
+{"kind":"textbox","id":"sh/7mt0b2d4","slide":9,"text":"课后","textPreview":"课后","textChars":2,"textLines":1,"bbox":[672,292,196,24]}
+{"kind":"textbox","id":"sh/gb2h8rul","slide":9,"text":"批改 + 分析 + 复盘","textPreview":"批改 + 分析 + 复盘","textChars":12,"textLines":1,"bbox":[672,334,196,36]}
+{"kind":"textbox","id":"sh/hcvihcv6","slide":9,"text":"形成证据","textPreview":"形成证据","textChars":4,"textLines":1,"bbox":[672,392,196,24]}
+{"kind":"shape","id":"sh/p8rilcna","slide":9,"bbox":[898,338,34,18]}
+{"kind":"shape","id":"sh/47ihs7mp","slide":9,"bbox":[942,266,242,166]}
+{"kind":"textbox","id":"sh/36pgjm54","slide":9,"text":"下一次","textPreview":"下一次","textChars":3,"textLines":1,"bbox":[966,292,196,24]}
+{"kind":"textbox","id":"sh/25gzqh4j","slide":9,"text":"继续生成","textPreview":"继续生成","textChars":4,"textLines":1,"bbox":[966,334,196,36]}
+{"kind":"textbox","id":"sh/dwripwn6","slide":9,"text":"进入新一轮","textPreview":"进入新一轮","textChars":5,"textLines":1,"bbox":[966,392,196,24]}
+{"kind":"shape","id":"sh/cvihwrm1","slide":9,"bbox":[180,514,918,0]}
+{"kind":"shape","id":"sh/bu90nm5g","slide":9,"bbox":[580,494,118,40]}
+{"kind":"textbox","id":"sh/qt0zuh4v","slide":9,"text":"课程空间","textPreview":"课程空间","textChars":4,"textLines":1,"bbox":[580,505,118,22]}
+{"kind":"textbox","id":"sh/t07ydsn2","slide":9,"text":"把输入、过程和结果放在一起，教师才能真正复用经验。","textPreview":"把输入、过程和结果放在一起，教师才能真正复用经验。","textChars":25,"textLines":1,"bbox":[260,578,760,32]}
+{"kind":"notes","id":"nt/2jui4n","slide":9,"text":"这一页是产品总览的收束。用一条横向链路把前面的功能重新组织起来：课程空间承接输入，课件和课堂助手支持教学，批改、学情分析和复盘形成证据，再回到下一次课件生成。\n\n讲解时长建议：45 秒。"}
+{"kind":"slide","id":"sl/r59mu8","slide":10,"title":"教学设计工作台","textShapes":18}
+{"kind":"textbox","id":"sh/4zu50jix","slide":10,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,34,220,24]}
+{"kind":"textbox","id":"sh/3y14rehc","slide":10,"text":"真实演示素材","textPreview":"真实演示素材","textChars":6,"textLines":1,"bbox":[42,654,420,20]}
+{"kind":"textbox","id":"sh/ixsnyt07","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1180,650,58,24]}
+{"kind":"textbox","id":"sh/hwjmpozm","slide":10,"text":"从产品演示到真实课堂，只差三段素材","textPreview":"从产品演示到真实课堂，只差三段素材","textChars":17,"textLines":1,"bbox":[42,76,1196,66]}
+{"kind":"textbox","id":"sh/gva5wji1","slide":10,"text":"当前 PPT 已放入真实界面截图，后续可替换为你的屏幕录制","textPreview":"当前 PPT 已放入真实界面截图，后续可替换为你的屏幕录制","textChars":29,"textLines":1,"bbox":[44,143,920,32]}
+{"kind":"shape","id":"sh/vu14nehg","slide":10,"bbox":[54,204,510,302]}
+{"kind":"shape","id":"sh/utsnu90v","slide":10,"bbox":[234,282,150,108]}
+{"kind":"shape","id":"sh/tsjml4za","slide":10,"bbox":[293,315,44,44]}
+{"kind":"textbox","id":"sh/87a5szip","slide":10,"text":"视频位 · 待替换","textPreview":"视频位 · 待替换","textChars":9,"textLines":1,"bbox":[178,418,242,30]}
+{"kind":"textbox","id":"sh/m9gz6ls7","slide":10,"text":"建议每段 30–45 秒，横屏 16:9","textPreview":"建议每段 30–45 秒，横屏 16:9","textChars":20,"textLines":1,"bbox":[136,458,326,24]}
+{"kind":"shape","id":"sh/nap0zq9c","slide":10,"bbox":[640,216,8,26]}
+{"kind":"textbox","id":"sh/obyh8vax","slide":10,"text":"建议录制","textPreview":"建议录制","textChars":4,"textLines":1,"bbox":[658,215,220,28]}
+{"kind":"textbox","id":"sh/9cri10ri","slide":10,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[640,276,40,26]}
+{"kind":"textbox","id":"sh/elgz2lsv","slide":10,"text":"课程空间 → 用于课件生成","textPreview":"课程空间 → 用于课件生成","textChars":13,"textLines":1,"bbox":[700,272,430,28]}
+{"kind":"textbox","id":"sh/z6pgvqtg","slide":10,"text":"展示课程、附件和课件生成之间的连接","textPreview":"展示课程、附件和课件生成之间的连接","textChars":17,"textLines":1,"bbox":[700,308,430,26]}
+{"kind":"shape","id":"sh/07yh4va1","slide":10,"bbox":[700,346,430,0]}
+{"kind":"textbox","id":"sh/187ixgrm","slide":10,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[640,364,40,26]}
+{"kind":"textbox","id":"sh/qhwzy1sz","slide":10,"text":"作业批改 → 批量导入","textPreview":"作业批改 → 批量导入","textChars":11,"textLines":1,"bbox":[700,360,430,28]}
+{"kind":"textbox","id":"sh/ri5gr6tk","slide":10,"text":"展示多份作业、批改进度和结果列表","textPreview":"展示多份作业、批改进度和结果列表","textChars":16,"textLines":1,"bbox":[700,396,430,26]}
+{"kind":"shape","id":"sh/fmlwz29c","slide":10,"bbox":[700,434,430,0]}
+{"kind":"textbox","id":"sh/ulcf6x8r","slide":10,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[640,452,40,26]}
+{"kind":"textbox","id":"sh/ho3e1cr2","slide":10,"text":"课表日历 → 新增安排","textPreview":"课表日历 → 新增安排","textChars":11,"textLines":1,"bbox":[700,448,430,28]}
+{"kind":"textbox","id":"sh/gnux87qh","slide":10,"text":"展示日期、安排类型和安排内容","textPreview":"展示日期、安排类型和安排内容","textChars":14,"textLines":1,"bbox":[700,484,430,26]}
+{"kind":"shape","id":"sh/3qlw3mp8","slide":10,"bbox":[640,548,514,46]}
+{"kind":"textbox","id":"sh/2pcfah8n","slide":10,"text":"录制时隐藏浏览器地址栏，保留鼠标操作和关键结果。","textPreview":"录制时隐藏浏览器地址栏，保留鼠标操作和关键结果。","textChars":24,"textLines":1,"bbox":[658,560,478,24]}
+{"kind":"notes","id":"nt/r59mu8","slide":10,"text":"这页是素材交接页。当前没有用户提供的实际视频，所以保留了一个明确标注的可替换视频位，没有伪造视频内容。\n\nmacOS 录制步骤：按 Shift + Command + 5，选择“录制整个屏幕”或“录制所选部分”；把浏览器窗口调整到 16:9，隐藏地址栏，开始录制。每段只演示一个动作链，控制在 30–45 秒。\n\n建议录制三段：\n1. 课程空间：打开课程，点击“用于课件生成”，生成一次课件。\n2. 批量批改：导入 3 份作业，点击批量批改，展示进度和结果。\n3. 课表日历：选择日期，添加一条备课或授课安排。\n\n截图可用 Shift + Command + 4 框选窗口；尽量保持 16:9，并让关键按钮和结果完整入镜。素材准备好后，可以直接替换本页视频位，也可以把视频分别插入对应功能页。\n\n讲解时长建议：35 秒。"}
+{"kind":"slide","id":"sl/7eydru","slide":11,"title":"教学设计工作台","textShapes":12}
+{"kind":"textbox","id":"sh/y9wretwj","slide":11,"text":"教学设计工作台","textPreview":"教学设计工作台","textChars":7,"textLines":1,"bbox":[42,42,260,26]}
+{"kind":"textbox","id":"sh/lc7a98fa","slide":11,"text":"给老师一条更短的路径","textPreview":"给老师一条更短的路径","textChars":10,"textLines":1,"bbox":[42,160,700,90]}
+{"kind":"textbox","id":"sh/0by9g3ep","slide":11,"text":"准备 · 讲授 · 批改 · 复盘","textPreview":"准备 · 讲授 · 批改 · 复盘","textChars":17,"textLines":1,"bbox":[46,286,620,38]}
+{"kind":"shape","id":"sh/nepsbyx0","slide":11,"bbox":[46,390,132,6]}
+{"kind":"textbox","id":"sh/mdgritwv","slide":11,"text":"把时间还给教学判断","textPreview":"把时间还给教学判断","textChars":9,"textLines":1,"bbox":[46,430,420,40]}
+{"kind":"shape","id":"sh/9g7ad8f6","slide":11,"bbox":[752,152,0,368]}
+{"kind":"shape","id":"sh/8fy9k3el","slide":11,"bbox":[808,156,60,60]}
+{"kind":"textbox","id":"sh/vi9sfixc","slide":11,"text":"备","textPreview":"备","textChars":1,"textLines":1,"bbox":[808,169,60,34]}
+{"kind":"textbox","id":"sh/ahgrmdwr","slide":11,"text":"把课程和材料准备好","textPreview":"把课程和材料准备好","textChars":9,"textLines":1,"bbox":[902,172,280,28]}
+{"kind":"shape","id":"sh/8vudgfy5","slide":11,"bbox":[808,250,60,60]}
+{"kind":"textbox","id":"sh/9wnupkfq","slide":11,"text":"讲","textPreview":"讲","textChars":1,"textLines":1,"bbox":[808,263,60,34]}
+{"kind":"textbox","id":"sh/mtcbe5gf","slide":11,"text":"让课堂节奏更从容","textPreview":"让课堂节奏更从容","textChars":8,"textLines":1,"bbox":[902,266,280,28]}
+{"kind":"shape","id":"sh/nulcnaxk","slide":11,"bbox":[808,344,60,60]}
+{"kind":"textbox","id":"sh/wzedkzyh","slide":11,"text":"改","textPreview":"改","textChars":1,"textLines":1,"bbox":[808,357,60,34]}
+{"kind":"textbox","id":"sh/x0nut4f2","slide":11,"text":"让批改和反馈可持续","textPreview":"让批改和反馈可持续","textChars":9,"textLines":1,"bbox":[902,360,280,28]}
+{"kind":"shape","id":"sh/axwvipgb","slide":11,"bbox":[808,438,60,60]}
+{"kind":"textbox","id":"sh/vy5cruxw","slide":11,"text":"析","textPreview":"析","textChars":1,"textLines":1,"bbox":[808,451,60,34]}
+{"kind":"textbox","id":"sh/knydozed","slide":11,"text":"让下一次课更有依据","textPreview":"让下一次课更有依据","textChars":9,"textLines":1,"bbox":[902,454,280,28]}
+{"kind":"notes","id":"nt/7eydru","slide":11,"text":"结尾回到教师视角：产品不是把功能堆在一起，而是让备课、授课、批改和复盘之间少一次信息搬运。最后可以播放你录制的 30 秒总览视频，或者回到第 1 页展示产品全貌。\n\n讲解时长建议：30 秒。"}
